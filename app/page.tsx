@@ -1,17 +1,53 @@
-export default function Home() {
+import { client } from "@/sanity/lib/client"
+import { Blog } from "@/sanity/models/Blog"
+import Image from "next/image"
+import { urlForImage } from "@/sanity/lib/image"
+import Link from "next/link"
+
+async function getData(): Promise<Blog[]> {
+  const query = `
+  *[_type == "blog"] | order(_createdAt desc){
+    title,
+    "slug": slug.current,
+    image,
+    thumbnail,
+    description,
+    content,
+}`
+
+  return client.fetch(query)
+}
+
+export default async function Home() {
+  const data = await getData()
+
   return (
-    <main className="flex justify-stretch items-stretch min-h-screen p-5 w-full">
-      <div className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 flex-1"}>
-        {Array.from({ length: 9 }).map((_, index) => (
-          <div
-            className={
-              "border-2 border-r-4 border-b-4 hover:border-r-8 hover:border-b-8 border-cyan-600 p-5 min-h-[200px] hover:bg-cyan-100 transition-all duration-100 ease-in-out"
-            }
-            key={index}>
-            blog {index + 1}
+    <div className="flex flex-col ">
+      <h1 className={"text-4xl font-bold text-black mb-5 text-center"}>Latest Blogs</h1>
+      <div className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 flex-1"}>
+        {Array.from(data).map((blog) => (
+          <div className={"shadow shadow-gray-400 rounded overflow-hidden hover:transform-[scale-1]"} key={blog.slug}>
+            <Image
+              src={urlForImage(blog.image)}
+              alt={blog.title}
+              width={200}
+              height={200}
+              className={"object-fill w-full"}
+            />
+            <div className={"p-4"}>
+              <h3 className={"text-lg leading-6 line-clamp-2 text-black font-bold mb-2"}>{blog.title}</h3>
+              <p className={"text-sm line-clamp-4"}>{blog.description}</p>
+              <Link
+                href={`/blog/${blog.slug}`}
+                className={
+                  "bg-cyan-600 hover:bg-cyan-800 text-white font-bold rounded w-full block p-2 text-center mt-4"
+                }>
+                View more
+              </Link>
+            </div>
           </div>
         ))}
       </div>
-    </main>
+    </div>
   )
 }

@@ -23,6 +23,14 @@ export default {
       title: "Image"
     },
     {
+      name: "thumbnail",
+      type: "image",
+      title: "Thumbnail",
+      options: {
+        maxLength: 96
+      }
+    },
+    {
       name: "description",
       type: "text",
       title: "Description"
