@@ -1,10 +1,12 @@
 import { client } from "@/sanity/lib/client"
-import { Blog } from "@/sanity/models/Blog"
+import { _blog } from "@/sanity/models/_blog"
 import Image from "next/image"
 import { urlForImage } from "@/sanity/lib/image"
 import Link from "next/link"
 
-async function getData(): Promise<Blog[]> {
+export const revalidate = 30 // revalidate every 30 seconds
+
+async function getData(): Promise<_blog[]> {
   const query = `
   *[_type == "blog"] | order(_createdAt desc){
     title,
