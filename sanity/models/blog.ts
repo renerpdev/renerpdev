@@ -1,4 +1,4 @@
-export interface _blog {
+export interface Blog {
   title: string
   slug: string
   image?: any

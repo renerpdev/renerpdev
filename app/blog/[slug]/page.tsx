@@ -1,13 +1,13 @@
 import { urlForImage } from "@/sanity/lib/image"
 import Image from "next/image"
-import { _blog } from "@/sanity/models/_blog"
+import { Blog } from "@/sanity/models/blog"
 import { client } from "@/sanity/lib/client"
 import { PortableText } from "@portabletext/react"
 import Link from "next/link"
 
 export const revalidate = 30 // revalidate every 30 seconds
 
-async function getData(slug: string): Promise<_blog> {
+async function getData(slug: string): Promise<Blog> {
   const query = `
   *[_type == "blog" && slug.current == '${slug}']{
     title,
