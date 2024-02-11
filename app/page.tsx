@@ -3,6 +3,7 @@ import { Blog } from "@/sanity/models/blog"
 import Image from "next/image"
 import { urlForImage } from "@/sanity/lib/image"
 import Link from "next/link"
+import Button from "@/components/button"
 
 export const revalidate = 30 // revalidate every 30 seconds
 
@@ -26,6 +27,8 @@ export default async function Home() {
   return (
     <div className="flex flex-col ">
       <h1 className={"text-4xl font-bold text-black mb-5 text-center"}>Latest Blogs</h1>
+      <Button />
+      <br />
       <div className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 flex-1"}>
         {Array.from(data).map((blog) => (
           <div className={"shadow shadow-gray-400 rounded overflow-hidden hover:transform-[scale-1]"} key={blog.slug}>
