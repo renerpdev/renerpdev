@@ -8,13 +8,13 @@ export default function Home() {
   const [dataSent, setDataSent] = useState(false)
 
   const handleSubmit = async (formData: FormData) => {
-    const { name, message, email } = Object.fromEntries(formData) as Record<string, string>
+    const { name, message, email, topics } = Object.fromEntries(formData) as Record<string, string>
 
     await sendEmail({
       name,
       message,
       email,
-      topics: "web development".split(",")
+      topics: topics.split(",")
     })
 
     setDataSent(true)
@@ -105,15 +105,15 @@ export default function Home() {
           </svg>
         </a>
       </section>
-      <section id="skills" className="text-[#333] pb-12 md:pb-16 pt-16 md:pt-20 px-5 bg-white h-auto lg:h-screen">
+      <section id="skills" className="text-[#333] pt-24 pb-16 px-5 bg-white h-auto lg:h-screen">
         <SkillSet />
       </section>
-      <section id="contact" className="text-[#333] pt-12 md:pt-16 pb-16 md:pb-20 px-5 bg-white h-auto lg:h-screen ">
+      <section id="contact" className="text-[#333] pt-16 pb-24 px-5 bg-white h-auto lg:h-screen ">
         <div className="flex justify-center items-center dark:bg-gray-800 h-full mx-auto max-w-2xl ">
           <div className="mx-auto w-full">
             {!dataSent ? (
               <>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-center">How can I help?</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center text-cyan-950 ">How can I help?</h2>
                 <Form action={handleSubmit} />
               </>
             ) : (
@@ -160,6 +160,45 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
         className="w-full rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
+      <div className={"flex flex-col gap-4 pb-2"}>
+        <div className="flex items-center">
+          <input
+            id="default-checkbox1"
+            type="radio"
+            name="topics"
+            defaultChecked
+            value="Web Development"
+            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label htmlFor="default-checkbox1" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            Web Development
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="checked-checkbox2"
+            type="radio"
+            name="topics"
+            value="Web Design"
+            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label htmlFor="checked-checkbox2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            Web Design
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="checked-checkbox3"
+            type="radio"
+            name="topics"
+            value="Mobile Development"
+            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label htmlFor="checked-checkbox3" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            Mobile Development
+          </label>
+        </div>
+      </div>
       <Submit />
     </form>
   )
@@ -213,7 +252,7 @@ const SkillSet = () => {
   return (
     <div className="flex justify-center items-center dark:bg-gray-800 h-full mx-auto max-w-2xl ">
       <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">What I am good at?</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 text-cyan-950 ">What I am good at?</h2>
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
@@ -236,11 +275,11 @@ const SkillSet = () => {
 
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Mobile App</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">80%</span>
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Mobile Development</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">70%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[80%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[70%]" />
             </div>
           </div>
         </div>
