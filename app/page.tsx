@@ -22,17 +22,19 @@ export default function Home() {
 
   return (
     <>
-      <section className="text-center md:text-left text-gray-600 body-font h-screen flex bg-gray-900 bg-svg-constellation-gray-100 relative">
+      <section className="text-center md:text-left text-gray-600 body-font h-screen flex bg-gradient-to-r to-gray-900 from-slate-800 relative">
+        <Navbar />
         <div className="container mx-auto flex px-5 py-12 items-center justify-center flex-col">
           <div className="lg:w-2/3 w-full animate-fade-in-down">
             <h1 className="md:text-6xl text-4xl mb-2 font-bold text-white tracking-tight leading-tight">
               {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
             </h1>
             <p className="mt-4 mb-6 md:leading-relaxed leading-normal text-white/80 tracking-tight text-xl md:text-2xl">
-              I am a Frontend Developer based in Montevideo, Uruguay. I am always looking for new challenges.
+              I am a Frontend Developer based in Montevideo, Uruguay. If you need a developer who can bring your ideas
+              to life, feel free to contact me.
             </p>
             <a
-              href="#contactme"
+              href="#contact"
               className={
                 "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center text-gray-900 bg-white px-6 py-2 rounded-xl hover:text-cyan-600 hover:pr-8 group border-none transition-all ease-in-out"
               }>
@@ -84,7 +86,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <a href="#contactme" className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-pulse">
+        <a href="#contact" className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-pulse">
           <svg
             className="w-14 h-14 text-white"
             aria-hidden="true"
@@ -103,19 +105,31 @@ export default function Home() {
           </svg>
         </a>
       </section>
-      <section className="py-16 md:py-20 px-5 mx-auto max-w-xl bg-white font-[sans-serif]">
-        {!dataSent ? (
-          <>
-            <h2 id="contactme" className="text-3xl text-[#333] font-extrabold text-center">
-              How can I help you?
-            </h2>
-            <Form action={handleSubmit} />
-          </>
-        ) : (
-          <p className={"text-lg text-center flex items-center justify-center gap-2 flex-wrap"}>
-            Thank you for your interest. I will get back to you shortly. <RocketIcon className={"w-8 h-8"} />
-          </p>
-        )}
+      <section id="skills" className="text-[#333] pb-12 md:pb-16 pt-16 md:pt-20 px-5 bg-white h-auto lg:h-screen">
+        <SkillSet />
+      </section>
+      <section id="contact" className="text-[#333] pt-12 md:pt-16 pb-16 md:pb-20 px-5 bg-white h-auto lg:h-screen ">
+        <div className="flex justify-center items-center dark:bg-gray-800 h-full mx-auto max-w-2xl ">
+          <div className="mx-auto w-full">
+            {!dataSent ? (
+              <>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center">How can I help?</h2>
+                <Form action={handleSubmit} />
+              </>
+            ) : (
+              <p className={"text-lg text-center flex items-center justify-center gap-2 flex-wrap"}>
+                Thank you for your interest. I will get back to you shortly. <RocketIcon className={"w-8 h-8"} />
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+      <section className="p-5 w-full bg-gray-900 text-white text-center text-sm">
+        Made with ❤️ by{" "}
+        <a href="https://github.com/renerpdev" target="_blank" rel="noreferrer noopener" className={"underline"}>
+          René Ricardo
+        </a>{" "}
+        © {new Date().getFullYear()}
       </section>
     </>
   )
@@ -179,5 +193,97 @@ const RocketIcon = ({ className }: { className?: string }) => {
         clipRule="evenodd"
       />
     </svg>
+  )
+}
+
+const Navbar = () => {
+  return (
+    <nav className="absolute top-0 left-0 w-full px-5 md:px-10 py-6 text-white flex justify-end items-center gap-8">
+      <a href="#skills" className={"font-semibold border-b-2 border-transparent hover:border-white transition-colors"}>
+        Skills
+      </a>
+      <a href="#contact" className={"font-semibold border-b-2 border-transparent hover:border-white transition-colors"}>
+        Contact
+      </a>
+    </nav>
+  )
+}
+
+const SkillSet = () => {
+  return (
+    <div className="flex justify-center items-center dark:bg-gray-800 h-full mx-auto max-w-2xl ">
+      <div className="mx-auto w-full">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">What I am good at?</h2>
+        <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Web Development</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">95%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[95%]" />
+            </div>
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Web Design</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">70%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[70%]" />
+            </div>
+          </div>
+
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Mobile App</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">80%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[80%]" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 w-full mt-12">
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Critical Thinking</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">99%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[99%]" />
+            </div>
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Problem Solving</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">99%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[99%]" />
+            </div>
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Team Work</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">99%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[99%]" />
+            </div>
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between py-1">
+              <span className="text-base text-gray-lite font-semibold dark:text-[#A6A6A6]">Attention to Detail</span>
+              <span className="text-base font-semibold text-gray-lite pr-5 dark:text-[#A6A6A6]">99%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[99%]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
