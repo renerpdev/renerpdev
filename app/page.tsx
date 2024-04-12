@@ -36,10 +36,12 @@ export default function Home() {
             <a
               href="#contact"
               className={
-                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center text-gray-900 bg-white px-6 py-2 rounded-xl hover:text-cyan-600 hover:pr-8 group border-none transition-all ease-in-out"
+                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-6 py-2 rounded-xl  hover:pr-8 group border-none transition-all ease-in-out"
               }>
-              <span className={"mr-2"}>Hire me</span>
-              <RocketIcon className="group-hover:[transform:translateX(10px)_rotate(45deg)_scale(1.2)] transition-transform ease-in-out" />
+              <span className={"mr-2 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
+                {"Let's connect"}
+              </span>
+              <RocketIcon className="text-cyan-900 group-hover:[transform:translateX(10px)_rotate(45deg)_scale(1.2)] transition-transform ease-in-out" />
             </a>
             <div className={"flex justify-center md:justify-start space-x-2 items-center mt-6"}>
               <a
@@ -86,7 +88,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <a href="#contact" className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-pulse">
+        <a href="#skills" className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-pulse">
           <svg
             className="w-14 h-14 text-white"
             aria-hidden="true"
@@ -113,7 +115,9 @@ export default function Home() {
           <div className="mx-auto w-full">
             {!dataSent ? (
               <>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-center text-cyan-950 ">How can I help?</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent">
+                  How can I help?
+                </h2>
                 <Form action={handleSubmit} />
               </>
             ) : (
@@ -238,10 +242,12 @@ const RocketIcon = ({ className }: { className?: string }) => {
 const Navbar = () => {
   return (
     <nav className="absolute top-0 left-0 w-full px-5 md:px-10 py-6 text-white flex justify-end items-center gap-8">
-      <a href="#skills" className={"font-semibold border-b-2 border-transparent hover:border-white transition-colors"}>
+      <a href="#skills" className={"font-semibold border-b-2 border-transparent hover:text-cyan-600 transition-colors"}>
         Skills
       </a>
-      <a href="#contact" className={"font-semibold border-b-2 border-transparent hover:border-white transition-colors"}>
+      <a
+        href="#contact"
+        className={"font-semibold border-b-2 border-transparent hover:text-cyan-600 transition-colors"}>
         Contact
       </a>
     </nav>
@@ -252,7 +258,9 @@ const SkillSet = () => {
   return (
     <div className="flex justify-center items-center  h-full mx-auto max-w-2xl ">
       <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 text-cyan-950 ">What I am good at?</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent">
+          What I am good at?
+        </h2>
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
