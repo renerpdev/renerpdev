@@ -2,7 +2,8 @@
 
 import { useFormStatus } from "react-dom"
 import { sendEmail } from "@/app/lib/actions"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useAnimate, useInView, motion } from "framer-motion"
 
 export default function Home() {
   const [dataSent, setDataSent] = useState(false)
@@ -33,16 +34,18 @@ export default function Home() {
               I am a Frontend Developer based in Montevideo, Uruguay. If you need a developer who can bring your ideas
               to life, feel free to contact me.
             </p>
-            <a
+            <motion.a
               href="#contact"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 1 }}
               className={
-                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-6 py-2 rounded-xl  hover:pr-8 group border-none transition-all ease-in-out"
+                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-6 py-2 rounded-xl border-none"
               }>
               <span className={"mr-2 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
                 {"Let's connect"}
               </span>
-              <RocketIcon className="text-cyan-900 group-hover:[transform:translateX(10px)_rotate(45deg)_scale(1.2)] transition-transform ease-in-out" />
-            </a>
+              <RocketIcon className="text-cyan-900" />
+            </motion.a>
             <div className={"flex justify-center md:justify-start space-x-2 items-center mt-6"}>
               <a
                 href="https://github.com/renerpdev"
@@ -115,7 +118,7 @@ export default function Home() {
           <div className="mx-auto w-full">
             {!dataSent ? (
               <>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
                   How can I help?
                 </h2>
                 <Form action={handleSubmit} />
@@ -129,7 +132,13 @@ export default function Home() {
         </div>
       </section>
       <section className="p-5 w-full bg-gray-900 text-white text-center text-sm">
-        Made with ❤️ by{" "}
+        <span>
+          Made with{" "}
+          <span className={"relative mx-0.5"}>
+            <span className={"animate-pulse"}>❤️</span>
+          </span>{" "}
+          by{" "}
+        </span>
         <a href="https://github.com/renerpdev" target="_blank" rel="noreferrer noopener" className={"underline"}>
           René Ricardo
         </a>{" "}
@@ -161,7 +170,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
         rows={6}
         name="message"
         defaultValue={"I would like to know more about your services."}
-        className="w-full rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
+        className="w-full min-h-32 rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
       <div className={"flex flex-col gap-4 pb-2"}>
@@ -172,7 +181,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             name="topics"
             defaultChecked
             value="Web Development"
-            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+            className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
           <label htmlFor="default-checkbox1" className="ms-2 text-sm font-medium text-gray-900 ">
             Web Development
@@ -184,7 +193,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             type="radio"
             name="topics"
             value="Web Design"
-            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+            className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
           <label htmlFor="checked-checkbox2" className="ms-2 text-sm font-medium text-gray-900">
             Web Design
@@ -196,7 +205,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             type="radio"
             name="topics"
             value="Mobile Development"
-            className="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+            className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
           <label htmlFor="checked-checkbox3" className="ms-2 text-sm font-medium text-gray-900">
             Mobile Development
@@ -211,12 +220,14 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
 const Submit = () => {
   const { pending } = useFormStatus()
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 1 }}
       type="submit"
-      className="text-white bg-cyan-500 hover:bg-cyan-600 font-semibold rounded-md text-sm px-10 py-3 block w-full lg:w-auto lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-md text-sm px-10 py-3 block w-full lg:w-auto lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
-      {pending ? "Sending..." : "Send"}
-    </button>
+      {pending ? "Sending..." : "Send message"}
+    </motion.button>
   )
 }
 
@@ -255,10 +266,23 @@ const Navbar = () => {
 }
 
 const SkillSet = () => {
+  const [scope, animate] = useAnimate()
+  const isInView = useInView(scope, { margin: "80px" })
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (isInView) {
+      animate(".animate-width-to-100", { width: "100%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
+      animate(".animate-width-to-99", { width: "99%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
+      animate(".animate-width-to-85", { width: "85%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
+      animate(".animate-width-to-75", { width: "75%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
+    }
+  }, [animate, isInView])
+
   return (
-    <div className="flex justify-center items-center  h-full mx-auto max-w-2xl ">
-      <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent">
+    <div className="flex justify-center items-center  h-full mx-auto max-w-2xl">
+      <div className="mx-auto w-full" ref={scope}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
           What I am good at?
         </h2>
         <div className="flex flex-col gap-4 w-full">
@@ -268,16 +292,16 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">99%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[99%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-99" />
             </div>
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full" ref={ref}>
             <div className="flex justify-between py-1">
               <span className="text-base text-gray-lite font-semibold ">Web Design</span>
               <span className="text-base font-semibold text-gray-lite pr-5 ">85%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[85%]" />
+            <div className="w-full bg-gray-200 rounded-full h-1.5 " ref={ref}>
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-85" />
             </div>
           </div>
 
@@ -287,7 +311,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">75%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[75%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-75" />
             </div>
           </div>
         </div>
@@ -299,7 +323,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -308,7 +332,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -317,7 +341,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -326,7 +350,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -335,7 +359,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -344,7 +368,7 @@ const SkillSet = () => {
               <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-[100%]" />
+              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
             </div>
           </div>
         </div>
