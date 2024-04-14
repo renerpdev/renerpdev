@@ -271,11 +271,19 @@ const SkillSet = () => {
   const ref = useRef(null)
 
   useEffect(() => {
+    const selectors = ["animate-width-to-100", "animate-width-to-99", "animate-width-to-85", "animate-width-to-75"]
+
+    const doAnimate = (selector: any, width: any) => {
+      animate(
+        `.${selector}`,
+        { width: `${width}%` },
+        { ease: "anticipate", duration: width === 0 ? 0 : 1.8, delay: width === 0 ? 0 : 0.05 }
+      )
+    }
     if (isInView) {
-      animate(".animate-width-to-100", { width: "100%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
-      animate(".animate-width-to-99", { width: "99%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
-      animate(".animate-width-to-85", { width: "85%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
-      animate(".animate-width-to-75", { width: "75%" }, { ease: "anticipate", duration: 1.5, delay: 0.1 })
+      selectors.forEach((selector) => doAnimate(selector, selector.split("-").pop()))
+    } else {
+      selectors.forEach((selector) => doAnimate(selector, 0))
     }
   }, [animate, isInView])
 
