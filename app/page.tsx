@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom"
 import { sendEmail } from "@/app/lib/actions"
 import { useEffect, useRef, useState } from "react"
-import { useAnimate, useInView, motion } from "framer-motion"
+import { useAnimate, useInView, m, LazyMotion, domAnimation } from "framer-motion"
 
 export default function Home() {
   const [dataSent, setDataSent] = useState(false)
@@ -22,7 +22,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <section className="text-center md:text-left text-gray-600 body-font h-screen flex bg-gradient-to-r to-gray-900 from-slate-800 relative">
         <Navbar />
         <div className="container mx-auto flex px-5 py-12 items-center justify-center flex-col">
@@ -30,14 +30,15 @@ export default function Home() {
             <h1 className="md:text-6xl text-4xl mb-2 font-bold text-white tracking-tight leading-tight">
               {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
             </h1>
-            <p className="mt-4 mb-6 md:leading-relaxed leading-normal text-white/80 tracking-tight text-xl md:text-2xl">
+            <p className="mt-4 mb-6 md:leading-snug leading-normal text-white/80 tracking-tight text-xl md:text-2xl">
               I am a Frontend Developer based in Montevideo, Uruguay. If you need a developer who can bring your ideas
               to life, feel free to contact me.
             </p>
-            <motion.a
+            <m.a
               href="#contact"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className={
                 "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-8 py-3 rounded-3xl border-none"
               }>
@@ -45,7 +46,7 @@ export default function Home() {
                 {"Let's connect"}
               </span>
               <RocketIcon className="text-cyan-900" />
-            </motion.a>
+            </m.a>
             <div className={"flex justify-center md:justify-start space-x-2 items-center mt-6"}>
               <a
                 href="https://github.com/renerpdev"
@@ -144,7 +145,7 @@ export default function Home() {
         </a>{" "}
         © {new Date().getFullYear()}
       </section>
-    </>
+    </LazyMotion>
   )
 }
 
@@ -220,14 +221,15 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
 const Submit = () => {
   const { pending } = useFormStatus()
   return (
-    <motion.button
+    <m.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
       type="submit"
-      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto max-w-sm lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
       {pending ? "Sending..." : "Send message"}
-    </motion.button>
+    </m.button>
   )
 }
 
