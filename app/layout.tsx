@@ -2,7 +2,10 @@ import type { Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"]
+})
 
 export const viewport: Viewport = {
   width: "device-width",

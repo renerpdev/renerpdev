@@ -2,8 +2,9 @@
 
 import { useFormStatus } from "react-dom"
 import { sendEmail } from "@/app/lib/actions"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useAnimate, useInView, m, LazyMotion, domAnimation } from "framer-motion"
+import ParallaxText from "@/components/parallax-text"
 
 export default function Home() {
   const [dataSent, setDataSent] = useState(false)
@@ -113,6 +114,10 @@ export default function Home() {
       </section>
       <section id="skills" className="text-[#333] pt-24 pb-16 px-5 bg-white h-auto lg:h-screen">
         <SkillSet />
+      </section>
+      <section className="py-16 bg-white">
+        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
+        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
       </section>
       <section id="contact" className="text-[#333] pt-16 pb-24 px-5 bg-white h-auto lg:h-screen ">
         <div className="flex justify-center items-center  h-full mx-auto max-w-2xl ">
@@ -270,7 +275,6 @@ const Navbar = () => {
 const SkillSet = () => {
   const [scope, animate] = useAnimate()
   const isInView = useInView(scope, { margin: "80px" })
-  const ref = useRef(null)
 
   useEffect(() => {
     const selectors = ["animate-width-to-100", "animate-width-to-99", "animate-width-to-85", "animate-width-to-75"]
@@ -298,27 +302,27 @@ const SkillSet = () => {
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Web Development</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">99%</span>
+              <span className="text-base text-gray-lite font-medium ">Web Development</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">99%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-99" />
             </div>
           </div>
-          <div className="flex flex-col w-full" ref={ref}>
+          <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Web Design</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">85%</span>
+              <span className="text-base text-gray-lite font-medium ">Web Design</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">85%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 " ref={ref}>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-85" />
             </div>
           </div>
 
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Mobile Development</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">75%</span>
+              <span className="text-base text-gray-lite font-medium ">Mobile Development</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">75%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-75" />
@@ -329,8 +333,8 @@ const SkillSet = () => {
         <div className="flex flex-col gap-4 w-full mt-12">
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Critical Thinking</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Critical Thinking</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
@@ -338,8 +342,8 @@ const SkillSet = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Problem Solving</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Problem Solving</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
@@ -347,8 +351,8 @@ const SkillSet = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Team Work</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Team Work</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
@@ -356,8 +360,8 @@ const SkillSet = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Attention to Detail</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Attention to Detail</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
@@ -365,8 +369,8 @@ const SkillSet = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Time Management</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Time Management</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
@@ -374,8 +378,8 @@ const SkillSet = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite font-semibold ">Responsibility</span>
-              <span className="text-base font-semibold text-gray-lite pr-5 ">100%</span>
+              <span className="text-base text-gray-lite font-medium ">Responsibility</span>
+              <span className="text-base font-medium text-gray-lite pr-5 ">100%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 ">
               <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
