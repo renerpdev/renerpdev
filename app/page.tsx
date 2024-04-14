@@ -39,7 +39,7 @@ export default function Home() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1 }}
               className={
-                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-6 py-2 rounded-xl border-none"
+                "font-semibold max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-8 py-3 rounded-3xl border-none"
               }>
               <span className={"mr-2 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
                 {"Let's connect"}
@@ -224,7 +224,7 @@ const Submit = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
       type="submit"
-      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-md text-sm px-10 py-3 block w-full lg:w-auto lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
       {pending ? "Sending..." : "Send message"}
     </motion.button>
@@ -252,7 +252,7 @@ const RocketIcon = ({ className }: { className?: string }) => {
 
 const Navbar = () => {
   return (
-    <nav className="absolute top-0 left-0 w-full px-5 md:px-10 py-6 text-white flex justify-end items-center gap-8">
+    <nav className="absolute top-0 left-0 w-full px-5 md:px-10 py-6 text-white flex justify-end items-center gap-4 md:gap-6">
       <a href="#skills" className={"font-semibold border-b-2 border-transparent hover:text-cyan-600 transition-colors"}>
         Skills
       </a>
