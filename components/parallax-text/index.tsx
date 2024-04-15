@@ -24,7 +24,7 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
     damping: 50,
     stiffness: 500
   })
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+  const velocityFactor = useTransform(smoothVelocity, [0, 3000], [0, 5], {
     clamp: false
   })
 
@@ -37,7 +37,7 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
 
   const directionFactor = useRef<number>(1)
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
+    let moveBy = directionFactor.current * baseVelocity * (delta / 3000)
 
     /**
      * This is what changes the direction of the scroll once we
@@ -49,7 +49,7 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
       directionFactor.current = 1
     }
 
-    moveBy += directionFactor.current * moveBy * velocityFactor.get()
+    moveBy += (directionFactor.current * moveBy * velocityFactor.get()) / 2
 
     baseX.set(baseX.get() + moveBy)
   })
