@@ -4,6 +4,7 @@ import { RocketIcon } from "@/components/icons/rocket"
 import { GithubIcon } from "@/components/icons/github"
 import { LinkedinIcon } from "@/components/icons/linkedin"
 import { ChevronDownIcon } from "@/components/icons/chevron-down"
+import { NpmIcon } from "@/components/icons/npm"
 
 const Hero = () => {
   const viewport = useViewportDimensions()
@@ -29,7 +30,7 @@ const Hero = () => {
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
           </h1>
           <p className="mt-4 mb-6 md:leading-snug leading-normal text-white/80 tracking-tight text-xl md:text-2xl">
-            I am a Frontend Developer based in Montevideo, Uruguay. If you need a developer who can bring your ideas to
+            I am a Software Engineer based in Montevideo, Uruguay. If you need a developer who can bring your ideas to
             life, feel free to contact me.
           </p>
           <div className={"inline-flex flex-col sm:flex-row gap-4 "}>
@@ -72,6 +73,13 @@ const Hero = () => {
               rel="noreferrer noopener"
               className={"inline-flex text-white hover:text-cyan-600"}>
               <LinkedinIcon className={"w-8 h-8"} />
+            </a>
+            <a
+              href="https://www.npmjs.com/~2rhop"
+              target="_blank"
+              rel="noreferrer noopener"
+              className={"inline-flex text-white hover:text-cyan-600"}>
+              <NpmIcon className={"w-8 h-8"} />
             </a>
           </div>
         </div>
