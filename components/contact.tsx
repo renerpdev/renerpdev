@@ -21,7 +21,7 @@ const Contact = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-full mx-auto max-w-2xl ">
+    <div className="flex justify-center items-center h-full w-full mx-auto max-w-2xl ">
       <div className="mx-auto w-full">
         {!dataSent ? (
           <>

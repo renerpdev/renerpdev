@@ -15,14 +15,18 @@ export default function Home() {
         <Navbar />
         <Hero />
       </section>
-      <section id="skills" className="text-[#333] pt-24 pb-16 px-5 bg-white h-auto lg:min-h-screen">
+      <section
+        id="skills"
+        className="text-[#333] pt-24 pb-16 px-5 bg-white h-auto lg:min-h-screen flex flex-col justify-center">
         <SkillSet />
       </section>
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white flex flex-col justify-center">
         <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
         <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
       </section>
-      <section id="contact" className="text-[#333] pt-16 pb-24 px-5 bg-white h-auto lg:min-h-screen ">
+      <section
+        id="contact"
+        className="text-[#333] pt-16 pb-24 px-5 bg-white h-auto lg:min-h-screen flex flex-col justify-center">
         <Contact />
       </section>
       <Footer />
