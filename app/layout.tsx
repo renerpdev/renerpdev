@@ -1,9 +1,9 @@
 import type { Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Ubuntu } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({
-  weight: ["400", "500", "600", "700"],
+const font = Ubuntu({
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"]
 })
 
@@ -46,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+      <body className={font.className}>
         <main>{children}</main>
       </body>
     </html>

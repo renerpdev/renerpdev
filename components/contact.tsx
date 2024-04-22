@@ -61,7 +61,6 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
         placeholder="Message"
         rows={6}
         name="message"
-        defaultValue={"I would like to know more about your services."}
         className="w-full min-h-32 rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
@@ -75,7 +74,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Web Development"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="default-checkbox1" className="ms-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="default-checkbox1" className="ms-2 text-sm text-gray-900 ">
             Web Development
           </label>
         </div>
@@ -87,7 +86,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Web Design"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="checked-checkbox2" className="ms-2 text-sm font-medium text-gray-900">
+          <label htmlFor="checked-checkbox2" className="ms-2 text-sm text-gray-900">
             Web Design
           </label>
         </div>
@@ -99,7 +98,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Mobile Development"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="checked-checkbox3" className="ms-2 text-sm font-medium text-gray-900">
+          <label htmlFor="checked-checkbox3" className="ms-2 text-sm text-gray-900">
             Mobile Development
           </label>
         </div>
@@ -117,7 +116,7 @@ const Submit = () => {
       whileTap={{ scale: 1 }}
       type="submit"
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto max-w-sm lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      className="text-white bg-cyan-600 hover:bg-cyan-500 rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto max-w-sm lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
       {pending ? "Sending..." : "Send message"}
     </m.button>

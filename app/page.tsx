@@ -4,7 +4,7 @@ import { LazyMotion, domAnimation } from "framer-motion"
 import ParallaxText from "@/components/parallax-text"
 import Footer from "@/components/footer"
 import Contact from "@/components/contact"
-import Navbar from "@/components/navbar"
+import Navbar from "@/components/navbar/navbar"
 import SkillSet from "@/components/skillset"
 import Hero from "@/components/hero"
 
