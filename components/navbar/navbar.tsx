@@ -2,8 +2,8 @@ import * as React from "react"
 import { useRef } from "react"
 import { m, useCycle } from "framer-motion"
 import { useDimensions } from "./use-dimensions"
-import { MenuToggle } from "./MenuToggle"
-import { Navigation } from "@/components/navbar/Navigation"
+import { MenuToggle } from "./menu-toggle"
+import { Navigation } from "./navigation"
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -38,7 +38,7 @@ const Navbar = () => {
       className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen flex justify-start items-end p-8 flex-col`}>
       <m.div className="bg-white absolute top-0 bottom-0 right-0 w-full z-20" variants={sidebar} />
       <MenuToggle toggle={toggleOpen} className="absolute top-0 right-0 z-20" />
-      <Navigation onClick={toggleOpen} />
+      <Navigation onItemClick={toggleOpen} />
     </m.nav>
   )
 }

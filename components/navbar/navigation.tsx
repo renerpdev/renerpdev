@@ -1,6 +1,6 @@
 import * as React from "react"
 import { m } from "framer-motion"
-import { MenuItem } from "./MenuItem"
+import { MenuItem } from "./menu-item"
 
 const variants = {
   open: {
@@ -13,10 +13,10 @@ const variants = {
   }
 }
 
-export const Navigation = ({ onClick }: { onClick?: () => void }) => (
+export const Navigation = ({ onItemClick }: { onItemClick?: () => void }) => (
   <m.ul variants={variants} className="z-20 flex-col gap-10 justify-center items-center w-full h-full">
     {items.map((item) => (
-      <MenuItem key={item.id} link={item.link} onClick={onClick}>
+      <MenuItem key={item.id} link={item.link} onClick={onItemClick}>
         {item.text}
       </MenuItem>
     ))}

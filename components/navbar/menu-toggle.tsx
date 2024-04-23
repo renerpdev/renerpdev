@@ -1,8 +1,15 @@
 import * as React from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 
 const Path = (props: any) => (
-  <motion.path fill="currentColor" strokeWidth="3" stroke="hsl(0, 0%, 18%)" strokeLinecap="round" {...props} />
+  <m.path
+    whileHover={{ scale: 1.5 }}
+    fill="currentColor"
+    strokeWidth="3"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    {...props}
+  />
 )
 
 export const MenuToggle = ({ toggle, className }: any) => (
