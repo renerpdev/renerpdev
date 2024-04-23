@@ -1,23 +1,22 @@
 import React, { useEffect, useRef } from "react"
 import { m, useMotionValue, useTransform } from "framer-motion"
 import { RocketIcon } from "@/components/icons/rocket"
-import { GithubIcon } from "@/components/icons/github"
-import { LinkedinIcon } from "@/components/icons/linkedin"
 import { ChevronDownIcon } from "@/components/icons/chevron-down"
-import { DribbleIcon } from "@/components/icons/dribble"
 
 const Hero = () => {
   const viewport = useViewportDimensions()
-  const gradientX = useMotionValue(0.5)
-  const gradientY = useMotionValue(0.5)
+  const gradientX = useMotionValue(0.9)
+  const gradientY = useMotionValue(0.7)
 
   const background = useTransform(
     [gradientX, gradientY],
-    ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, #1f313e 0%, transparent 30%)`
+    ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 0%, #1d2839 30%)`
   )
 
   return (
-    <div className="text-center md:text-left text-gray-600 body-font h-screen flex bg-gradient-to-r to-gray-900 from-slate-800 ">
+    <div
+      className="text-center md:text-left text-gray-600 body-font bg-gradient-to-r to-gray-900 from-slate-800 h-screen flex"
+      style={{ background: "url(/circuit-board.svg) repeat center/25% #1d2839" }}>
       <m.div
         style={{ background }}
         className=" flex px-10 py-12 items-center justify-center flex-col w-full z-10"
@@ -25,7 +24,7 @@ const Hero = () => {
           gradientX.set(e.clientX / viewport.width)
           gradientY.set(e.clientY / viewport.height)
         }}>
-        <div className="container mx-auto lg:w-2/3 w-full animate-fade-in-down">
+        <div className="container mx-auto lg:w-2/3 w-full">
           <h1 className="md:text-6xl xl:text-7xl text-4xl mb-2 font-bold text-white tracking-tight leading-tight">
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
           </h1>
@@ -35,7 +34,7 @@ const Hero = () => {
               href="https://github.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600"}>
+              className={"inline-flex text-white font-normal hover:text-cyan-600 cursor-external"}>
               Software Engineer
             </a>{" "}
             and{" "}
@@ -43,7 +42,7 @@ const Hero = () => {
               href="https://dribbble.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600"}>
+              className={"inline-flex text-white font-normal hover:text-cyan-600 cursor-external"}>
               Design Enthusiast
             </a>
             , based in Montevideo, Uruguay. If you need a pixel perfect solution, {"don't"} hesitate to contact me.
@@ -74,31 +73,8 @@ const Hero = () => {
               <span className={"mr-2 text-white"}>{"Download CV"}</span>
             </m.a>
           </div>
-          <div className={"flex justify-center md:justify-start space-x-2 items-center mt-6"}>
-            <a
-              href="https://github.com/renerpdev"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={"inline-flex text-white hover:text-cyan-600"}>
-              <GithubIcon className={"w-6 h-6"} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/renerpdev"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={"inline-flex text-white hover:text-cyan-600"}>
-              <LinkedinIcon className={"w-8 h-8"} />
-            </a>
-            <a
-              href="https://dribbble.com/renerpdev"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={"inline-flex text-white hover:text-cyan-600"}>
-              <DribbleIcon className={"w-10 h-10 translate-y-1 -translate-x-2"} />
-            </a>
-          </div>
         </div>
-        <div className="absolute bottom-10 left-[45%]">
+        <div className="absolute bottom-10 left-1/2 -ml-3">
           <ChevronDownIcon className="absolute animate-bounce text-white h-12 w-12" />
         </div>
       </m.div>

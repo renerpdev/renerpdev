@@ -30,78 +30,27 @@ const SkillSet = () => {
         </h2>
 
         <div className="flex flex-col gap-6 w-full mt-12">
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Critical Thinking</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
+          {[
+            "Critical Thinking",
+            "Time Management",
+            "Problem Solving",
+            "Teamwork",
+            "Problem Solving",
+            "Attention to Detail",
+            "Creativity",
+            "Responsibility",
+            "Adaptability"
+          ].map((skill, index) => (
+            <div className="flex flex-col w-full" key={index}>
+              <div className="flex justify-between py-1">
+                <span className="text-base text-gray-lite ">{skill}</span>
+                <span className="text-base text-gray-lite pr-5 ">100%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5 ">
+                <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Problem Solving</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Team Work</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Attention to Detail</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Time Management</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Responsibility</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Communication</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between py-1">
-              <span className="text-base text-gray-lite ">Flexibility</span>
-              <span className="text-base text-gray-lite pr-5 ">100%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-              <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
