@@ -16,31 +16,31 @@ const variants = {
 export const Navigation = ({ onItemClick }: { onItemClick?: () => void }) => (
   <m.ul variants={variants} className="z-20 flex-col gap-10 justify-center items-center w-full h-full">
     {items.map((item) => (
-      <MenuItem key={item.id} link={item.link} onClick={onItemClick}>
+      <MenuItem key={item.text} link={item.link} onClick={onItemClick}>
         {item.text}
       </MenuItem>
     ))}
   </m.ul>
 )
 
-const items: { id: number; text: string; link: string }[] = [
+const items: { text: string; link: string }[] = [
   {
-    id: 0,
-    text: "Skills",
-    link: "#skills"
+    text: "About",
+    link: "#about"
   },
   {
-    id: 1,
     text: "Experience",
     link: "#experience"
   },
   {
-    id: 2,
     text: "Projects",
     link: "#projects"
   },
   {
-    id: 3,
+    text: "Skills",
+    link: "#skills"
+  },
+  {
     text: "Contact",
     link: "#contact"
   }

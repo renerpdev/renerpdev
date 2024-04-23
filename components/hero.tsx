@@ -5,12 +5,12 @@ import { ChevronDownIcon } from "@/components/icons/chevron-down"
 
 const Hero = () => {
   const viewport = useViewportDimensions()
-  const gradientX = useMotionValue(0.9)
+  const gradientX = useMotionValue(0.8)
   const gradientY = useMotionValue(0.7)
 
   const background = useTransform(
     [gradientX, gradientY],
-    ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 0%, #1d2839 30%)`
+    ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 0%, #1d2839 40%)`
   )
 
   return (
@@ -47,7 +47,7 @@ const Hero = () => {
             </a>
             , based in Montevideo, Uruguay. If you need a pixel perfect solution, {"don't"} hesitate to contact me.
           </p>
-          <div className={"inline-flex flex-col sm:flex-row gap-4 "}>
+          <div className={"inline-flex flex-col sm:flex-row gap-2 sm:gap-4 "}>
             <m.a
               href="#contact"
               whileHover={{ scale: 1.1 }}
@@ -74,7 +74,7 @@ const Hero = () => {
             </m.a>
           </div>
         </div>
-        <div className="absolute bottom-10 left-1/2 -ml-3">
+        <div className="absolute bottom-20 left-1/2 -ml-4 md:-ml-3">
           <ChevronDownIcon className="absolute animate-bounce text-white h-12 w-12" />
         </div>
       </m.div>

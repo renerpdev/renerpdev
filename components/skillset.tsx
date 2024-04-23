@@ -44,7 +44,6 @@ const SkillSet = () => {
             <div className="flex flex-col w-full" key={index}>
               <div className="flex justify-between py-1">
                 <span className="text-base text-gray-lite ">{skill}</span>
-                <span className="text-base text-gray-lite pr-5 ">100%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-1.5 ">
                 <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />

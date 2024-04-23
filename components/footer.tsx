@@ -3,6 +3,7 @@ import { GithubIcon } from "@/components/icons/github"
 import { LinkedinIcon } from "@/components/icons/linkedin"
 import { DribbleIcon } from "@/components/icons/dribble"
 import { NpmIcon } from "@/components/icons/npm"
+import { LogoIcon } from "@/components/icons/logo"
 
 const Footer = () => {
   const socialLinks = [
@@ -30,6 +31,8 @@ const Footer = () => {
 
   return (
     <footer className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8">
+      <LogoIcon className={"w-10 h-10 text-cyan-600 mx-auto"} />
+
       <p className={"text-2xl font-light tracking-wider"}>Always looking for improvements</p>
 
       <div className={"flex justify-center space-x-4 items-center"}>
@@ -45,9 +48,13 @@ const Footer = () => {
         ))}
       </div>
 
-      <p className={"text-lg tracking-widest"}>
-        <span>Handcrafted by by </span>
-        <a href="https://github.com/renerpdev" target="_blank" rel="noreferrer noopener" className={"cursor-external"}>
+      <p className={"text-lg tracking-widest font-light"}>
+        <span>Handcrafted by </span>
+        <a
+          href="https://github.com/renerpdev/renerpdev"
+          target="_blank"
+          rel="noreferrer noopener"
+          className={"cursor-external font-bold"}>
           me
         </a>{" "}
         © {new Date().getFullYear()}

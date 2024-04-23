@@ -4,6 +4,7 @@ import { m, useCycle } from "framer-motion"
 import { useDimensions } from "./use-dimensions"
 import { MenuToggle } from "./menu-toggle"
 import { Navigation } from "./navigation"
+import { LogoIcon } from "@/components/icons/logo"
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -35,10 +36,13 @@ const Navbar = () => {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
-      className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen flex justify-start items-end p-8 flex-col`}>
+      className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen p-8 flex justify-between items-start`}>
+      <LogoIcon className={"relative z-20 w-8 h-8 text-cyan-600"} />
       <m.div className="bg-white absolute top-0 bottom-0 right-0 w-full z-20" variants={sidebar} />
-      <MenuToggle toggle={toggleOpen} className="absolute top-0 right-0 z-20" />
-      <Navigation onItemClick={toggleOpen} />
+      <div className={"flex justify-start items-end flex-col w-full h-full"}>
+        <MenuToggle toggle={toggleOpen} className="absolute top-0 right-0 z-20" />
+        <Navigation onItemClick={toggleOpen} />
+      </div>
     </m.nav>
   )
 }

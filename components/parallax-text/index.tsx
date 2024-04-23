@@ -62,7 +62,7 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
    * dynamically generated number of children.
    */
   return (
-    <div className="parallax">
+    <div className={"parallax"}>
       <m.div className="scroller text-cyan-900" style={{ x }}>
         <span>{children} </span>
         <span>{children} </span>

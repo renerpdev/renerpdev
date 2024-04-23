@@ -10,6 +10,8 @@ import Hero from "@/components/hero"
 import TechStack from "@/components/tech-stack"
 import CallToAction from "@/components/call-to-action"
 import Experience from "@/components/experience"
+import About from "@/components/about"
+import Projects from "@/components/projects"
 
 export default function Home() {
   return (
@@ -18,32 +20,48 @@ export default function Home() {
         <Navbar />
         <Hero />
       </section>
-      <Section id="skills">
-        <SkillSet />
-      </Section>
-      <section className="py-16 bg-white flex flex-col justify-center">
-        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
-        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
+
+      <section id="about" className={" -mt-12 z-20 relative px-5"}>
+        <About />
       </section>
-      <Section id="skills">
-        <TechStack />
-      </Section>
-      <CallToAction />
+
       <Section id="experience">
         <Experience />
       </Section>
+
+      <Section id="projects">
+        <Projects />
+      </Section>
+
+      <CallToAction />
+
+      <Section id="skills">
+        <SkillSet />
+      </Section>
+
+      <section className="py-16 rotate-2">
+        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
+      </section>
+
+      <Section id="stack">
+        <TechStack />
+      </Section>
+
+      <section className="py-16 -rotate-2">
+        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
+      </section>
+
       <Section id="contact">
         <Contact />
       </Section>
+
       <Footer />
     </LazyMotion>
   )
 }
 
 const Section = ({ children, className, ...props }: { children: React.ReactNode; className?: string; id?: string }) => (
-  <section
-    className={`text-[#333] py-16 md:py-20 lg:py-24 px-5 bg-white h-auto lg:min-h-screen flex flex-col justify-center ${className}`}
-    {...props}>
+  <section className={`text-[#333] py-16 md:py-20 lg:py-24 xl:py-28 px-5 bg-white ${className}`} {...props}>
     {children}
   </section>
 )
