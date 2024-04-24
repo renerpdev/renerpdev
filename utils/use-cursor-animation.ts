@@ -38,7 +38,7 @@ export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
     },
     action: {
       opacity: 1,
-      backgroundColor: "transparent",
+      backgroundColor: "rgba(255, 255, 255, 0)",
       height: 64,
       width: 64,
       border: "2px solid white",
