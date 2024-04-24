@@ -58,7 +58,7 @@ export const SwipeCarousel = ({ children: slides, className, setCursorText, setC
         onDragEnd={onDragEnd}
         onMouseLeave={onMouseLeave}
         onMouseEnter={linkEnter}
-        className="flex items-start cursor-none">
+        className="flex items-start cursor-grab lg:cursor-none">
         <Slides {...{ imgIndex, slides }} />
       </motion.div>
 
