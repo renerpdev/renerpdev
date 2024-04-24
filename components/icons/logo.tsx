@@ -15,7 +15,7 @@ export const LogoIcon = ({ className }: { className?: string }) => {
           width="45"
           height="200"
           rx="5"
-          transform="translate(55 35)"
+          transform="translate(55 33)"
           fill="#fff"
         />
         <rect
@@ -24,7 +24,7 @@ export const LogoIcon = ({ className }: { className?: string }) => {
           width="45"
           height="115"
           rx="5"
-          transform="translate(120 35)"
+          transform="translate(120 33)"
           fill="#fff"
         />
         <rect
