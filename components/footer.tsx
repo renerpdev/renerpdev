@@ -81,11 +81,11 @@ const Footer = () => {
         <p className={"font-light"}>
           Animations powered by{" "}
           <a
-            href="https://framer.com"
+            href="https://www.framer.com/motion/"
             target="_blank"
             rel="noreferrer noopener"
             className={"cursor-external font-medium"}>
-            Framer
+            Framer Motion
           </a>
         </p>
         <p className={"font-light"}>
