@@ -24,7 +24,7 @@ export default function Home() {
       <main ref={ref}>
         <m.div
           variants={variants}
-          className="pointer-events-none fixed z-50 lg:flex justify-center items-center bg-cyan-600 text-center text-sm rounded-full"
+          className="hidden pointer-events-none fixed z-50 lg:flex justify-center items-center bg-cyan-600 text-center text-sm rounded-full"
           animate={cursorVariant}
           transition={spring}>
           <span className="pointer-events-none m-auto">{cursorText}</span>

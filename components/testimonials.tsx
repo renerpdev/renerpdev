@@ -52,7 +52,7 @@ const Testimonials = ({ setCursorText, setCursorVariant }: CursorAnimationHandle
                   href={t.profileUrl}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className={"font-medium text-cyan-500"}>
+                  className={"font-medium text-cyan-500 lg:cursor-external"}>
                   {t.name}
                 </a>
                 <p className={"text-sm text-center"}>
