@@ -1,7 +1,18 @@
 import React from "react"
 import { m } from "framer-motion"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const CallToAction = () => {
+const CallToAction = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function contactEnter() {
+    setCursorText("👋")
+    setCursorVariant("link")
+  }
+
   return (
     <div className={"bg-[#1d2839] px-5 py-12 lg:py-14"}>
       <div
@@ -13,6 +24,8 @@ const CallToAction = () => {
           {"Are you interested in working together? Let's grab a coffee and chat about it! My treat!"}
         </p>
         <m.a
+          onMouseEnter={contactEnter}
+          onMouseLeave={onMouseLeave}
           whileHover={{ scale: 1.1, rotate: 2 }}
           whileTap={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -2,18 +2,11 @@ import * as React from "react"
 import { m } from "framer-motion"
 
 const Path = (props: any) => (
-  <m.path
-    whileHover={{ scale: 1.5 }}
-    fill="currentColor"
-    strokeWidth="3"
-    stroke="hsl(0, 0%, 18%)"
-    strokeLinecap="round"
-    {...props}
-  />
+  <m.path fill="currentColor" strokeWidth="3" stroke="hsl(0, 0%, 18%)" strokeLinecap="round" {...props} />
 )
 
-export const MenuToggle = ({ toggle, className }: any) => (
-  <button onClick={toggle} className={`relative z-10 p-2 ${className}`}>
+export const MenuToggle = ({ toggle, className, ...props }: any) => (
+  <button onClick={toggle} className={`relative z-10 p-2 ${className}`} {...props}>
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{

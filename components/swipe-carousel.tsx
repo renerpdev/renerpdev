@@ -1,7 +1,8 @@
 import React, { ReactElement, useState } from "react"
 import { motion, useMotionValue } from "framer-motion"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const DRAG_BUFFER = 20
+const DRAG_BUFFER = 10
 
 const SPRING_OPTIONS = {
   type: "spring",
@@ -10,7 +11,11 @@ const SPRING_OPTIONS = {
   damping: 50
 }
 
-export const SwipeCarousel = ({ children: slides, className }: { children: ReactElement[]; className?: string }) => {
+interface SwipeCarouselProps extends CursorAnimationHandler {
+  children: ReactElement[]
+  className?: string
+}
+export const SwipeCarousel = ({ children: slides, className, setCursorText, setCursorVariant }: SwipeCarouselProps) => {
   const [imgIndex, setImgIndex] = useState(0)
 
   const dragX = useMotionValue(0)
@@ -23,6 +28,16 @@ export const SwipeCarousel = ({ children: slides, className }: { children: React
     } else if (x >= DRAG_BUFFER && imgIndex > 0) {
       setImgIndex((pv) => pv - 1)
     }
+  }
+
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function linkEnter() {
+    setCursorText("")
+    setCursorVariant("action")
   }
 
   return (
@@ -41,8 +56,10 @@ export const SwipeCarousel = ({ children: slides, className }: { children: React
         }}
         transition={SPRING_OPTIONS}
         onDragEnd={onDragEnd}
-        className="flex cursor-grab items-start active:cursor-grabbing">
-        <Slices imgIndex={imgIndex} slices={slides} />
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={linkEnter}
+        className="flex items-start cursor-none">
+        <Slides {...{ imgIndex, slides }} />
       </motion.div>
 
       <Dots slices={slides} imgIndex={imgIndex} setImgIndex={setImgIndex} />
@@ -50,10 +67,14 @@ export const SwipeCarousel = ({ children: slides, className }: { children: React
   )
 }
 
-const Slices = ({ slices }: { imgIndex: number; slices: ReactElement[] }) => {
+interface SlidesProps {
+  imgIndex: number
+  slides: ReactElement[]
+}
+const Slides = ({ slides }: SlidesProps) => {
   return (
     <>
-      {slices.map((content, idx) => {
+      {slides.map((content, idx) => {
         return (
           <motion.div key={idx} transition={SPRING_OPTIONS} className="w-full shrink-0">
             {content}
@@ -72,8 +93,8 @@ const Dots = ({ slices, imgIndex, setImgIndex }: { slices: ReactElement[]; imgIn
           <button
             key={idx}
             onClick={() => setImgIndex(idx)}
-            className={`h-3 w-3 rounded-full transition-colors border-2 border-cyan-800 ${
-              idx === imgIndex ? "bg-cyan-800" : "bg-white"
+            className={`h-3 w-3 rounded-full transition-colors border-2 border-white ${
+              idx === imgIndex ? "bg-white" : "bg-transparent"
             }`}
           />
         )

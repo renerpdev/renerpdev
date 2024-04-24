@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from "react"
 import { m, useMotionValue, useTransform } from "framer-motion"
 import { RocketIcon } from "@/components/icons/rocket"
 import { ChevronDownIcon } from "@/components/icons/chevron-down"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const Hero = () => {
+const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const viewport = useViewportDimensions()
   const gradientX = useMotionValue(0.8)
   const gradientY = useMotionValue(0.7)
@@ -12,6 +13,25 @@ const Hero = () => {
     [gradientX, gradientY],
     ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 0%, #1d2839 40%)`
   )
+
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function linkEnter() {
+    setCursorText("👀")
+    setCursorVariant("link")
+  }
+
+  function contactEnter() {
+    setCursorText("👋")
+    setCursorVariant("link")
+  }
+  function downloadEnter() {
+    setCursorText("📥")
+    setCursorVariant("link")
+  }
 
   return (
     <div
@@ -31,24 +51,30 @@ const Hero = () => {
           <p className="mt-4 mb-6 md:leading-snug leading-normal text-white/80 tracking-wide text-md md:text-xl lg:text-2xl mx-auto md:ml-0 max-w-md sm:max-w-lg md:max-w-2xl font-light">
             {"I'm a "}
             <a
+              onMouseEnter={linkEnter}
+              onMouseLeave={onMouseLeave}
               href="https://github.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600 cursor-external"}>
+              className={"inline-flex text-white font-normal hover:text-cyan-600 "}>
               Software Engineer
             </a>{" "}
             and{" "}
             <a
+              onMouseEnter={linkEnter}
+              onMouseLeave={onMouseLeave}
               href="https://dribbble.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600 cursor-external"}>
+              className={"inline-flex text-white font-normal hover:text-cyan-600 "}>
               Design Enthusiast
             </a>
             , based in Montevideo, Uruguay. If you need a pixel perfect solution, {"don't"} hesitate to contact me.
           </p>
           <div className={"inline-flex flex-col sm:flex-row gap-2 sm:gap-4 "}>
             <m.a
+              onMouseEnter={contactEnter}
+              onMouseLeave={onMouseLeave}
               href="#contact"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1 }}
@@ -62,8 +88,11 @@ const Hero = () => {
               <RocketIcon className="text-cyan-900" />
             </m.a>
             <m.a
+              onMouseEnter={downloadEnter}
+              onMouseLeave={onMouseLeave}
               href="/assets/renerp-cv.pdf"
-              download
+              target="_blank"
+              rel="noreferrer noopener"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}

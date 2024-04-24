@@ -3,8 +3,9 @@ import { RocketIcon } from "@/components/icons/rocket"
 import { sendEmail } from "@/app/lib/actions"
 import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const Contact = () => {
+const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const [dataSent, setDataSent] = useState(false)
 
   const handleSubmit = async (formData: FormData) => {
@@ -25,10 +26,13 @@ const Contact = () => {
       <div className="mx-auto w-full">
         {!dataSent ? (
           <>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl mb-4 font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
               How can I help?
             </h2>
-            <Form action={handleSubmit} />
+            <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal mb-6"}>
+              {"Let me know what you're looking for"}
+            </h3>
+            <Form action={handleSubmit} {...{ setCursorText, setCursorVariant }} />
           </>
         ) : (
           <p className={"text-lg text-center flex items-center justify-center gap-2 flex-wrap"}>
@@ -40,7 +44,11 @@ const Contact = () => {
   )
 }
 
-const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
+const Form = ({
+  action,
+  setCursorVariant,
+  setCursorText
+}: { action: (data: FormData) => Promise<void> } & CursorAnimationHandler) => {
   return (
     <form className="mt-8 space-y-4" action={action}>
       <input
@@ -103,15 +111,28 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
           </label>
         </div>
       </div>
-      <Submit />
+      <Submit {...{ setCursorText, setCursorVariant }} />
     </form>
   )
 }
 
-const Submit = () => {
+const Submit = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const { pending } = useFormStatus()
+
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function contactEnter() {
+    setCursorText("🚀")
+    setCursorVariant("link")
+  }
+
   return (
     <m.button
+      onMouseEnter={contactEnter}
+      onMouseLeave={onMouseLeave}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}

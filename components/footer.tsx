@@ -5,8 +5,19 @@ import { DribbleIcon } from "@/components/icons/dribble"
 import { NpmIcon } from "@/components/icons/npm"
 import { LogoIcon } from "@/components/icons/logo"
 import { BehanceIcon } from "@/components/icons/behance"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const Footer = () => {
+const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function linkEnter() {
+    setCursorText("👀")
+    setCursorVariant("link")
+  }
+
   const socialLinks = [
     {
       name: "Linkedin",
@@ -49,11 +60,13 @@ const Footer = () => {
       <div className={"flex justify-center flex-wrap space-x-4 items-center"}>
         {socialLinks.map((link) => (
           <a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href={link.href}
             key={link.name}
             target="_blank"
             rel="noreferrer noopener"
-            className={"inline-flex text-white hover:text-cyan-600 cursor-external"}>
+            className={"inline-flex text-white hover:text-cyan-600"}>
             {link.icon()}
           </a>
         ))}
@@ -62,10 +75,12 @@ const Footer = () => {
       <p className={"text-sm lg:text-lg tracking-widest font-light"}>
         <span>Handcrafted by </span>
         <a
+          onMouseEnter={linkEnter}
+          onMouseLeave={onMouseLeave}
           href="https://github.com/renerpdev/renerpdev"
           target="_blank"
           rel="noreferrer noopener"
-          className={"cursor-external font-bold"}>
+          className={"font-bold"}>
           me
         </a>{" "}
         © {new Date().getFullYear()}
@@ -74,38 +89,46 @@ const Footer = () => {
         <p className={"font-light"}>
           Made with{" "}
           <a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href="https://tailwindcss.com"
             target="_blank"
             rel="noreferrer noopener"
-            className={"cursor-external font-medium"}>
+            className={"font-medium"}>
             Tailwind
           </a>{" "}
           and{" "}
           <a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href="https://nextjs.org/"
             target="_blank"
             rel="noreferrer noopener"
-            className={"cursor-external font-medium"}>
+            className={"font-medium"}>
             Next.js
           </a>
         </p>
         <p className={"font-light"}>
           Animations powered by{" "}
           <a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href="https://www.framer.com/motion/"
             target="_blank"
             rel="noreferrer noopener"
-            className={"cursor-external font-medium"}>
+            className={"font-medium"}>
             Framer Motion
           </a>
         </p>
         <p className={"font-light"}>
           Deployed on{" "}
           <a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href="https://vercel.com"
             target="_blank"
             rel="noreferrer noopener"
-            className={"cursor-external font-medium"}>
+            className={"font-medium"}>
             Vercel
           </a>
         </p>{" "}

@@ -1,6 +1,6 @@
 "use client"
 
-import { LazyMotion, domAnimation } from "framer-motion"
+import { LazyMotion, domAnimation, m } from "framer-motion"
 import ParallaxText from "@/components/parallax-text"
 import Footer from "@/components/footer"
 import Contact from "@/components/contact"
@@ -12,24 +12,39 @@ import CallToAction from "@/components/call-to-action"
 import Experience from "@/components/experience"
 import About from "@/components/about"
 import Projects from "@/components/projects"
+import { useCursorAnimation } from "@/utils/use-cursor-animation"
 
 export default function Home() {
+  const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation()
+
   return (
     <LazyMotion features={domAnimation}>
+      <m.div
+        variants={variants}
+        className="pointer-events-none fixed z-50 flex justify-center items-center bg-cyan-600 text-center text-sm rounded-full"
+        animate={cursorVariant}
+        transition={spring}>
+        <span className="pointer-events-none m-auto">{cursorText}</span>
+      </m.div>
+
       <section className="relative min-h-screen">
-        <Navbar />
-        <Hero />
+        <Navbar {...{ setCursorText, setCursorVariant }} />
+        <Hero {...{ setCursorText, setCursorVariant }} />
       </section>
 
       <section id="about" className={" -mt-12 z-20 relative px-5"}>
         <About />
       </section>
 
+      <section className="pt-28 py-8 rotate-2 overflow-x-hidden w-screen">
+        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
+      </section>
+
       <Section id="experience">
         <Experience />
       </Section>
 
-      <section className="py-16 -rotate-2 overflow-x-hidden w-screen">
+      <section className="pt-20 py-16 -rotate-2 overflow-x-hidden w-screen">
         <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
       </section>
 
@@ -37,30 +52,41 @@ export default function Home() {
         <Projects />
       </Section>
 
-      <CallToAction />
+      <CallToAction {...{ setCursorText, setCursorVariant }} />
 
       <Section id="skills">
         <SkillSet />
       </Section>
 
-      <Section id="testimonials">
-        <Testimonials />
+      <Section
+        id="testimonials"
+        className="bg-[_#1d2838] text-white"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 100%), url(/assets/circuit-board.svg) repeat center/25% #1d2839"
+        }}>
+        <Testimonials {...{ setCursorText, setCursorVariant }} />
       </Section>
-
-      <section className="py-16 rotate-2 overflow-x-hidden w-screen">
-        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
-      </section>
 
       <Section id="contact">
-        <Contact />
+        <Contact {...{ setCursorText, setCursorVariant }} />
       </Section>
 
-      <Footer />
+      <Footer {...{ setCursorText, setCursorVariant }} />
     </LazyMotion>
   )
 }
 
-const Section = ({ children, className, ...props }: { children: React.ReactNode; className?: string; id?: string }) => (
+const Section = ({
+  children,
+  className,
+  ...props
+}: {
+  children: React.ReactNode
+  className?: string
+  id?: string
+  style?: React.CSSProperties
+}) => (
   <section className={`text-[#333] py-16 md:py-20 lg:py-24 xl:py-28 px-5 bg-white ${className}`} {...props}>
     {children}
   </section>

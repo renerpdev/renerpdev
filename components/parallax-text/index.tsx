@@ -9,7 +9,6 @@ import {
   wrap
 } from "framer-motion"
 import { useRef } from "react"
-import "./styles.css"
 
 interface ParallaxProps {
   children: string

@@ -11,9 +11,6 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
-      },
-      cursor: {
-        external: "url(/assets/arrow-diagonal-up.svg), pointer"
       }
     }
   },
