@@ -8,6 +8,7 @@ const Projects = () => {
         <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal"}>
           {"Here are some of the projects I've worked on"}
         </h3>
+        <p className={"mt-10 text-center text-cyan-700"}>{"<coming soon />"}</p>
       </div>
     </div>
   )

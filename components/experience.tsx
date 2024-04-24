@@ -6,6 +6,7 @@ const Experience = () => {
           Experience
         </h2>
         <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal"}>{"Where I've worked so far"}</h3>
+        <p className={"mt-10 text-center text-cyan-700"}>{"<coming soon />"}</p>
       </div>
     </div>
   )
