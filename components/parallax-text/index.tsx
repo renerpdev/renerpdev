@@ -13,9 +13,10 @@ import { useRef } from "react"
 interface ParallaxProps {
   children: string
   baseVelocity: number
+  className?: string
 }
 
-export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxProps) {
+export default function ParallaxText({ children, className, baseVelocity = 500 }: ParallaxProps) {
   const baseX = useMotionValue(0)
   const { scrollY } = useScroll()
   const scrollVelocity = useVelocity(scrollY)
@@ -61,7 +62,7 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
    * dynamically generated number of children.
    */
   return (
-    <div className={"parallax"}>
+    <div className={`parallax ${className}`}>
       <m.div className="scroller text-cyan-900 heading" style={{ x }}>
         <span>{children} </span>
         <span>{children} </span>

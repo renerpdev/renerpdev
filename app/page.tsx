@@ -36,16 +36,20 @@ export default function Home() {
         <About />
       </section>
 
-      <section className="pt-28 py-8 rotate-2 overflow-x-hidden w-screen">
-        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
+      <section className="pt-28 py-8 overflow-x-hidden w-screen">
+        <ParallaxText className="rotate-2" baseVelocity={5}>
+          Design • Development • Design • Development
+        </ParallaxText>
       </section>
 
       <Section id="experience">
         <Experience />
       </Section>
 
-      <section className="pt-20 py-16 -rotate-2 overflow-x-hidden w-screen">
-        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
+      <section className="pt-20 py-16 overflow-x-hidden w-screen">
+        <ParallaxText className="-rotate-2" baseVelocity={-5}>
+          Web • Mobile • Web • Mobile
+        </ParallaxText>
       </section>
 
       <Section id="projects">
