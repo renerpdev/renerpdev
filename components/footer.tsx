@@ -59,7 +59,7 @@ const Footer = () => {
         </a>{" "}
         © {new Date().getFullYear()}
       </p>
-      <div className={"tracking-wider"}>
+      <div className={"tracking-wider text-xs space-y-0.5"}>
         <p className={"font-light"}>
           Made with{" "}
           <a
@@ -79,6 +79,16 @@ const Footer = () => {
           </a>
         </p>
         <p className={"font-light"}>
+          Animations powered by{" "}
+          <a
+            href="https://framer.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className={"cursor-external font-medium"}>
+            Framer
+          </a>
+        </p>
+        <p className={"font-light"}>
           Deployed on{" "}
           <a
             href="https://vercel.com"
@@ -87,7 +97,7 @@ const Footer = () => {
             className={"cursor-external font-medium"}>
             Vercel
           </a>
-        </p>
+        </p>{" "}
       </div>
     </footer>
   )

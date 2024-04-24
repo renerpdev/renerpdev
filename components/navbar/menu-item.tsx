@@ -33,7 +33,7 @@ export const MenuItem = ({ link, children, onClick }: { link: string; onClick?: 
       <a
         href={link}
         onClick={handleClick}
-        className="text-5xl md:text-6xl font-bold  text-transparent bg-gradient-to-tr from-cyan-700 to-cyan-600 bg-clip-text drop-shadow-md">
+        className="heading text-5xl md:text-6xl font-bold  text-transparent bg-gradient-to-tr from-cyan-700 to-cyan-600 bg-clip-text drop-shadow-md">
         {children}
       </a>
     </m.li>

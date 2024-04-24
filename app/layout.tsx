@@ -1,10 +1,18 @@
 import type { Viewport } from "next"
-import { Ubuntu } from "next/font/google"
+import { Ubuntu, Inter } from "next/font/google"
 import "./globals.css"
+import Head from "next/head"
 
-const font = Ubuntu({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"]
+const ubuntuFont = Ubuntu({
+  weight: ["500", "700"],
+  subsets: ["latin"],
+  variable: "--font-ubuntu"
+})
+
+const interFont = Inter({
+  weight: ["300", "400", "500"],
+  subsets: ["latin"],
+  variable: "--font-inter"
 })
 
 export const viewport: Viewport = {
@@ -46,7 +54,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={font.className}>
+      <Head>
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+      </Head>
+      <body className={`${ubuntuFont.variable} ${interFont.variable}`}>
         <main>{children}</main>
       </body>
     </html>

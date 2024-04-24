@@ -37,7 +37,6 @@ const SkillSet = () => {
             "Teamwork",
             "Problem Solving",
             "Attention to Detail",
-            "Creativity",
             "Responsibility",
             "Adaptability"
           ].map((skill, index) => (

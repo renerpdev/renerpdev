@@ -64,7 +64,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
         className="w-full min-h-32 rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
-      <div className={"flex flex-col gap-4 pb-2"}>
+      <div className={"flex flex-row flex-wrap justify-center gap-4 pb-4 md:pb-8"}>
         <div className="flex items-center">
           <input
             id="default-checkbox1"
@@ -114,9 +114,9 @@ const Submit = () => {
     <m.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
-      type="submit"
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      className="text-white bg-cyan-600 hover:bg-cyan-500 rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto max-w-sm lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      type="submit"
+      className="max-w-sm mx-auto text-lg flex justify-center text-white items-center bg-cyan-600 px-8 py-3 rounded-3xl border-none disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
       {pending ? "Sending..." : "Send message"}
     </m.button>

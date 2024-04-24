@@ -1,4 +1,5 @@
 import React from "react"
+import { m } from "framer-motion"
 
 const CallToAction = () => {
   return (
@@ -11,13 +12,16 @@ const CallToAction = () => {
         <p className={"text-lg tracking-wider max-w-2xl"}>
           {"Are you interested in working together? Let's grab a coffee and chat about it! My treat!"}
         </p>
-        <a
+        <m.a
+          whileHover={{ scale: 1.1, rotate: 2 }}
+          whileTap={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
           href="#contact"
           className={
-            "rounded-full ring-2 ring-white px-10 py-3 hover:bg-white hover:text-cyan-950 transition-colors whitespace-nowrap"
+            "rounded-full ring-2 ring-white px-8 py-3 hover:bg-white hover:text-cyan-950 transition-colors whitespace-nowrap"
           }>
           {"Let's chat!"}
-        </a>
+        </m.a>
       </div>
     </div>
   )

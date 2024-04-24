@@ -13,7 +13,7 @@ const config: Config = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
       },
       cursor: {
-        external: "url(/cursors/arrow-diagonal-up.svg), pointer"
+        external: "url(/assets/arrow-diagonal-up.svg), pointer"
       }
     }
   },

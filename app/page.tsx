@@ -7,7 +7,7 @@ import Contact from "@/components/contact"
 import Navbar from "@/components/navbar/navbar"
 import SkillSet from "@/components/skillset"
 import Hero from "@/components/hero"
-import TechStack from "@/components/tech-stack"
+import Testimonials from "@/components/testimonials"
 import CallToAction from "@/components/call-to-action"
 import Experience from "@/components/experience"
 import About from "@/components/about"
@@ -29,6 +29,10 @@ export default function Home() {
         <Experience />
       </Section>
 
+      <section className="py-16 -rotate-2 overflow-x-hidden w-screen">
+        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
+      </section>
+
       <Section id="projects">
         <Projects />
       </Section>
@@ -39,16 +43,12 @@ export default function Home() {
         <SkillSet />
       </Section>
 
-      <section className="py-16 rotate-2">
-        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
-      </section>
-
-      <Section id="stack">
-        <TechStack />
+      <Section id="testimonials">
+        <Testimonials />
       </Section>
 
-      <section className="py-16 -rotate-2">
-        <ParallaxText baseVelocity={-5}>Web • Mobile • Web • Mobile</ParallaxText>
+      <section className="py-16 rotate-2 overflow-x-hidden w-screen">
+        <ParallaxText baseVelocity={5}>Design • Development • Design • Development</ParallaxText>
       </section>
 
       <Section id="contact">

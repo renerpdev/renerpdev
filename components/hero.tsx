@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <div
       className="text-center md:text-left text-gray-600 body-font bg-gradient-to-r to-gray-900 from-slate-800 h-screen flex"
-      style={{ background: "url(/circuit-board.svg) repeat center/25% #1d2839" }}>
+      style={{ background: "url(/assets/circuit-board.svg) repeat center/25% #1d2839" }}>
       <m.div
         style={{ background }}
         className=" flex px-10 py-12 items-center justify-center flex-col w-full z-10"
@@ -62,7 +62,7 @@ const Hero = () => {
               <RocketIcon className="text-cyan-900" />
             </m.a>
             <m.a
-              href="/renerp-cv.pdf"
+              href="/assets/renerp-cv.pdf"
               download
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1 }}
