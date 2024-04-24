@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { RefObject, useState } from "react"
 import { useFollowPointer } from "@/utils/use-follow-pointer"
 
 export type CursorAnimationHandler = {
@@ -6,11 +6,11 @@ export type CursorAnimationHandler = {
   setCursorVariant: (variant: "default" | "link" | "action") => void
 }
 
-export const useCursorAnimation = () => {
+export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
   const [cursorText, setCursorText] = useState("")
   const [cursorVariant, setCursorVariant] = useState("default")
 
-  const { mouseXPosition, mouseYPosition } = useFollowPointer()
+  const { mouseXPosition, mouseYPosition } = useFollowPointer(ref)
 
   const variants = {
     default: {

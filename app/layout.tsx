@@ -57,9 +57,7 @@ export default function RootLayout({
       <Head>
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </Head>
-      <body className={`${ubuntuFont.variable} ${interFont.variable}`}>
-        <main>{children}</main>
-      </body>
+      <body className={`${ubuntuFont.variable} ${interFont.variable}`}>{children}</body>
     </html>
   )
 }
