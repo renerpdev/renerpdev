@@ -36,12 +36,17 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8">
+    <footer
+      className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8"
+      style={{
+        background:
+          "radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url(/assets/circuit-board.svg) repeat center/25% #1d2839"
+      }}>
       <LogoIcon className={"w-10 h-10 text-cyan-600 mx-auto"} />
 
-      <p className={"text-2xl font-light tracking-wider"}>Always looking for improvements</p>
+      <p className={"text-xl lg:text-2xl font-light tracking-wider"}>Always looking for improvements</p>
 
-      <div className={"flex justify-center space-x-4 items-center"}>
+      <div className={"flex justify-center flex-wrap space-x-4 items-center"}>
         {socialLinks.map((link) => (
           <a
             href={link.href}
@@ -54,7 +59,7 @@ const Footer = () => {
         ))}
       </div>
 
-      <p className={"text-lg tracking-widest font-light"}>
+      <p className={"text-sm lg:text-lg tracking-widest font-light"}>
         <span>Handcrafted by </span>
         <a
           href="https://github.com/renerpdev/renerpdev"
