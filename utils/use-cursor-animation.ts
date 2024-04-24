@@ -15,8 +15,8 @@ export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
   const variants = {
     default: {
       opacity: 1,
-      height: 10,
-      width: 10,
+      height: 0,
+      width: 0,
       fontSize: "16px",
       backgroundColor: "#1e91d6",
       x: mouseXPosition,
