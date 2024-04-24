@@ -17,7 +17,7 @@ const Testimonials = () => {
       title: "Lead Software Engineer",
       company: "Level 6 LLC",
       quote:
-        "His web design and frontend development skills are excellent. His attitudes as a person and professional seem correct to me and I would recommend him to recruiters and clients who need these qualities in a developer.",
+        "I can affirm that he fully fulfills the tasks that are aligned. His web design and frontend development skills are excellent. His attitudes as a person and professional seem correct to me and I would recommend him to recruiters and clients who need these qualities in a developer.",
       image:
         "https://media.licdn.com/dms/image/D5635AQEFSCIM3VGyTA/profile-framedphoto-shrink_400_400/0/1703014825234?e=1714532400&v=beta&t=-C3hy_ovX5r2-btg8dR2z7qDc9o7NHYsK0GjrxVVyZg"
     }

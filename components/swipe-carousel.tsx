@@ -66,7 +66,7 @@ const Slices = ({ slices }: { imgIndex: number; slices: ReactElement[] }) => {
 
 const Dots = ({ slices, imgIndex, setImgIndex }: { slices: ReactElement[]; imgIndex: number; setImgIndex: any }) => {
   return (
-    <div className="mt-4 flex w-full justify-center gap-2">
+    <div className="mt-8 flex w-full justify-center gap-2">
       {slices.map((_, idx) => {
         return (
           <button
