@@ -3,7 +3,7 @@ import { useFollowPointer } from "@/utils/use-follow-pointer"
 
 export type CursorAnimationHandler = {
   setCursorText: (text: string) => void
-  setCursorVariant: (variant: "default" | "link" | "action") => void
+  setCursorVariant: (variant: "default" | "link" | "action" | "drag") => void
 }
 
 export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
@@ -39,6 +39,15 @@ export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
     action: {
       opacity: 1,
       backgroundColor: "rgba(255, 255, 255, 0)",
+      height: 64,
+      width: 64,
+      border: "2px solid white",
+      x: mouseXPosition - 32,
+      y: mouseYPosition - 32
+    },
+    drag: {
+      opacity: 1,
+      backgroundColor: "rgba(255, 255, 255, .5)",
       height: 64,
       width: 64,
       border: "2px solid white",

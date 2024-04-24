@@ -37,7 +37,7 @@ export const SwipeCarousel = ({ children: slides, className, setCursorText, setC
 
   function linkEnter() {
     setCursorText("")
-    setCursorVariant("action")
+    setCursorVariant("drag")
   }
 
   return (
