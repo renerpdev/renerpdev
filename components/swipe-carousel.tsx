@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react"
 import { motion, useMotionValue } from "framer-motion"
 
-const DRAG_BUFFER = 50
+const DRAG_BUFFER = 20
 
 const SPRING_OPTIONS = {
   type: "spring",
@@ -41,7 +41,7 @@ export const SwipeCarousel = ({ children: slides, className }: { children: React
         }}
         transition={SPRING_OPTIONS}
         onDragEnd={onDragEnd}
-        className="flex cursor-grab items-center active:cursor-grabbing">
+        className="flex cursor-grab items-start active:cursor-grabbing">
         <Slices imgIndex={imgIndex} slices={slides} />
       </motion.div>
 
