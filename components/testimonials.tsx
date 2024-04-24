@@ -17,7 +17,7 @@ const Testimonials = () => {
       title: "Lead Software Engineer",
       company: "Level 6 LLC",
       quote:
-        "I can affirm that he fully fulfills the tasks that are aligned. His web design and frontend development skills are excellent. His attitudes as a person and professional seem correct to me and I would recommend him to recruiters and clients who need these qualities in a developer.",
+        "I can affirm that he fully fulfills the tasks that are assigned. His web design and frontend development skills are excellent. His attitudes as a person and professional seem correct to me and I would recommend him to recruiters and clients who need these qualities in a developer.",
       image:
         "https://media.licdn.com/dms/image/D5635AQEFSCIM3VGyTA/profile-framedphoto-shrink_400_400/0/1703014825234?e=1714532400&v=beta&t=-C3hy_ovX5r2-btg8dR2z7qDc9o7NHYsK0GjrxVVyZg"
     }
@@ -26,7 +26,7 @@ const Testimonials = () => {
   return (
     <div className="flex justify-center items-center h-full mx-auto max-w-2xl w-full">
       <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
           Testimonials
         </h2>
         <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal"}>
