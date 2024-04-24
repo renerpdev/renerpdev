@@ -3,7 +3,7 @@ import { m } from "framer-motion"
 
 const CallToAction = () => {
   return (
-    <div className={"bg-[#1d2839] px-5 py-10"}>
+    <div className={"bg-[#1d2839] px-5 py-12 lg:py-14"}>
       <div
         className={
           "w-full max-w-7xl mx-auto text-center flex gap-6 flex-col lg:flex-row items-center lg:items-start justify-evenly text-white"

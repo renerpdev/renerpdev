@@ -24,7 +24,7 @@ const Hero = () => {
           gradientX.set(e.clientX / viewport.width)
           gradientY.set(e.clientY / viewport.height)
         }}>
-        <div className="container mx-auto lg:w-2/3 w-full">
+        <div className="container mx-auto  max-w-3xl lg:max-w-4xl w-full">
           <h1 className="md:text-6xl xl:text-7xl text-4xl mb-2 font-bold text-white tracking-tight leading-tight">
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
           </h1>
