@@ -4,6 +4,7 @@ import { LinkedinIcon } from "@/components/icons/linkedin"
 import { DribbleIcon } from "@/components/icons/dribble"
 import { NpmIcon } from "@/components/icons/npm"
 import { LogoIcon } from "@/components/icons/logo"
+import { BehanceIcon } from "@/components/icons/behance"
 
 const Footer = () => {
   const socialLinks = [
@@ -26,6 +27,11 @@ const Footer = () => {
       name: "Dribbble",
       href: "https://dribbble.com/renerpdev",
       icon: () => <DribbleIcon className={"w-10 h-10 translate-y-1"} />
+    },
+    {
+      name: "Behance",
+      href: "https://www.behance.net/renricardo",
+      icon: () => <BehanceIcon className={"w-7 h-7 -translate-x-1"} />
     }
   ]
 
