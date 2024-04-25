@@ -48,11 +48,11 @@ export const useCursorAnimation = (ref: RefObject<HTMLElement>) => {
     drag: {
       opacity: 1,
       backgroundColor: "rgba(255, 255, 255, .5)",
-      height: 64,
-      width: 64,
+      height: 48,
+      width: 48,
       border: "2px solid white",
-      x: mouseXPosition - 32,
-      y: mouseYPosition - 32
+      x: mouseXPosition - 16,
+      y: mouseYPosition - 16
     }
   }
 
