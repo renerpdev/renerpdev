@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react"
 import { m, useMotionValue, useTransform } from "framer-motion"
 import { RocketIcon } from "@/components/icons/rocket"
-import { ChevronDownIcon } from "@/components/icons/chevron-down"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
+import { ArrowDownIcon } from "@sanity/icons"
 
 const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const viewport = useViewportDimensions()
@@ -103,8 +103,8 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
             </m.a>
           </div>
         </div>
-        <div className="absolute bottom-20 left-1/2 -ml-4 md:-ml-3">
-          <ChevronDownIcon className="absolute animate-bounce text-white h-12 w-12" />
+        <div className="absolute bottom-24 left-1/2 -ml-4 md:-ml-3">
+          <ArrowDownIcon className="absolute animate-bounce text-white h-12 w-12" />
         </div>
       </m.div>
     </div>

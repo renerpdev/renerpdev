@@ -7,7 +7,7 @@ import { LogoIcon } from "@/components/icons/logo"
 import { BehanceIcon } from "@/components/icons/behance"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 import Magnet from "@/components/magnet"
-import { ArrowDownIcon } from "@sanity/icons"
+import { ArrowUpIcon } from "@sanity/icons"
 
 const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   function onMouseLeave() {
@@ -147,7 +147,7 @@ const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
         onMouseLeave={onMouseLeave}>
         <Magnet>
           <a href="#" className={"w-16 h-16 rounded-full flex items-center justify-center "}>
-            <ArrowDownIcon className={"w-10 h-10 text-white rotate-180"} />
+            <ArrowUpIcon className={"w-10 h-10 text-white"} />
           </a>
         </Magnet>
       </div>
