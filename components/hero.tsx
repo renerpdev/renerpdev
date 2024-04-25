@@ -69,7 +69,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               className={"inline-flex text-white font-normal hover:text-cyan-600 "}>
               Design Enthusiast
             </a>
-            , based in Montevideo, Uruguay. If you need a pixel perfect solution, {"don't"} hesitate to contact me.
+            , based in Montevideo, Uruguay. {"Let's connect and build something cool together!"}
           </p>
           <div className={"inline-flex flex-col sm:flex-row gap-2 sm:gap-4 "}>
             <m.a
