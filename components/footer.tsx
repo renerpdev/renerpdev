@@ -6,6 +6,8 @@ import { NpmIcon } from "@/components/icons/npm"
 import { LogoIcon } from "@/components/icons/logo"
 import { BehanceIcon } from "@/components/icons/behance"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
+import Magnet from "@/components/magnet"
+import { ArrowDownIcon } from "@sanity/icons"
 
 const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   function onMouseLeave() {
@@ -16,6 +18,11 @@ const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
   function linkEnter() {
     setCursorText("👀")
     setCursorVariant("link")
+  }
+
+  function btnUpEnter() {
+    setCursorText("")
+    setCursorVariant("action")
   }
 
   const socialLinks = [
@@ -48,7 +55,7 @@ const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
 
   return (
     <footer
-      className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8"
+      className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8 relative"
       style={{
         background:
           "radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url(/assets/circuit-board.svg) repeat center/25% #1d2839"
@@ -132,6 +139,17 @@ const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
             Vercel
           </a>
         </p>{" "}
+      </div>
+
+      <div
+        className={"absolute top-0 md:top-4 right-4 md:right-8 z-10 cursor-none"}
+        onMouseEnter={btnUpEnter}
+        onMouseLeave={onMouseLeave}>
+        <Magnet>
+          <a href="#" className={"w-16 h-16 rounded-full flex items-center justify-center "}>
+            <ArrowDownIcon className={"w-10 h-10 text-white rotate-180"} />
+          </a>
+        </Magnet>
       </div>
     </footer>
   )

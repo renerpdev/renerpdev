@@ -7,7 +7,7 @@ import { Navigation } from "./navigation"
 import { LogoIcon } from "@/components/icons/logo"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const sidebar = {
+const backdrop = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at calc(100% - 50px) calc(0% + 50px))`,
     transition: {
@@ -49,7 +49,7 @@ const Navbar = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
       ref={containerRef}
       className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen p-8 flex justify-between items-start`}>
       <LogoIcon className={`relative z-20 w-8 h-8 text-cyan-600 ${isOpen ? "hidden" : "block"}`} />
-      <m.div className="bg-white absolute top-0 bottom-0 right-0 w-full z-20" variants={sidebar} />
+      <m.div className="bg-white absolute top-0 bottom-0 right-0 w-full z-20" variants={backdrop} />
       <div className={"flex justify-start items-end flex-col w-full h-full"}>
         <MenuToggle
           toggle={toggleOpen}
