@@ -9,7 +9,7 @@ const CallToAction = ({ setCursorText, setCursorVariant }: CursorAnimationHandle
   }
 
   function contactEnter() {
-    setCursorText("👋")
+    setCursorText("☕️")
     setCursorVariant("link")
   }
 
