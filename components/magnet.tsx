@@ -5,6 +5,8 @@ export default function Magnet({ children }: PropsWithChildren) {
   const ref = useRef(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
+  const isMobile = window.matchMedia("(max-width: 992px)").matches
+
   const handleMouse = (e: any) => {
     const { clientX, clientY } = e
     const { height, width, left, top } = (ref?.current as any)?.getBoundingClientRect()
@@ -24,7 +26,7 @@ export default function Magnet({ children }: PropsWithChildren) {
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
-      animate={{ x, y }}
+      animate={isMobile ? {} : { x, y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}>
       {children}
     </motion.div>

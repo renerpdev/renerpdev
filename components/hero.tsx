@@ -35,7 +35,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
 
   return (
     <div
-      className="text-center md:text-left text-gray-600 body-font bg-gradient-to-r to-gray-900 from-slate-800 h-screen flex"
+      className="text-center md:text-left text-gray-600 body-font bg-gradient-to-r to-gray-900 from-slate-800 h-screen min-h-[36rem] flex"
       style={{ background: "url(/assets/circuit-board.svg) repeat center/25% #1d2839" }}>
       <m.div
         style={{ background }}
@@ -45,10 +45,10 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
           gradientY.set(e.clientY / viewport.height)
         }}>
         <div className="container mx-auto  max-w-3xl lg:max-w-4xl w-full">
-          <h1 className="md:text-6xl xl:text-7xl text-4xl mb-2 font-bold text-white tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-2 font-bold text-white tracking-tight leading-tight md:leading-tight">
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
           </h1>
-          <p className="mt-4 mb-6 md:leading-snug leading-normal text-white/80 tracking-wide text-md md:text-xl lg:text-2xl mx-auto md:ml-0 max-w-md sm:max-w-lg md:max-w-2xl font-light">
+          <p className="mt-4 mb-6 leading-relaxed text-white/80 tracking-wide text-md md:text-xl lg:text-2xl mx-auto md:ml-0 max-w-md sm:max-w-lg md:max-w-2xl font-light">
             {"I'm a "}
             <a
               onMouseEnter={linkEnter}
@@ -71,7 +71,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
             </a>
             , based in Montevideo, Uruguay. {"Let's connect and build something cool together!"}
           </p>
-          <div className={"inline-flex flex-col sm:flex-row gap-2 sm:gap-4 "}>
+          <div className={"inline-flex flex-col sm:flex-row gap-3 sm:gap-4 "}>
             <m.a
               onMouseEnter={contactEnter}
               onMouseLeave={onMouseLeave}
@@ -80,7 +80,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className={
-                "max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-white px-8 py-3 rounded-3xl border-none"
+                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-white px-6 sm:px-8 py-3 rounded-3xl border-none"
               }>
               <span className={"mr-2 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
                 {"Let's connect"}
@@ -97,14 +97,14 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className={
-                "max-w-sm mx-auto md:ml-0 text-lg flex md:inline-flex justify-center items-center bg-cyan-600 px-8 py-3 rounded-3xl border-none"
+                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-cyan-600 px-6 sm:px-8 py-3 rounded-3xl border-none"
               }>
               <span className={"mr-2 text-white"}>{"Download Resume"}</span>
             </m.a>
           </div>
         </div>
         <div className="absolute bottom-24 left-1/2 -ml-4 md:-ml-3">
-          <ArrowDownIcon className="absolute animate-bounce text-white h-12 w-12" />
+          <ArrowDownIcon className="absolute animate-bounce text-white h-10 md:h-12 w-10 md:w-12" />
         </div>
       </m.div>
     </div>

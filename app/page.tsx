@@ -19,12 +19,14 @@ export default function Home() {
   const ref = useRef(null)
   const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation(ref)
 
+  const isMobile = window.matchMedia("(max-width: 992px)").matches
+
   return (
     <LazyMotion features={domAnimation}>
       <main ref={ref}>
         <m.div
-          variants={variants}
-          className="pointer-events-none fixed z-50 hidden lg:flex justify-center items-center bg-cyan-600 text-center text-sm rounded-full"
+          variants={isMobile ? {} : variants}
+          className="pointer-events-none fixed z-50 hidden  lg:flex justify-center items-center bg-cyan-600 text-center text-sm rounded-full"
           animate={cursorVariant}
           transition={spring}>
           <span className="pointer-events-none m-auto">{cursorText}</span>
@@ -35,7 +37,7 @@ export default function Home() {
           <Hero {...{ setCursorText, setCursorVariant }} />
         </section>
 
-        <section id="about" className={" -mt-12 z-20 relative px-5"}>
+        <section id="about" className={" -mt-12 z-10 relative px-5"}>
           <About />
         </section>
 

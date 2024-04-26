@@ -9,7 +9,7 @@ import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
 const backdrop = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at calc(100% - 70px) calc(0% + 70px))`,
+    clipPath: `circle(${height * 2 + 200}px at calc(100% - 60px) calc(0% + 60px))`,
     transition: {
       type: "spring",
       stiffness: 20,
@@ -17,28 +17,29 @@ const backdrop = {
     }
   }),
   closed: {
-    clipPath: "circle(0px at calc(100% - 70px) calc(0% + 70px))",
+    clipPath: "circle(0px at calc(100% - 60px) calc(0% + 60px))",
     transition: {
       type: "spring",
-      stiffness: 300,
-      damping: 40
+      stiffness: 250,
+      damping: 30
     }
   }
 }
 
 const toggle = {
-  open: () => ({
-    background: "transparent",
+  open: {
+    background: "radial-gradient(circle at 100% 100%, #1D2838 100%, #1D2838 100%)",
     transform: "rotate(90deg)",
     transition: {
-      type: "teen"
+      type: "spring"
     }
-  }),
+  },
   closed: {
-    background: "#18C5E1",
+    background: "radial-gradient(circle at 100% 100%, #1c2839 100%, #1c2839 100%)",
+    transform: "rotate(0deg)",
     transition: {
-      delay: 0.5,
-      type: "teen"
+      delay: 0.3,
+      type: "spring"
     }
   }
 }
@@ -70,17 +71,15 @@ const Navbar = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
         className="bg-gradient-from-tr bg-gradient-to-bl from-[_#1D2839] to-[_#1D2630] ring-1 ring-white fixed top-0 bottom-0 right-0 w-screen z-20"
         variants={backdrop}
       />
-      <m.div
-        className={"fixed top-10 right-12 z-30 p-2 rounded-full flex items-center justify-center"}
-        variants={toggle}>
+      <m.div className={"fixed top-7 right-8 z-30 rounded-full flex items-center justify-center"} variants={toggle}>
         <MenuToggle
           toggle={toggleOpen}
           onMouseEnter={linkEnter}
           onMouseLeave={onMouseLeave}
-          className="translate-y-0.5"
+          className="translate-y-0.5 p-4 "
         />
       </m.div>
-      <Navigation onItemClick={toggleOpen} />
+      <Navigation onItemClick={toggleOpen} className={!isOpen ? "pointer-events-none" : ""} />
     </m.nav>
   )
 }

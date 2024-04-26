@@ -66,8 +66,8 @@ export default function ParallaxText({ children, className, baseVelocity = 500 }
       <m.div
         className="scroller text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl mr text-cyan-900 heading !font-light bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent"
         style={{ x }}>
-        {Array.from({ length: 4 }).map((key) => (
-          <span key={key as number} className="mr-1.5 md:mr-4">
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <span key={idx} className="mr-1.5 md:mr-4">
             {children}{" "}
           </span>
         ))}

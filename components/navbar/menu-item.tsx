@@ -24,7 +24,7 @@ const variants = {
 export const MenuItem = ({ link, children, onClick }: { link: string; onClick?: () => void } & PropsWithChildren) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    setTimeout(() => (window.location.href = link), 200)
+    setTimeout(() => (window.location.href = link), 250)
     if (onClick) {
       onClick()
     }
@@ -41,7 +41,7 @@ export const MenuItem = ({ link, children, onClick }: { link: string; onClick?: 
       <a
         href={link}
         onClick={handleClick}
-        className="heading opacity-80 hover:opacity-100 text-5xl md:text-6xl xl:text-7xl font-bold  text-transparent bg-gradient-to-tr from-cyan-700 to-cyan-500 bg-clip-text drop-shadow-md">
+        className="heading hover:text-cyan-500 text-5xl md:text-6xl xl:text-7xl font-bold  text-transparent bg-gradient-to-tr from-cyan-600 to-cyan-500 bg-clip-text drop-shadow-md">
         {children}
       </a>
     </m.li>
