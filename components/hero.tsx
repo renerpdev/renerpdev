@@ -3,6 +3,7 @@ import { m, useMotionValue, useTransform } from "framer-motion"
 import { RocketIcon } from "@/components/icons/rocket"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 import { ArrowDownIcon } from "@sanity/icons"
+import { useBreakpoint } from "@/utils/use-breakpoint"
 
 const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const viewport = useViewportDimensions()
@@ -13,6 +14,8 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
     [gradientX, gradientY],
     ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 0%, #1d2839 40%)`
   )
+
+  const { isMobile } = useBreakpoint()
 
   function onMouseLeave() {
     setCursorText("")
@@ -38,12 +41,16 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
       className="text-center md:text-left text-gray-600 body-font bg-gradient-to-r to-gray-900 from-slate-800 h-screen min-h-[36rem] flex"
       style={{ background: "url(/assets/circuit-board.svg) repeat center/25% #1d2839" }}>
       <m.div
-        style={{ background }}
+        style={!isMobile ? { background } : undefined}
         className=" flex px-10 py-12 items-center justify-center flex-col w-full z-10"
-        onPointerMove={(e) => {
-          gradientX.set(e.clientX / viewport.width)
-          gradientY.set(e.clientY / viewport.height)
-        }}>
+        onPointerMove={
+          isMobile
+            ? undefined
+            : (e) => {
+                gradientX.set(e.clientX / viewport.width)
+                gradientY.set(e.clientY / viewport.height)
+              }
+        }>
         <div className="container mx-auto  max-w-3xl lg:max-w-4xl w-full">
           <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-2 font-bold text-white tracking-tight leading-tight md:leading-tight">
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>

@@ -28,14 +28,14 @@ const backdrop = {
 
 const toggle = {
   open: {
-    background: "radial-gradient(circle at 100% 100%, #1D2838 100%, #1D2838 100%)",
+    background: "radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%)",
     transform: "rotate(90deg)",
     transition: {
       type: "spring"
     }
   },
   closed: {
-    background: "radial-gradient(circle at 100% 100%, #1c2839 100%, #1c2839 100%)",
+    background: "radial-gradient(circle at 100% 100%, #1C2839 100%, #1C2839 100%)",
     transform: "rotate(0deg)",
     transition: {
       delay: 0.3,

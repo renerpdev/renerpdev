@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { RocketIcon } from "@/components/icons/rocket"
-import { sendEmail } from "@/app/lib/actions"
+import { sendEmail } from "@/lib/actions"
 import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"

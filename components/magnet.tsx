@@ -1,11 +1,12 @@
 import { PropsWithChildren, useRef, useState } from "react"
 import { motion } from "framer-motion"
+import { useBreakpoint } from "@/utils/use-breakpoint"
 
 export default function Magnet({ children }: PropsWithChildren) {
   const ref = useRef(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
-  const isMobile = window.matchMedia("(max-width: 992px)").matches
+  const { isMobile } = useBreakpoint()
 
   const handleMouse = (e: any) => {
     const { clientX, clientY } = e
