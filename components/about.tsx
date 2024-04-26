@@ -34,7 +34,7 @@ const About = () => {
         <p className={"md:text-lg tracking-wide !leading-relaxed font-light my-4"}>
           {"Here are some of the technologies I've been working with:"}
         </p>
-        <ul className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-4"}>
+        <ul className={"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-4"}>
           {technologies.map((tech) => (
             <li className="text-left text-cyan-700 flex gap-1 items-center" key={tech}>
               <CheckmarkIcon />
