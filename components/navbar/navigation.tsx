@@ -14,7 +14,9 @@ const variants = {
 }
 
 export const Navigation = ({ onItemClick }: { onItemClick?: () => void }) => (
-  <m.ul variants={variants} className="z-20 flex-col gap-10 justify-center items-center w-full h-full">
+  <m.ul
+    variants={variants}
+    className="z-20  flex-col gap-10 justify-center items-center fixed top-0 left-0 w-screen h-screen">
     {items.map((item) => (
       <MenuItem key={item.text} link={item.link} onClick={onItemClick}>
         {item.text}

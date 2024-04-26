@@ -9,7 +9,7 @@ import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
 const backdrop = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at calc(100% - 50px) calc(0% + 50px))`,
+    clipPath: `circle(${height * 2 + 200}px at calc(100% - 70px) calc(0% + 70px))`,
     transition: {
       type: "spring",
       stiffness: 20,
@@ -17,11 +17,28 @@ const backdrop = {
     }
   }),
   closed: {
-    clipPath: "circle(0px at calc(100% - 50px) calc(0% + 50px))",
+    clipPath: "circle(0px at calc(100% - 70px) calc(0% + 70px))",
     transition: {
       type: "spring",
-      stiffness: 400,
+      stiffness: 300,
       damping: 40
+    }
+  }
+}
+
+const toggle = {
+  open: () => ({
+    background: "transparent",
+    transform: "rotate(90deg)",
+    transition: {
+      type: "teen"
+    }
+  }),
+  closed: {
+    background: "#18C5E1",
+    transition: {
+      delay: 0.5,
+      type: "teen"
     }
   }
 }
@@ -47,18 +64,23 @@ const Navbar = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
-      className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen p-8 flex justify-between items-start`}>
+      className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen p-12 flex justify-between items-start`}>
       <LogoIcon className={`relative z-20 w-8 h-8 text-cyan-600 ${isOpen ? "hidden" : "block"}`} />
-      <m.div className="bg-white absolute top-0 bottom-0 right-0 w-full z-20" variants={backdrop} />
-      <div className={"flex justify-start items-end flex-col w-full h-full"}>
+      <m.div
+        className="bg-gradient-from-tr bg-gradient-to-bl from-[_#1D2839] to-[_#1D2630] ring-1 ring-white fixed top-0 bottom-0 right-0 w-screen z-20"
+        variants={backdrop}
+      />
+      <m.div
+        className={"fixed top-10 right-12 z-30 p-2 rounded-full flex items-center justify-center"}
+        variants={toggle}>
         <MenuToggle
           toggle={toggleOpen}
-          className="absolute top-0 right-0 z-20"
           onMouseEnter={linkEnter}
           onMouseLeave={onMouseLeave}
+          className="translate-y-0.5"
         />
-        <Navigation onItemClick={toggleOpen} />
-      </div>
+      </m.div>
+      <Navigation onItemClick={toggleOpen} />
     </m.nav>
   )
 }
