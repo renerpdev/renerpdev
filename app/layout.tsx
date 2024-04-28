@@ -37,7 +37,7 @@ export async function generateMetadata() {
       description: "Want to build something cool? Lets connect!",
       images: [
         {
-          url: "https://avatars.githubusercontent.com/u/32307287",
+          url: "https://renerp.dev/assets/og-img.png",
           width: 800,
           height: 600,
           alt: "Rene Ricardo profile picture"
