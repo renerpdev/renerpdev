@@ -71,7 +71,7 @@ const Navbar = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
         className="bg-gradient-from-tr bg-gradient-to-bl from-[_#1D2839] to-[_#1D2630] ring-1 ring-white fixed top-0 bottom-0 right-0 w-screen z-20"
         variants={backdrop}
       />
-      <m.div className={"fixed top-7 right-8 z-30 rounded-full flex items-center justify-center"} variants={toggle}>
+      <m.div className={"fixed top-8 right-8 z-30 rounded-full flex items-center justify-center"} variants={toggle}>
         <MenuToggle
           toggle={toggleOpen}
           onMouseEnter={linkEnter}

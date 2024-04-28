@@ -34,14 +34,14 @@ const SkillSet = () => {
 
         <div className="flex flex-col gap-6 w-full mt-12">
           {[
-            "Critical Thinking",
-            "Time Management",
             "Problem Solving",
             "Teamwork",
-            "Problem Solving",
-            "Attention to Detail",
+            "Critical Thinking",
             "Responsibility",
-            "Adaptability"
+            "Adaptability",
+            "Attention to Detail",
+            "Time Management",
+            "Creativity"
           ].map((skill, index) => (
             <div className="flex flex-col w-full" key={index}>
               <div className="flex justify-between py-1">

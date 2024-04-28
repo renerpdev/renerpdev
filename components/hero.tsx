@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react"
 import { m, useMotionValue, useTransform } from "framer-motion"
 import { RocketIcon } from "@/components/icons/rocket"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
-import { ArrowDownIcon } from "@sanity/icons"
 import { useBreakpoint } from "@/utils/use-breakpoint"
+import { MouseIcon } from "@/components/icons/mouse"
 
 const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const viewport = useViewportDimensions()
@@ -110,9 +110,9 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
             </m.a>
           </div>
         </div>
-        <div className="absolute bottom-24 left-1/2 -ml-4 md:-ml-3">
-          <ArrowDownIcon className="absolute animate-bounce text-white h-10 md:h-12 w-10 md:w-12" />
-        </div>
+        <a href="#about" className="absolute bottom-16 left-1/2 -ml-4 md:-ml-3">
+          <MouseIcon className="text-white h-10 md:h-12 w-10 md:w-12" />
+        </a>
       </m.div>
     </div>
   )

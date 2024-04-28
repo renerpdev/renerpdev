@@ -35,7 +35,7 @@ export default function Home() {
           <Hero {...{ setCursorText, setCursorVariant }} />
         </section>
 
-        <section id="about" className={" -mt-12 z-10 relative px-5"}>
+        <section id="about" className={" -mt-10 z-10 relative px-5"}>
           <About />
         </section>
 
