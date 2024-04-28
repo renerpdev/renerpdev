@@ -13,7 +13,7 @@ const SkillSet = () => {
     if (isInView) {
       animate(
         ".skill-pill",
-        { opacity: 1, scale: 1, filter: "blur(0px)" },
+        { opacity: 1, scale: 1 },
         { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
       )
     }
@@ -51,7 +51,7 @@ const SkillSet = () => {
             <m.div key={index} animate="start">
               <Magnet>
                 <m.span
-                  className="text-base bg-white text-gray-lite skill-pill blur-md opacity-0 py-2 px-5 border-2 border-cyan-800 select-none rounded-full"
+                  className="text-base bg-white text-gray-lite skill-pill opacity-0 py-2 px-5 border-2 border-cyan-800 select-none rounded-full"
                   key={index}>
                   {skill}
                 </m.span>

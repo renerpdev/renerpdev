@@ -33,7 +33,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
     if (isInView) {
       animate(
         ".timeline-item",
-        { opacity: 1, scale: 1, filter: "blur(0px)" },
+        { opacity: 1, scale: 1 },
         { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
       )
       animate(
@@ -65,7 +65,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
           className={`w-[2.5px] top-0 left-1/2 -translate-x-1/2 absolute z-[1] bg-cyan-900 timeline-line h-0 ${!lastChild ? "" : "opacity-0"}`}
         />
       </div>
-      <div className={"pb-6 timeline-item opacity-0 blur-sm "}>{children}</div>
+      <div className={"pb-6 timeline-item opacity-0"}>{children}</div>
     </div>
   )
 }
