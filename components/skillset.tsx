@@ -3,27 +3,29 @@ import { useEffect } from "react"
 import Magnet from "@/components/magnet"
 import { m } from "framer-motion"
 
-const variants = {
-  start: {
-    opacity: [0, 1],
-    transition: {
-      y: { stiffness: 800, velocity: -100 }
-    }
-  }
-}
+// const variants = {
+//   start: {
+//     opacity: [0, 1],
+//     transition: {
+//       y: { stiffness: 800, velocity: -100 }
+//     }
+//   }
+// }
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 })
+const staggerMenuItems = stagger(0.1, { startDelay: 0.1 })
 
 const SkillSet = () => {
   const [scope, animate] = useAnimate()
   const isInView = useInView(scope, { margin: "80px" })
 
   useEffect(() => {
-    animate(
-      ".skill-pill",
-      isInView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.3, filter: "blur(20px)" },
-      { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
-    )
+    if (isInView) {
+      animate(
+        ".skill-pill",
+        { opacity: 1, scale: 1, filter: "blur(0px)", rotateX: "25deg" },
+        { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
+      )
+    }
   }, [animate, isInView])
 
   return (
@@ -55,10 +57,10 @@ const SkillSet = () => {
             "Collaboration",
             "Communication"
           ].map((skill, index) => (
-            <m.div key={index} animate="start" variants={variants}>
+            <m.div key={index} animate="start">
               <Magnet>
                 <m.span
-                  className="text-base bg-white text-gray-lite skill-pill opacity-0 py-2 px-5 border-2 border-cyan-800 rounded-full"
+                  className="text-base bg-white text-gray-lite skill-pill blur-md opacity-0 py-2 px-5 border-2 border-cyan-800 select-none rounded-full"
                   key={index}>
                   {skill}
                 </m.span>
