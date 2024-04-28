@@ -1,25 +1,29 @@
-import { useAnimate, useInView } from "framer-motion"
+import { stagger, useAnimate, useInView } from "framer-motion"
 import { useEffect } from "react"
+import Magnet from "@/components/magnet"
+import { m } from "framer-motion"
+
+const variants = {
+  start: {
+    opacity: [0, 1],
+    transition: {
+      y: { stiffness: 800, velocity: -100 }
+    }
+  }
+}
+
+const staggerMenuItems = stagger(0.1, { startDelay: 0.15 })
 
 const SkillSet = () => {
   const [scope, animate] = useAnimate()
   const isInView = useInView(scope, { margin: "80px" })
 
   useEffect(() => {
-    const selectors = ["animate-width-to-100"]
-
-    const doAnimate = (selector: any, width: any) => {
-      animate(
-        `.${selector}`,
-        { width: `${width}%` },
-        { ease: "anticipate", duration: width === 0 ? 0 : 1.8, delay: width === 0 ? 0 : 0.05 }
-      )
-    }
-    if (isInView) {
-      selectors.forEach((selector) => doAnimate(selector, selector.split("-").pop()))
-    } else {
-      selectors.forEach((selector) => doAnimate(selector, 0))
-    }
+    animate(
+      ".skill-pill",
+      isInView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.3, filter: "blur(20px)" },
+      { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
+    )
   }, [animate, isInView])
 
   return (
@@ -32,27 +36,36 @@ const SkillSet = () => {
           Why we should work together...
         </h3>
 
-        <div className="flex flex-col gap-6 w-full mt-12">
+        <m.div
+          className="flex items-center justify-center flex-wrap gap-6 w-full mt-12"
+          transition={{ staggerChildren: 0.07, delayChildren: 0.2 }}>
           {[
             "Problem Solving",
             "Teamwork",
             "Critical Thinking",
             "Responsibility",
             "Adaptability",
+            "Flexibility",
             "Attention to Detail",
+            "Pragmatism",
             "Time Management",
-            "Creativity"
+            "Empathy",
+            "Discipline",
+            "Creativity",
+            "Collaboration",
+            "Communication"
           ].map((skill, index) => (
-            <div className="flex flex-col w-full" key={index}>
-              <div className="flex justify-between py-1">
-                <span className="text-base text-gray-lite ">{skill}</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-1.5 ">
-                <div className="bg-gradient-to-r to-cyan-400 from-cyan-500 h-full rounded-full w-0 animate-width-to-100" />
-              </div>
-            </div>
+            <m.div key={index} animate="start" variants={variants}>
+              <Magnet>
+                <m.span
+                  className="text-base bg-white text-gray-lite skill-pill opacity-0 py-2 px-5 border-2 border-cyan-800 rounded-full"
+                  key={index}>
+                  {skill}
+                </m.span>
+              </Magnet>
+            </m.div>
           ))}
-        </div>
+        </m.div>
       </div>
     </div>
   )
