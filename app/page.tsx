@@ -39,20 +39,21 @@ export default function Home() {
           <About />
         </section>
 
-        <section className="pt-24 md:pt-28 py-8 overflow-x-hidden w-screen">
-          <ParallaxText className="md:rotate-2" baseVelocity={5}>
-            Design • Development • Design • Development
-          </ParallaxText>
-        </section>
-
         <Section id="experience">
           <Experience />
         </Section>
 
-        <section className="pt-16 md:pt-20 py-16 overflow-x-hidden w-screen">
-          <ParallaxText className="md:-rotate-2" baseVelocity={-5}>
-            Web • Mobile • Web • Mobile
-          </ParallaxText>
+        <section className="-my-8 py-16 overflow-hidden w-full">
+          <div className=" w-[110%] -translate-x-[15px]">
+            <ParallaxText
+              className="-rotate-[10deg] md:-rotate-[6deg] translate-y-1/2  bg-[#1D2834] blur-[1px]"
+              baseVelocity={-5}>
+              Web • Mobile • Web • Mobile
+            </ParallaxText>
+            <ParallaxText className="rotate-[10deg]  md:rotate-[6deg] -translate-y-1/2  bg-[#1D2839]" baseVelocity={5}>
+              Design • Development • Design • Development
+            </ParallaxText>
+          </div>
         </section>
 
         <Section id="projects">
