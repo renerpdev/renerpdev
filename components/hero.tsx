@@ -87,12 +87,10 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className={
-                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-white px-6 sm:px-8 py-3 rounded-3xl border-none"
+                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-cyan-600  px-6 sm:px-8 py-3 rounded-3xl border-none"
               }>
-              <span className={"mr-2 bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
-                {"Let's connect"}
-              </span>
-              <RocketIcon className="text-cyan-900" />
+              <span className={"mr-2 text-white"}>{"Let's connect"}</span>
+              <RocketIcon className="text-white" />
             </m.a>
             <m.a
               onMouseEnter={downloadEnter}
@@ -104,9 +102,11 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className={
-                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-cyan-600 px-6 sm:px-8 py-3 rounded-3xl border-none"
+                "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center bg-white items-centerpx-6 sm:px-8 py-3 rounded-3xl border-none"
               }>
-              <span className={"mr-2 text-white"}>{"Check Resume"}</span>
+              <span className={"bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
+                {"Check Resume"}
+              </span>
             </m.a>
           </div>
         </div>

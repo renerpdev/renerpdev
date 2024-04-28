@@ -45,7 +45,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
   }, [animate, isInView])
 
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-4" ref={scope}>
+    <div className="grid grid-cols-[auto_1fr] gap-2 md:gap-4" ref={scope}>
       <div className="relative col-auto">
         <m.div
           animate={{
@@ -59,10 +59,10 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
             restDelta: 2
           }}
           className={`border-2 border-cyan-900 opacity-0 blur-sm timeline-icon scale-0 ${firstChild ? "bg-cyan-900" : "bg-white"} rounded-full relative z-[2]`}>
-          <CheckmarkIcon className={`h-4 w-4 ${firstChild ? "text-white" : "text-cyan-900"}`} />
+          <CheckmarkIcon className={`h-3 md:h-4 w-3 md:w-4 ${firstChild ? "text-white" : "text-cyan-900"}`} />
         </m.div>
         <div
-          className={`w-[2.5px] top-0 left-1/2 -translate-x-1/2 absolute z-[1] bg-cyan-900 timeline-line h-0 ${!lastChild ? "" : "opacity-0"}`}
+          className={`w-[2px] md:w-[2.5px] top-0 left-1/2 -translate-x-1/2 absolute z-[1] bg-cyan-900 timeline-line h-0 ${!lastChild ? "" : "opacity-0"}`}
         />
       </div>
       <div className={"pb-6 timeline-item opacity-0"}>{children}</div>

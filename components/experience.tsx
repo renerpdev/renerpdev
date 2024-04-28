@@ -178,7 +178,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
                   </ul>
                   <ul className="flex gap-2 flex-wrap">
                     {job.tags.map((tag) => (
-                      <span key={tag} className={"text-sm text-white rounded-full bg-cyan-950  py-1 px-2.5"}>
+                      <span key={tag} className={"text-xs sm:text-sm text-white rounded-full bg-cyan-950 py-1 px-2.5"}>
                         {tag}
                       </span>
                     ))}

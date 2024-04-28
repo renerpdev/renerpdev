@@ -46,7 +46,7 @@ export default function Home() {
         <section className="-my-8 py-16 overflow-hidden w-full">
           <div className=" w-[110%] -translate-x-[15px]">
             <ParallaxText
-              className="-rotate-[10deg] md:-rotate-[6deg] translate-y-1/2  bg-[#1D2834] blur-[1px]"
+              className="-rotate-[10deg] md:-rotate-[6deg] translate-y-1/2  bg-[#1D2834] blur-[2px] md:blur-[3px]"
               baseVelocity={-5}>
               Web • Mobile • Web • Mobile
             </ParallaxText>
