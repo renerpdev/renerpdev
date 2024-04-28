@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { CheckmarkIcon } from "@sanity/icons"
+import { DotIcon } from "@sanity/icons"
 import { stagger, useAnimate, useInView } from "framer-motion"
 import { m } from "framer-motion"
 
@@ -58,14 +58,29 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
             stiffness: 100,
             restDelta: 2
           }}
-          className={`border-2 border-cyan-900 opacity-0 blur-sm timeline-icon scale-0 ${firstChild ? "bg-cyan-900" : "bg-white"} rounded-full relative z-[2]`}>
-          <CheckmarkIcon className={`h-3 md:h-4 w-3 md:w-4 ${firstChild ? "text-white" : "text-cyan-900"}`} />
+          className={`opacity-0 blur-sm timeline-icon scale-0 ${firstChild ? "bg-cyan-900" : "bg-white"} rounded-full relative z-[2]`}>
+          <div className="absolute top-0 left-0 h-4 w-4 border-2 border-cyan-900 rounded-full z-[2]" />
+          <DotIcon className={`h-4 w-4 ${firstChild ? "text-white" : "text-cyan-950"} text-white relative z-[2]`} />
+          {firstChild && (
+            <m.div
+              className="absolute top-0 left-0 h-4 w-4 bg-cyan-500/60 rounded-full z-[1]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0], scale: 1.5 }}
+              transition={{
+                duration: 1.8,
+                repeat: Infinity,
+                delay: 0.2,
+                repeatDelay: 1,
+                ease: "easeInOut"
+              }}
+            />
+          )}
         </m.div>
         <div
           className={`w-[2px] md:w-[2.5px] top-0 left-1/2 -translate-x-1/2 absolute z-[1] bg-cyan-900 timeline-line h-0 ${!lastChild ? "" : "opacity-0"}`}
         />
       </div>
-      <div className={"pb-6 timeline-item opacity-0"}>{children}</div>
+      <div className={"pb-8 timeline-item opacity-0 -mt-1"}>{children}</div>
     </div>
   )
 }

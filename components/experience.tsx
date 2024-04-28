@@ -139,7 +139,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
         </h2>
         <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal"}>{"Where I've worked so far"}</h3>
 
-        <div className="mt-6">
+        <div className="mt-10">
           <Timeline>
             {jobs
               .slice()
