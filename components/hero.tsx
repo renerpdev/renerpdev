@@ -106,7 +106,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
               className={
                 "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-cyan-600 px-6 sm:px-8 py-3 rounded-3xl border-none"
               }>
-              <span className={"mr-2 text-white"}>{"Download Resume"}</span>
+              <span className={"mr-2 text-white"}>{"Check Resume"}</span>
             </m.a>
           </div>
         </div>

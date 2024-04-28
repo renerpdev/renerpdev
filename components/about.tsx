@@ -32,7 +32,7 @@ const About = () => {
           }
         </p>
         <p className={"md:text-lg tracking-wide !leading-relaxed font-light my-4"}>
-          {"Here are some of the technologies I've been working with:"}
+          {"Here are some of the technologies I've been working with lately:"}
         </p>
         <ul className={"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-4"}>
           {technologies.map((tech) => (

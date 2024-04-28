@@ -40,7 +40,7 @@ export default function Home() {
         </section>
 
         <Section id="experience">
-          <Experience />
+          <Experience {...{ setCursorText, setCursorVariant }} />
         </Section>
 
         <section className="-my-8 py-16 overflow-hidden w-full">
