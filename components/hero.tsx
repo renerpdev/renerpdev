@@ -95,7 +95,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
             <m.a
               onMouseEnter={downloadEnter}
               onMouseLeave={onMouseLeave}
-              href="/assets/renerp-cv.pdf"
+              href="/assets/Rene_Ricardo_resume.pdf"
               target="_blank"
               rel="noreferrer noopener"
               whileHover={{ scale: 1.1 }}

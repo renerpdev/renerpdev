@@ -212,7 +212,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
             <m.a
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              href="/assets/renerp-cv.pdf"
+              href="/assets/Rene_Ricardo_resume.pdf"
               target="_blank"
               rel="noreferrer noopener"
               transition={{ type: "teen", stiffness: 400, damping: 10 }}
