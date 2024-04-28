@@ -23,6 +23,16 @@ const Testimonials = ({ setCursorText, setCursorVariant }: CursorAnimationHandle
       image:
         "https://media.licdn.com/dms/image/D5635AQEFSCIM3VGyTA/profile-framedphoto-shrink_400_400/0/1703014825234?e=1714532400&v=beta&t=-C3hy_ovX5r2-btg8dR2z7qDc9o7NHYsK0GjrxVVyZg",
       profileUrl: "https://www.linkedin.com/in/alexander-escalona-fern%C3%A1ndez-a59883123/"
+    },
+    {
+      name: "Josué Bermúdez",
+      title: "Data Analyst",
+      company: "PeopleWalking",
+      quote:
+        "I had the pleasure of working with René, and let me tell you, he's quite the star! He's got a great work ethic, is super responsible, and always gets the job done with lightning-fast speed and top-notch quality. I'd highly recommend him both personally and professionally - he's just a great guy to have around!",
+      image:
+        "https://media.licdn.com/dms/image/C4E03AQE3NoxRF0MYbA/profile-displayphoto-shrink_400_400/0/1526917046378?e=1720051200&v=beta&t=mhgYFGpuDvzQQKrWGXeLxjo9KJXJMRywfWBu4mZNcyA",
+      profileUrl: "https://www.linkedin.com/in/josue-bermudez/"
     }
   ]
 
