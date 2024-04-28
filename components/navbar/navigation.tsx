@@ -39,8 +39,8 @@ const items: { text: string; link: string }[] = [
     link: "#projects"
   },
   {
-    text: "Skills",
-    link: "#skills"
+    text: "Testimonials",
+    link: "#testimonials"
   },
   {
     text: "Contact",
