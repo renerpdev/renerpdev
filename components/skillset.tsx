@@ -3,15 +3,6 @@ import { useEffect } from "react"
 import Magnet from "@/components/magnet"
 import { m } from "framer-motion"
 
-// const variants = {
-//   start: {
-//     opacity: [0, 1],
-//     transition: {
-//       y: { stiffness: 800, velocity: -100 }
-//     }
-//   }
-// }
-
 const staggerMenuItems = stagger(0.1, { startDelay: 0.1 })
 
 const SkillSet = () => {
@@ -22,7 +13,7 @@ const SkillSet = () => {
     if (isInView) {
       animate(
         ".skill-pill",
-        { opacity: 1, scale: 1, filter: "blur(0px)", rotateX: "25deg" },
+        { opacity: 1, scale: 1, filter: "blur(0px)" },
         { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
       )
     }

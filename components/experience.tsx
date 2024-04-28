@@ -210,6 +210,8 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
           )}
           {jobs.length === itemsToShow && (
             <m.a
+              onMouseEnter={linkEnter}
+              onMouseLeave={onMouseLeave}
               href="/assets/renerp-cv.pdf"
               target="_blank"
               rel="noreferrer noopener"
