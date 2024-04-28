@@ -217,7 +217,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
               rel="noreferrer noopener"
               transition={{ type: "teen", stiffness: 400, damping: 10 }}
               className={
-                "underline underline-offset-2 mt-4 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 rounded-full"
+                "underline underline-offset-2 mt-4 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1"
               }>
               <span className={"text-cyan-950"}>{"See Full Resume"}</span>
               <ExternalLink />

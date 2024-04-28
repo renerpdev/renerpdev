@@ -1,6 +1,8 @@
 import { CheckmarkIcon } from "@sanity/icons"
+import React from "react"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 
-const About = () => {
+const About = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const technologies = [
     "JavaScript (ES6+)",
     "TypeScript",
@@ -19,6 +21,16 @@ const About = () => {
     "Vercel",
     "Github"
   ]
+
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function linkEnter() {
+    setCursorText("👀")
+    setCursorVariant("link")
+  }
 
   return (
     <div className="h-full w-full px-6 py-8 sm:py-10 md:p-12 lg:p-16 rounded-xl max-w-3xl lg:max-w-4xl mx-auto shadow-md bg-white">
@@ -43,6 +55,15 @@ const About = () => {
           ))}
         </ul>
       </div>
+      <a
+        onMouseEnter={linkEnter}
+        onMouseLeave={onMouseLeave}
+        href="#skills"
+        className={
+          "mt-8 underline underline-offset-2 max-w-max text-center mx-auto text-sm flex justify-center px-3 py-1"
+        }>
+        <span className={"text-cyan-950"}>{"Check Soft Skills"}</span>
+      </a>
     </div>
   )
 }

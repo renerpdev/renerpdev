@@ -36,7 +36,7 @@ export default function Home() {
         </section>
 
         <section id="about" className={" -mt-10 z-10 relative px-5"}>
-          <About />
+          <About {...{ setCursorText, setCursorVariant }} />
         </section>
 
         <Section id="experience">
