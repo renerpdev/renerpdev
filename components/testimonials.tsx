@@ -2,6 +2,8 @@ import Image from "next/image"
 import { SwipeCarousel } from "@/components/swipe-carousel"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 import Title from "@/components/title"
+import Subtitle from "@/components/subtitle"
+import React from "react"
 
 const testimonials = [
   {
@@ -41,10 +43,7 @@ const Testimonials = ({ setCursorText, setCursorVariant }: CursorAnimationHandle
     <div className="flex justify-center items-center h-full mx-auto max-w-2xl w-full">
       <div className="mx-auto w-full">
         <Title className={"text-white"}>Testimonials</Title>
-        <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light"}>
-          What people I worked with have to say...
-        </h3>
-
+        <Subtitle>What people I worked with have to say...</Subtitle>
         <SwipeCarousel className={"mt-8 md:mt-12"} {...{ setCursorText, setCursorVariant }}>
           {testimonials.map((t) => (
             <div key={t.name} className={"flex flex-col items-center space-y-8"}>

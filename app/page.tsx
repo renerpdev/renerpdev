@@ -43,7 +43,7 @@ export default function Home() {
           <Experience {...{ setCursorText, setCursorVariant }} />
         </Section>
 
-        <section className="-my-8 py-16 overflow-hidden w-full">
+        <section className="-my-10 md:-my-8 py-12 md:py-16 overflow-hidden w-full">
           <div className=" w-[110%] -translate-x-[15px]">
             <ParallaxText
               className="-rotate-[10deg] md:-rotate-[6deg] translate-y-1/2  bg-[#1D2834] blur-[2px] md:blur-[3px]"
@@ -98,7 +98,7 @@ const Section = ({
   id?: string
   style?: React.CSSProperties
 }) => (
-  <section className={`text-[#333] py-16 md:py-20 lg:py-24 xl:py-28 px-5 bg-white ${className}`} {...props}>
+  <section className={`text-[#333] py-20 lg:py-24 xl:py-28 px-5 bg-white ${className}`} {...props}>
     {children}
   </section>
 )

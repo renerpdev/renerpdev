@@ -5,6 +5,7 @@ import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 import Title from "@/components/title"
+import Subtitle from "@/components/subtitle"
 
 const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const [dataSent, setDataSent] = useState(false)
@@ -28,9 +29,7 @@ const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =>
         {!dataSent ? (
           <>
             <Title>How can I help?</Title>
-            <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light mb-6"}>
-              {"Let me know what you're looking for"}
-            </h3>
+            <Subtitle>{"Let me know what you're looking for"}</Subtitle>
             <Form action={handleSubmit} {...{ setCursorText, setCursorVariant }} />
           </>
         ) : (

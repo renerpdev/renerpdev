@@ -5,6 +5,7 @@ import React, { useState } from "react"
 import { m } from "framer-motion"
 import Title from "@/components/title"
 import { ExternalLink } from "@/components/external-link"
+import Subtitle from "@/components/subtitle"
 
 const jobs = [
   {
@@ -136,8 +137,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
     <div className="flex justify-center items-center  h-full mx-auto max-w-3xl lg:max-w-4xl w-full">
       <div className="mx-auto w-full">
         <Title>Experience</Title>
-        <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light"}>{"Where I've worked so far"}</h3>
-
+        <Subtitle>{"Where I've worked so far"}</Subtitle>
         <div className="mt-10">
           <Timeline>
             {jobs
