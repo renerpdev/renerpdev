@@ -72,7 +72,7 @@ const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =
         <div>
           <div className="sticky top-20">
             <Title className="text-center lg:text-left xl:text-6xl">Recent Projects</Title>
-            <Subtitle className={"text-center md:text-left"}>{"Where I've worked so far"}</Subtitle>
+            <Subtitle className={"text-center md:text-left"}>{"Here are some of the projects I've worked on"}</Subtitle>
           </div>
         </div>
         <div className={"space-y-8 sticky top-0 pb-14 grid grid-cols-1 grid-flow-row "}>
