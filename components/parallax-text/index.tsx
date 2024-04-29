@@ -9,14 +9,14 @@ import {
   wrap
 } from "framer-motion"
 import { useRef } from "react"
-import "./styles.css"
 
 interface ParallaxProps {
   children: string
   baseVelocity: number
+  className?: string
 }
 
-export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxProps) {
+export default function ParallaxText({ children, className, baseVelocity = 500 }: ParallaxProps) {
   const baseX = useMotionValue(0)
   const { scrollY } = useScroll()
   const scrollVelocity = useVelocity(scrollY)
@@ -62,12 +62,15 @@ export default function ParallaxText({ children, baseVelocity = 500 }: ParallaxP
    * dynamically generated number of children.
    */
   return (
-    <div className="parallax">
-      <m.div className="scroller text-cyan-900" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+    <div className={`parallax py-4 ${className}`}>
+      <m.div
+        className="scroller text-2xl sm:text-4xl lg:text-6xl 2xl:text-7xl mr text-white heading !font-light bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent"
+        style={{ x }}>
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <span key={idx} className="mr-1.5 md:mr-4">
+            {children}{" "}
+          </span>
+        ))}
       </m.div>
     </div>
   )

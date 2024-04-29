@@ -1,10 +1,18 @@
 import type { Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Ubuntu, Inter } from "next/font/google"
 import "./globals.css"
+import Head from "next/head"
 
-const inter = Inter({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"]
+const ubuntuFont = Ubuntu({
+  weight: ["300", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-ubuntu"
+})
+
+const interFont = Inter({
+  weight: ["300", "400", "500"],
+  subsets: ["latin"],
+  variable: "--font-inter"
 })
 
 export const viewport: Viewport = {
@@ -29,7 +37,7 @@ export async function generateMetadata() {
       description: "Want to build something cool? Lets connect!",
       images: [
         {
-          url: "https://avatars.githubusercontent.com/u/32307287",
+          url: "https://renerp.dev/assets/og-img.png",
           width: 800,
           height: 600,
           alt: "Rene Ricardo profile picture"
@@ -46,9 +54,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
-        <main>{children}</main>
-      </body>
+      <Head>
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+      </Head>
+      <body className={`${ubuntuFont.variable} ${interFont.variable}`}>{children}</body>
     </html>
   )
 }

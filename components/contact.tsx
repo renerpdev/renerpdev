@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { RocketIcon } from "@/components/icons/rocket"
-import { sendEmail } from "@/app/lib/actions"
+import { sendEmail } from "@/lib/actions"
 import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
+import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
+import Title from "@/components/title"
 
-const Contact = () => {
+const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const [dataSent, setDataSent] = useState(false)
 
   const handleSubmit = async (formData: FormData) => {
@@ -25,10 +27,11 @@ const Contact = () => {
       <div className="mx-auto w-full">
         {!dataSent ? (
           <>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
-              How can I help?
-            </h2>
-            <Form action={handleSubmit} />
+            <Title>How can I help?</Title>
+            <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light mb-6"}>
+              {"Let me know what you're looking for"}
+            </h3>
+            <Form action={handleSubmit} {...{ setCursorText, setCursorVariant }} />
           </>
         ) : (
           <p className={"text-lg text-center flex items-center justify-center gap-2 flex-wrap"}>
@@ -40,7 +43,11 @@ const Contact = () => {
   )
 }
 
-const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
+const Form = ({
+  action,
+  setCursorVariant,
+  setCursorText
+}: { action: (data: FormData) => Promise<void> } & CursorAnimationHandler) => {
   return (
     <form className="mt-8 space-y-4" action={action}>
       <input
@@ -61,11 +68,10 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
         placeholder="Message"
         rows={6}
         name="message"
-        defaultValue={"I would like to know more about your services."}
         className="w-full min-h-32 rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
-      <div className={"flex flex-col gap-4 pb-2"}>
+      <div className={"flex flex-row flex-wrap justify-center gap-4 pb-4 md:pb-8"}>
         <div className="flex items-center">
           <input
             id="default-checkbox1"
@@ -75,7 +81,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Web Development"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="default-checkbox1" className="ms-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="default-checkbox1" className="ms-2 text-sm text-gray-900 ">
             Web Development
           </label>
         </div>
@@ -87,7 +93,7 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Web Design"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="checked-checkbox2" className="ms-2 text-sm font-medium text-gray-900">
+          <label htmlFor="checked-checkbox2" className="ms-2 text-sm text-gray-900">
             Web Design
           </label>
         </div>
@@ -99,25 +105,38 @@ const Form = ({ action }: { action: (data: FormData) => Promise<void> }) => {
             value="Mobile Development"
             className="w-4 h-4 text-cyan-600 bg-cyan-100 border-cyan-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="checked-checkbox3" className="ms-2 text-sm font-medium text-gray-900">
+          <label htmlFor="checked-checkbox3" className="ms-2 text-sm text-gray-900">
             Mobile Development
           </label>
         </div>
       </div>
-      <Submit />
+      <Submit {...{ setCursorText, setCursorVariant }} />
     </form>
   )
 }
 
-const Submit = () => {
+const Submit = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const { pending } = useFormStatus()
+
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function contactEnter() {
+    setCursorText("🚀")
+    setCursorVariant("link")
+  }
+
   return (
     <m.button
+      onMouseEnter={contactEnter}
+      onMouseLeave={onMouseLeave}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
-      type="submit"
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      className="text-white bg-cyan-600 hover:bg-cyan-500 font-semibold rounded-3xl text-sm px-10 py-3 block w-full lg:w-auto max-w-sm lg:max-w-xs mx-auto disabled:pointer-events-none disabled:opacity-50"
+      type="submit"
+      className="max-w-sm mx-auto text-lg flex justify-center text-white items-center bg-cyan-600 px-8 py-3 rounded-3xl border-none disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>
       {pending ? "Sending..." : "Send message"}
     </m.button>
