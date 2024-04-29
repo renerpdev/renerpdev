@@ -4,6 +4,7 @@ import { sendEmail } from "@/lib/actions"
 import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
+import Title from "@/components/title"
 
 const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const [dataSent, setDataSent] = useState(false)
@@ -26,10 +27,8 @@ const Contact = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =>
       <div className="mx-auto w-full">
         {!dataSent ? (
           <>
-            <h2 className="text-3xl md:text-4xl mb-4 font-extrabold text-center bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
-              How can I help?
-            </h2>
-            <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal mb-6"}>
+            <Title>How can I help?</Title>
+            <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light mb-6"}>
               {"Let me know what you're looking for"}
             </h3>
             <Form action={handleSubmit} {...{ setCursorText, setCursorVariant }} />

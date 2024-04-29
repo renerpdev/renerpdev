@@ -57,10 +57,12 @@ export default function Home() {
         </section>
 
         <Section id="projects">
-          <Projects />
+          <Projects {...{ setCursorText, setCursorVariant }} />
         </Section>
 
-        <CallToAction {...{ setCursorText, setCursorVariant }} />
+        <section>
+          <CallToAction {...{ setCursorText, setCursorVariant }} />
+        </section>
 
         <Section id="skills">
           <SkillSet />

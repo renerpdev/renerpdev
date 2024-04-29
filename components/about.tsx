@@ -1,6 +1,7 @@
 import { CheckmarkIcon } from "@sanity/icons"
 import React from "react"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
+import Title from "@/components/title"
 
 const About = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const technologies = [
@@ -35,9 +36,7 @@ const About = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   return (
     <div className="h-full w-full px-6 py-8 sm:py-10 md:p-12 lg:p-16 rounded-xl max-w-3xl lg:max-w-4xl mx-auto shadow-md bg-white">
       <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
-          About Me
-        </h2>
+        <Title>About Me</Title>
         <p className={"md:text-lg tracking-wide !leading-relaxed font-light"}>
           {
             "Hey there! Ever since I started my journey as a developer back in 2017, I've been doing remote work for some big companies and freelance clients. I've had the chance to work with many different technologies and build some really cool stuff, from landing pages to full-stack web applications. I absolutely love what I do and I'm always excited to learn new things."

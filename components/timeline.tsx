@@ -32,7 +32,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
   useEffect(() => {
     if (isInView) {
       animate(
-        ".timeline-item",
+        ".timeline-content",
         { opacity: 1, scale: 1 },
         { ease: "anticipate", duration: 0.8, delay: isInView ? staggerMenuItems : 0 }
       )
@@ -60,7 +60,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
           }}
           className={`opacity-0 blur-sm timeline-icon scale-0 ${firstChild ? "bg-cyan-900" : "bg-white"} rounded-full relative z-[2]`}>
           <div className="absolute top-0 left-0 h-4 w-4 border-2 border-cyan-900 rounded-full z-[2]" />
-          <DotIcon className={`h-4 w-4 ${firstChild ? "text-white" : "text-cyan-950"} text-white relative z-[2]`} />
+          <DotIcon className={`h-4 w-4 ${firstChild ? "text-white" : "text-cyan-900"} relative z-[2]`} />
           {firstChild && (
             <m.div
               className="absolute top-0 left-0 h-4 w-4 bg-cyan-500/60 rounded-full z-[1]"
@@ -80,7 +80,7 @@ const TimelineItem = ({ children, lastChild, firstChild }: TimelineItemProps) =>
           className={`w-[2px] md:w-[2.5px] top-0 left-1/2 -translate-x-1/2 absolute z-[1] bg-cyan-900 timeline-line h-0 ${!lastChild ? "" : "opacity-0"}`}
         />
       </div>
-      <div className={"pb-8 timeline-item opacity-0 -mt-1"}>{children}</div>
+      <div className={"pb-8 timeline-content opacity-0 -mt-1"}>{children}</div>
     </div>
   )
 }

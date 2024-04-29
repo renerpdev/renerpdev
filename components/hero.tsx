@@ -32,7 +32,7 @@ const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
     setCursorVariant("link")
   }
   function downloadEnter() {
-    setCursorText("📥")
+    setCursorText("📃")
     setCursorVariant("link")
   }
 

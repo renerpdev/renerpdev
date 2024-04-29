@@ -1,9 +1,10 @@
 import Timeline from "@/components/timeline"
 import { CheckmarkCircleIcon, AddCircleIcon } from "@sanity/icons"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
-import Image from "next/image"
 import React, { useState } from "react"
 import { m } from "framer-motion"
+import Title from "@/components/title"
+import { ExternalLink } from "@/components/external-link"
 
 const jobs = [
   {
@@ -134,10 +135,8 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
   return (
     <div className="flex justify-center items-center  h-full mx-auto max-w-3xl lg:max-w-4xl w-full">
       <div className="mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-transparent">
-          Experience
-        </h2>
-        <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-normal"}>{"Where I've worked so far"}</h3>
+        <Title>Experience</Title>
+        <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light"}>{"Where I've worked so far"}</h3>
 
         <div className="mt-10">
           <Timeline>
@@ -196,6 +195,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
               <div className={"text-center flex items-center"}>
                 <Divider />
                 <m.button
+                  title="Show More"
                   onClick={increaseThreshold}
                   whileHover={{
                     scale: 1.2,
@@ -217,7 +217,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
               rel="noreferrer noopener"
               transition={{ type: "teen", stiffness: 400, damping: 10 }}
               className={
-                "underline underline-offset-2 mt-4 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1"
+                "underline underline-offset-2 mt-4 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0"
               }>
               <span className={"text-cyan-950"}>{"See Full Resume"}</span>
               <ExternalLink />
@@ -230,17 +230,5 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
 }
 
 const Divider = () => <div className={"h-0.5 w-full bg-gray-100 rounded-full"} />
-
-const ExternalLink = () => (
-  <Image
-    width={18}
-    height={18}
-    src={"/assets/arrow-diagonal-up.svg"}
-    className={"invert translate-y-[2px]"}
-    role="presentation"
-    aria-hidden="true"
-    alt="arrow icon"
-  />
-)
 
 export default Experience
