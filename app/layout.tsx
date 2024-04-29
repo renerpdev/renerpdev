@@ -27,6 +27,7 @@ export async function generateMetadata() {
   return {
     description: "René Ricardo's developer portfolio",
     manifest: "/manifest.json",
+    title: "René Ricardo - Portfolio",
     openGraph: {
       type: "website",
       locale: "en",
