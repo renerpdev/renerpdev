@@ -52,6 +52,15 @@ const works = [
     npmRepo: "https://www.npmjs.com/package/vollk",
     year: 2018,
     tags: ["Javascript", "Knex", "Inquirer", "Commander", "Faker"]
+  },
+  {
+    title: "CSS Drag & Drop",
+    description:
+      "jQuery plugin for adding drag and drop functionality to your HTML elements. It has built-in styles but can be easily customized.",
+    githubRepo: "https://github.com/renerpdev/css-dnd",
+    npmRepo: "https://www.npmjs.com/package/css-dnd",
+    year: 2018,
+    tags: ["Javascript", "jquery", "drag & drop", "CSS"]
   }
 ]
 
@@ -193,7 +202,7 @@ const Project = ({
             <a
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              href={githubRepo}
+              href={npmRepo}
               target={"_blank"}
               title="See on NPM"
               rel={"noreferrer noopener"}>

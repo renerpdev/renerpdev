@@ -35,14 +35,12 @@ const SkillSet = () => {
             "Critical Thinking",
             "Responsibility",
             "Adaptability",
-            "Flexibility",
             "Attention to Detail",
             "Pragmatism",
             "Time Management",
             "Empathy",
             "Discipline",
             "Creativity",
-            "Collaboration",
             "Communication"
           ].map((skill, index) => (
             <m.div key={index} animate="start">
