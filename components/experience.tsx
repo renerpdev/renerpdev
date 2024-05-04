@@ -5,6 +5,7 @@ import React, { useState } from "react"
 import { m } from "framer-motion"
 import Title from "@/components/title"
 import { ExternalLink } from "@/components/external-link"
+import Subtitle from "@/components/subtitle"
 
 const jobs = [
   {
@@ -17,12 +18,8 @@ const jobs = [
     tasks: [
       "Developed responsive and mobile-friendly UI components using React, employing best practices to ensure components work seamlessly on various screen sizes and device orientations.",
       "Implemented navigation patterns typical for mobile applications, such as tab bars, drawers, and stack navigations, using libraries like React Router or React Navigation tailored for Capacitor’s environment.",
-      "Employed Context API for global state management in smaller applications, avoiding prop drilling.",
-      "Integrated third-party services and APIs using NestJS HTTP module, facilitating data exchange and external communications.",
       "Worked closely with backend teams to design and implement optimal APIs for frontend consumption.",
-      "Participated in Agile/Scrum meetings to stay aligned with team goals and timelines.",
-      "Ensured cross-browser compatibility and mobile responsiveness of applications.",
-      "Implemented unit tests to reduce bugs and enhance feature reliability."
+      "Integrated third-party services and APIs using NestJS HTTP module, facilitating data exchange and external communications."
     ],
     tags: ["React", "NestJS", "Capacitor", "Typescript", "Javascript", "Vitest"]
   },
@@ -36,10 +33,7 @@ const jobs = [
     tasks: [
       "Implemented complex user interfaces using JSX and React components, adhering to modern design principles and user experience standards.",
       "Utilized Conditional Rendering techniques to create dynamic components that adapt to different user interactions and data states.",
-      "Leveraged advanced React Hooks like useMemo and useCallback to optimize performance by memoizing complex calculations and limiting re-renders.",
-      "Participated in Agile/Scrum meetings to stay aligned with team goals and timelines.",
-      "Ensured cross-browser compatibility and mobile responsiveness of applications.",
-      "Implemented unit tests to reduce bugs and enhance feature reliability."
+      "Leveraged advanced React Hooks like useMemo and useCallback to optimize performance by memoizing complex calculations and limiting re-renders."
     ],
     tags: ["React", "Typescript", "Javascript", "Redux", "RTL"]
   },
@@ -52,11 +46,8 @@ const jobs = [
     url: "https://www.ukg.com",
     tasks: [
       "Implemented client-side routing using React Router, managing navigation within the application, dynamic route parameters, and nested routes.",
-      "Participated in Agile/Scrum meetings to stay aligned with team goals and timelines.",
       "Implemented complex user interfaces using JSX and React components, adhering to modern design principles and user experience standards.",
-      "Collaborated with UX/UI designers to transform designs into functional web interfaces.",
-      "Ensured cross-browser compatibility and mobile responsiveness of applications.",
-      "Implemented unit tests to reduce bugs and enhance feature reliability."
+      "Collaborated with UX/UI designers to transform designs into functional web interfaces."
     ],
     tags: ["React", "Typescript", "Javascript", "Redux", "Enzyme"]
   },
@@ -70,10 +61,7 @@ const jobs = [
     tasks: [
       "Developed scalable and maintainable single-page applications with React.js.",
       "Implemented Redux for state management across multiple components.",
-      "Created reusable React components to streamline development and ensure UI consistency.",
-      "Designed and implemented dynamic and responsive web applications using Angular.",
-      "Integrated APIs to fetch and post data dynamically to backend services.",
-      "Handled code reviews and pull requests to ensure code quality and integrate feedback."
+      "Designed and implemented dynamic and responsive web applications using Angular."
     ],
     tags: ["React", "Angular", "Javascript", "Typescript"]
   },
@@ -87,10 +75,7 @@ const jobs = [
     tasks: [
       "Designed and implemented dynamic and responsive web applications using Angular.",
       "Applied RxJS observables for managing asynchronous data flows and state management.",
-      "Integrated APIs to fetch and post data dynamically to backend services.",
-      "Kept up-to-date with industry trends and technologies through continuous learning and professional development.",
-      "Ensured cross-browser compatibility and mobile responsiveness of applications.",
-      "Implemented unit tests to reduce bugs and enhance feature reliability."
+      "Integrated APIs to fetch and post data dynamically to backend services."
     ],
     tags: ["Angular", "Javascript", "Typescript"]
   },
@@ -103,11 +88,8 @@ const jobs = [
     url: "",
     tasks: [
       "Generated and developed applications using the JHipster platform to bridge frontend and backend development seamlessly.",
-      "Managed source code versions and collaborated with other developers using Git.",
-      "Utilized branching and merging strategies to maintain workflow efficiency.",
       "Designed and implemented dynamic and responsive web applications using Angular.",
-      "Utilized Angular Material for crafting appealing and consistent UI components.",
-      "Integrated APIs to fetch and post data dynamically to backend services."
+      "Utilized Angular Material for crafting appealing and consistent UI components."
     ],
     tags: ["Angular", "Javascript", "Typescript", "JHipster"]
   }
@@ -136,8 +118,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
     <div className="flex justify-center items-center  h-full mx-auto max-w-3xl lg:max-w-4xl w-full">
       <div className="mx-auto w-full">
         <Title>Experience</Title>
-        <h3 className={"text-center mx-auto max-w-md text-lg md:text-xl font-light"}>{"Where I've worked so far"}</h3>
-
+        <Subtitle>{"Where I've worked so far"}</Subtitle>
         <div className="mt-10">
           <Timeline>
             {jobs
@@ -212,7 +193,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
             <m.a
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              href="/assets/Rene_Ricardo_resume.pdf"
+              href="/assets/Rene_Ricardo_Resume.pdf"
               target="_blank"
               rel="noreferrer noopener"
               transition={{ type: "teen", stiffness: 400, damping: 10 }}

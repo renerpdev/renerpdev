@@ -142,7 +142,7 @@ const Footer = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => 
       </div>
 
       <div
-        className={"absolute top-0 md:top-4 right-4 md:right-8 z-10 cursor-none"}
+        className={"absolute top-2 md:top-4 right-4 md:right-8 z-10 cursor-none"}
         onMouseEnter={btnUpEnter}
         onMouseLeave={onMouseLeave}>
         <Magnet>

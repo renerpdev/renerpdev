@@ -14,13 +14,13 @@ const CallToAction = ({ setCursorText, setCursorVariant }: CursorAnimationHandle
   }
 
   return (
-    <div className={"bg-[#1d2839] px-5 py-12 lg:py-14"}>
+    <div className={"bg-[#1d2839] px-5 py-14 lg:py-16"}>
       <div
         className={
           "w-full max-w-7xl mx-auto text-center flex gap-6 flex-col lg:flex-row items-center lg:items-start justify-evenly text-white"
         }>
         <h3 className={"text-3xl font-bold whitespace-nowrap"}>Start a project</h3>
-        <p className={"text-lg tracking-wider max-w-2xl"}>
+        <p className={"text-base md:text-lg tracking-wider max-w-2xl"}>
           {"Are you interested in working together? Let's grab a coffee and chat about it! My treat!"}
         </p>
         <m.a

@@ -25,22 +25,22 @@ export const viewport: Viewport = {
 
 export async function generateMetadata() {
   return {
-    title: "Rene Ricardo - Portfolio",
-    description: "Rene Ricardo's developer portfolio",
+    description: "René Ricardo's developer portfolio",
     manifest: "/manifest.json",
+    title: "René Ricardo - Portfolio",
     openGraph: {
       type: "website",
       locale: "en",
       url: "https://renerp.dev",
-      siteName: "Rene Ricardo - Portfolio",
-      title: "Rene Ricardo - Portfolio",
-      description: "Want to build something cool? Lets connect!",
+      siteName: "René Ricardo - Portfolio",
+      title: "René Ricardo - Portfolio",
+      description: "Want to build something cool? Let's connect!",
       images: [
         {
           url: "https://renerp.dev/assets/og-img.png",
           width: 800,
           height: 600,
-          alt: "Rene Ricardo profile picture"
+          alt: "René Ricardo profile picture"
         }
       ]
     }

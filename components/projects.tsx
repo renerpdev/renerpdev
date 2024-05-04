@@ -6,6 +6,7 @@ import { useAnimate, useInView } from "framer-motion"
 import React, { useEffect } from "react"
 import { NpmIcon } from "@/components/icons/npm"
 import { ExternalLink } from "@/components/external-link"
+import Subtitle from "@/components/subtitle"
 
 const works = [
   {
@@ -51,22 +52,39 @@ const works = [
     npmRepo: "https://www.npmjs.com/package/vollk",
     year: 2018,
     tags: ["Javascript", "Knex", "Inquirer", "Commander", "Faker"]
+  },
+  {
+    title: "CSS Drag & Drop",
+    description:
+      "jQuery plugin for adding drag and drop functionality to your HTML elements. It has built-in styles but can be easily customized.",
+    githubRepo: "https://github.com/renerpdev/css-dnd",
+    npmRepo: "https://www.npmjs.com/package/css-dnd",
+    year: 2018,
+    tags: ["Javascript", "jquery", "drag & drop", "CSS"]
   }
 ]
 
 const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
+  function onMouseLeave() {
+    setCursorText("")
+    setCursorVariant("default")
+  }
+
+  function linkEnter() {
+    setCursorText("👀")
+    setCursorVariant("link")
+  }
+
   return (
     <div className="flex justify-center items-center h-full mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-5xl w-full">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 xl:gap-16">
         <div>
           <div className="sticky top-20">
-            <Title className="text-center lg:text-left xl:text-6xl ">Recent Projects</Title>
-            <h3 className={"text-left mx-auto max-w-md text-lg md:text-xl font-light"}>
-              {"Here are some of the projects I've worked on"}
-            </h3>
+            <Title className="text-center lg:text-left xl:text-6xl">Recent Projects</Title>
+            <Subtitle className={"text-center md:text-left"}>{"Here are some of the projects I've worked on"}</Subtitle>
           </div>
         </div>
-        <div className={"space-y-8 sticky top-0 pb-14"}>
+        <div className={"space-y-8 sticky top-0 pb-14 grid grid-cols-1 grid-flow-row "}>
           {works.map((work, index) => (
             <Project
               key={work.title}
@@ -78,8 +96,8 @@ const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =
           ))}
           <div className={"h-72"} />
           <a
-            // onMouseEnter={linkEnter}
-            // onMouseLeave={onMouseLeave}
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
             href="https://github.com/renerpdev?tab=repositories"
             target={"_blank"}
             rel={"noreferrer noopenner"}
@@ -142,9 +160,11 @@ const Project = ({
     <div
       ref={scope}
       key={title}
-      className={"rounded-md shadow-md p-6 ring-1 ring-gray-200 h-72 sticky flex flex-col w-full opacity-0 bg-gray-50"}
+      className={
+        "rounded-md shadow-md p-6 ring-1 ring-gray-200 min-h-72 sticky flex flex-col w-full opacity-0 bg-gray-50"
+      }
       style={{ top: `${(index + 1) * 45}px` }}>
-      <div className={"mb-auto flex items-center justify-between elem"}>
+      <div className={"mb-auto flex items-center justify-between"}>
         <h4 className={"text-xl lg:text-2xl font-light tracking-wide uppercase text-cyan-600"}>
           {link ? (
             <a
@@ -182,7 +202,7 @@ const Project = ({
             <a
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              href={githubRepo}
+              href={npmRepo}
               target={"_blank"}
               title="See on NPM"
               rel={"noreferrer noopener"}>
@@ -202,7 +222,7 @@ const Project = ({
           )}
         </div>
       </div>
-      <p className={"my-auto"}>{description}</p>
+      <p className={"my-auto py-2"}>{description}</p>
       <div className={"mt-auto space-y-4"}>
         <p className={"text-lg"}>{year}</p>
         <ul className="flex gap-2 flex-wrap">
