@@ -3,7 +3,7 @@ import { GithubIcon } from "@/components/icons/github"
 import Image from "next/image"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
 import { useAnimate, useInView } from "framer-motion"
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { NpmIcon } from "@/components/icons/npm"
 import { ExternalLink } from "@/components/external-link"
 import Subtitle from "@/components/subtitle"
@@ -59,8 +59,17 @@ const works = [
       "jQuery plugin for adding drag and drop functionality to your HTML elements. It has built-in styles but can be easily customized.",
     githubRepo: "https://github.com/renerpdev/css-dnd",
     npmRepo: "https://www.npmjs.com/package/css-dnd",
-    year: 2018,
+    year: 2019,
     tags: ["Javascript", "jquery", "drag & drop", "CSS"]
+  },
+  {
+    title: "COVID-19 Stats",
+    description:
+      "Web application, built in Ionic, that displays the latest COVID-19 stats in the world. It uses the 'Rapidapi.com' API to fetch the data and displays it in a clean and easy-to-read format.",
+    githubRepo: "https://github.com/renerpdev/covid19-stats",
+    link: "https://cov19-stats.firebaseapp.com/",
+    year: 2020,
+    tags: ["Ionic", "Typescript", "React.js", "CSS", "Firebase"]
   }
 ]
 
@@ -69,6 +78,8 @@ const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =
     setCursorText("")
     setCursorVariant("default")
   }
+
+  const sortedProjects = useMemo(() => works.sort((a, b) => b.year - a.year), [])
 
   function linkEnter() {
     setCursorText("👀")
@@ -85,7 +96,7 @@ const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =
           </div>
         </div>
         <div className={"space-y-8 sticky top-0 pb-14 grid grid-cols-1 grid-flow-row "}>
-          {works.map((work, index) => (
+          {sortedProjects.map((work, index) => (
             <Project
               key={work.title}
               index={index}
