@@ -1,11 +1,12 @@
 import Timeline from "@/components/timeline"
 import { CheckmarkCircleIcon, AddCircleIcon } from "@sanity/icons"
 import { CursorAnimationHandler } from "@/utils/use-cursor-animation"
-import React, { useState } from "react"
+import React, { useMemo } from "react"
 import { m } from "framer-motion"
 import Title from "@/components/title"
 import { ExternalLink } from "@/components/external-link"
 import Subtitle from "@/components/subtitle"
+import { format } from "date-fns"
 
 const jobs = [
   {
@@ -13,7 +14,8 @@ const jobs = [
     role: "Senior Frontend Engineer",
     type: "Full-Time",
     mode: "Remote",
-    duration: "Feb 2022 - Present",
+    start: new Date(2022, 1, 7),
+    end: null,
     url: "https://lumenalta.com",
     tasks: [
       "Developed responsive and mobile-friendly UI components using React, employing best practices to ensure components work seamlessly on various screen sizes and device orientations.",
@@ -28,7 +30,8 @@ const jobs = [
     role: "Ssr. React Developer",
     type: "Full-Time",
     mode: "Remote",
-    duration: "May 2021 - Feb 2022",
+    start: new Date(2021, 4, 1),
+    end: new Date(2022, 1, 1),
     url: "https://www.altimetrik.com",
     tasks: [
       "Implemented complex user interfaces using JSX and React components, adhering to modern design principles and user experience standards.",
@@ -42,7 +45,8 @@ const jobs = [
     role: "Software Engineer II",
     type: "Full-Time",
     mode: "Hybrid",
-    duration: "Feb 2020 - May 2021",
+    start: new Date(2020, 1, 1),
+    end: new Date(2021, 4, 1),
     url: "https://www.ukg.com",
     tasks: [
       "Implemented client-side routing using React Router, managing navigation within the application, dynamic route parameters, and nested routes.",
@@ -56,7 +60,8 @@ const jobs = [
     role: "Frontend Developer",
     type: "Freelance",
     mode: "Remote",
-    duration: "Nov 2018 - Jan 2020",
+    start: new Date(2018, 10, 1),
+    end: new Date(2020, 0, 1),
     url: "https://www.informagestudios.com",
     tasks: [
       "Developed scalable and maintainable single-page applications with React.js.",
@@ -70,7 +75,8 @@ const jobs = [
     type: "Full-Time",
     mode: "On-site",
     role: "Software Engineer",
-    duration: "Sep 2017 - Oct 2019",
+    start: new Date(2017, 8, 1),
+    end: new Date(2019, 9, 1),
     url: "",
     tasks: [
       "Designed and implemented dynamic and responsive web applications using Angular.",
@@ -84,7 +90,8 @@ const jobs = [
     type: "Freelance",
     mode: "Remote",
     role: "Frontend Developer",
-    duration: "Jul 2017 - May 2018",
+    start: new Date(2017, 6, 1),
+    end: new Date(2018, 4, 1),
     url: "",
     tasks: [
       "Generated and developed applications using the JHipster platform to bridge frontend and backend development seamlessly.",
@@ -98,7 +105,7 @@ const jobs = [
 const ITEMS_THRESHOLD = 2
 
 const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
-  const [itemsToShow, setItemsToShow] = useState(ITEMS_THRESHOLD)
+  const sortedJobs = useMemo(() => jobs.sort((a, b) => b.start.getTime() - a.start.getTime()), [])
 
   function onMouseLeave() {
     setCursorText("")
@@ -110,10 +117,6 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
     setCursorVariant("link")
   }
 
-  const increaseThreshold = () => {
-    setItemsToShow(jobs.length)
-  }
-
   return (
     <div className="flex justify-center items-center  h-full mx-auto max-w-3xl lg:max-w-4xl w-full">
       <div className="mx-auto w-full">
@@ -121,9 +124,9 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
         <Subtitle>{"Where I've worked so far"}</Subtitle>
         <div className="mt-10">
           <Timeline>
-            {jobs
+            {sortedJobs
               .slice()
-              .slice(0, itemsToShow)
+              .slice(0, ITEMS_THRESHOLD)
               .map((job) => (
                 <div key={job.name} className={"space-y-2"}>
                   <div className="mb-2 space-y-1">
@@ -139,7 +142,7 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
                         <ExternalLink />
                       </a>
                       <span className="font-normal text-xs sm:text-sm rounded-full border-2 border-cyan-950 px-2.5">
-                        {job.duration}
+                        {`${format(job.start, "MMM yyyy")} - ${job.end ? format(job.end, "MMM yyyy") : "Present"}`}
                       </span>
                       <span className="font-normal text-xs sm:text-sm rounded-full border-2 border-cyan-950 px-2.5">
                         {" "}
@@ -166,44 +169,42 @@ const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler)
                 </div>
               ))}
           </Timeline>
-          {jobs.length > itemsToShow && (
-            <>
-              <div
-                className={
-                  "h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
-                }
-              />
-              <div className={"text-center flex items-center"}>
-                <Divider />
-                <m.button
-                  title="Show More"
-                  onClick={increaseThreshold}
-                  whileHover={{
-                    scale: 1.2,
-                    transition: { duration: 0.2 },
-                    type: "spring"
-                  }}>
-                  <AddCircleIcon className="h-8 w-8 text-gray-500" />
-                </m.button>
-                <Divider />
-              </div>
-            </>
-          )}
-          {jobs.length === itemsToShow && (
-            <m.a
-              onMouseEnter={linkEnter}
-              onMouseLeave={onMouseLeave}
-              href="/assets/Rene_Ricardo_Resume.pdf"
-              target="_blank"
-              rel="noreferrer noopener"
-              transition={{ type: "teen", stiffness: 400, damping: 10 }}
+          <>
+            <div
               className={
-                "underline underline-offset-2 mt-4 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0"
-              }>
-              <span className={"text-cyan-950"}>{"See Full Resume"}</span>
-              <ExternalLink />
-            </m.a>
-          )}
+                "h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
+              }
+            />
+            <div className={"text-center flex items-center"}>
+              <Divider />
+              <m.a
+                href="/assets/Rene_Ricardo_Resume.pdf"
+                target="_blank"
+                rel="noreferrer noopener"
+                title="Show More"
+                whileHover={{
+                  scale: 1.2,
+                  transition: { duration: 0.2 },
+                  type: "spring"
+                }}>
+                <AddCircleIcon className="h-8 w-8 text-gray-500" />
+              </m.a>
+              <Divider />
+            </div>
+          </>
+          <m.a
+            onMouseEnter={linkEnter}
+            onMouseLeave={onMouseLeave}
+            href="/assets/Rene_Ricardo_Resume.pdf"
+            target="_blank"
+            rel="noreferrer noopener"
+            transition={{ type: "teen", stiffness: 400, damping: 10 }}
+            className={
+              "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0"
+            }>
+            <span className={"text-cyan-950"}>{"See Full Resume"}</span>
+            <ExternalLink />
+          </m.a>
         </div>
       </div>
     </div>

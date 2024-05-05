@@ -113,7 +113,7 @@ const Projects = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) =
             target={"_blank"}
             rel={"noreferrer noopenner"}
             className={
-              "translate-y-14 underline underline-offset-2 max-w-max text-center mx-auto text-sm flex justify-center px-3 py-1 gap-2 relative z-0"
+              "translate-y-16 underline underline-offset-2 max-w-max text-center mx-auto text-sm flex justify-center px-3 py-1 gap-2 relative z-0"
             }>
             <span className={"text-cyan-950"}>{"See all projects"}</span>
             <ExternalLink />
