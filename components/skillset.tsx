@@ -41,7 +41,8 @@ const SkillSet = () => {
             "Empathy",
             "Discipline",
             "Creativity",
-            "Communication"
+            "Communication",
+            "Flexibility"
           ].map((skill, index) => (
             <m.div key={index} animate="start">
               <Magnet>
