@@ -1,8 +1,9 @@
 "use server"
 
 import { Resend } from "resend"
-import EmailTemplate from "@/components/email-template"
+import { EmailTemplate } from "@/components"
 import { ReactElement } from "react"
+import { logger } from "@/logger"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const emailRecipient = process.env.EMAIL_RECIPIENT
@@ -29,8 +30,8 @@ export async function sendEmail(data: DataType) {
       throw error
     }
 
-    console.log("Email sent successfully!", data)
+    logger.log("Email sent successfully!", data)
   } catch (error) {
-    console.error(error)
+    logger.error(error)
   }
 }

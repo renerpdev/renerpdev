@@ -1,17 +1,50 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
+  "extends": ["next/core-web-vitals", "prettier", "plugin:unicorn/recommended"],
   "rules": {
     "no-console": "warn",
     "quotes": "warn",
     "comma-style": "warn",
     "no-unused-expressions": "error",
-    "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",
       { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
+    "unicorn/filename-case": "off",
+    "unicorn/import-style": "off",
+    "validate-filename/naming-rules": [
+      "error",
+      {
+        "rules": [
+          {
+            "case": "kebab", // forces to use kebab case for file names within "app" folder
+            "target": "**/app/**",
+            "excludes": ["_sections"], // any file in "_sections" folder is excluded.
+            "patterns": "^(page|layout|loading|error|not-found|route|template).tsx$" // file names must match the pattern
+          },
+          {
+            "case": "pascal", // forces to use pascal case for file names within "components" folder
+            "target": "**/components/**",
+            "excludes": ["hooks"] // "hooks" folder is excluded.
+          },
+          {
+            "case": "pascal", // forces to use pascal case for file names within "_sections" folder
+            "target": "**/_sections/**.tsx" // targets only ".tsx" files in "_sections" folder
+          },
+          {
+            "case": "camel", // forces to use camel case for file names within "hooks" folder
+            "target": "**/hooks/**",
+            "patterns": "^use" // file names must begin with "use".
+          },
+          {
+            "case": "camel", // forces to use camel case for file names within "providers" folder
+            "target": "**/providers/**",
+            "patterns": "^[a-zA-Z]*Provider" // file names must end with "Provider".
+          }
+        ]
+      }
     ]
   },
-  "plugins": ["unused-imports"],
+  "plugins": ["unused-imports", "validate-filename"],
   "root": true
 }

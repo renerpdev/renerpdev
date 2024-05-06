@@ -1,7 +1,8 @@
 import type { Viewport } from "next"
-import { Ubuntu, Inter } from "next/font/google"
-import "./globals.css"
+import { Inter, Ubuntu } from "next/font/google"
 import Head from "next/head"
+
+import "./globals.css"
 
 const ubuntuFont = Ubuntu({
   weight: ["300", "500", "700"],
