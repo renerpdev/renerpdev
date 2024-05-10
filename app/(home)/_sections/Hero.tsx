@@ -50,10 +50,10 @@ export const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler
               }
         }>
         <div className="container mx-auto  max-w-3xl lg:max-w-4xl w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-2 font-bold text-white tracking-tight leading-tight md:leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-2 text-white tracking-tight leading-tight md:leading-tight">
             {"Hello, I’m "} <span className={"text-cyan-600"}>René Ricardo</span>
           </h1>
-          <p className="mt-4 mb-6 leading-relaxed text-white/80 tracking-wide text-md md:text-xl lg:text-2xl mx-auto md:ml-0 max-w-md sm:max-w-lg md:max-w-2xl font-light">
+          <p className="mt-4 mb-6 !leading-relaxed text-white/80 tracking-wide text-md md:text-xl lg:text-2xl mx-auto md:ml-0 max-w-md sm:max-w-lg md:max-w-3xl font-light">
             {"I'm a "}
             <a
               onMouseEnter={linkEnter}
@@ -61,7 +61,7 @@ export const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler
               href="https://github.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600 "}>
+              className={"text-2xl md:text-3xl lg:text-4xl inline-flex text-white font-normal hover:text-cyan-600 "}>
               Software Engineer
             </a>{" "}
             and{" "}
@@ -71,7 +71,7 @@ export const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler
               href="https://dribbble.com/renerpdev"
               target="_blank"
               rel="noreferrer noopener"
-              className={"inline-flex text-white font-normal hover:text-cyan-600 "}>
+              className={"text-2xl md:text-3xl lg:text-4xl inline-flex text-white font-normal hover:text-cyan-600 "}>
               Design Enthusiast
             </a>
             , based in Montevideo, Uruguay. {"Let's connect and build something cool together!"}
