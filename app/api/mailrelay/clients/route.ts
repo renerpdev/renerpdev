@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   // Ensure secret key is provided in the request headers
   const headersList = headers()
   console.log("*** headersList ***", request.headers)
-  const providedSecretKey = headersList.get("x-webhook-secret")
+  const providedSecretKey = headersList.get("secret")
 
   if (!webhookSecretKey || !providedSecretKey || providedSecretKey !== webhookSecretKey) {
     return new Response("Invalid secret key", {
