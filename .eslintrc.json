@@ -20,7 +20,7 @@
             "case": "kebab", // forces to use kebab case for file names within "app" folder
             "target": "**/app/**",
             "excludes": ["_sections"], // any file in "_sections" folder is excluded.
-            "patterns": "^(page|layout|loading|error|not-found|route|template).tsx$" // file names must match the pattern
+            "patterns": "^(page|layout|loading|error|not-found|route|template).tsx?$" // file names must match the pattern
           },
           {
             "case": "pascal", // forces to use pascal case for file names within "components" folder
