@@ -1,13 +1,14 @@
 import { headers } from "next/headers"
-
+//
 // enum UserStatus {
 //   ACTIVE = "active"
 // }
+//
 // enum UserGroup {
 //   CLIENTS = 2,
 //   PROVIDERS = 3
 // }
-
+//
 // type Payload = {
 //   status: UserStatus
 //   email: string
@@ -19,7 +20,6 @@ export async function POST(request: Request) {
 
   // Ensure secret key is provided in the request headers
   const headersList = headers()
-  console.log("*** headersList ***", request.headers)
   const providedSecretKey = headersList.get("secret")
 
   if (!webhookSecretKey || !providedSecretKey || providedSecretKey !== webhookSecretKey) {
@@ -30,13 +30,18 @@ export async function POST(request: Request) {
 
   const payload = await request.json()
 
-  console.log("*** payload ***", payload)
+  console.log("*** payload ***", JSON.stringify(payload, undefined, 2))
 
-  if (!payload) {
+  console.log("*** QUESTIONS ***", JSON.stringify(payload.questions, undefined, 2))
+  console.log("*** ANSWERS ***", JSON.stringify(payload.answer.answers, undefined, 2))
+
+  if (!payload || !payload.form) {
     return new Response("Invalid payload", {
       status: 400
     })
   }
+
+  // const groupId = payload.url.contains("proveedores") ? [UserGroup.PROVIDERS] : [UserGroup.CLIENTS]
 
   // await fetch("https://renerp.ipzmarketing.com/api/v1/subscribers", {
   //   method: "POST",
@@ -46,9 +51,9 @@ export async function POST(request: Request) {
   //   body: {
   //     status: UserStatus.ACTIVE,
   //     email: payload.email,
-  //     group_ids: [UserGroup.CLIENTS]
+  //     group_ids: [groupId]
   //   } as Payload as any
   // })
 
-  return new Response("New subscriber added", { status: 200 })
+  return new Response("New subscriber added", { status: 201 })
 }
