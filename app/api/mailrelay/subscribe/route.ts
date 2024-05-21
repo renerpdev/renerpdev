@@ -9,12 +9,6 @@ enum UserGroup {
   PROVIDERS = 3
 }
 
-type Payload = {
-  status: UserStatus
-  email: string
-  group_ids: UserGroup[]
-}
-
 export async function POST(request: Request) {
   const webhookSecretKey = process.env.WEBHOOK_KEY
 
@@ -47,17 +41,25 @@ export async function POST(request: Request) {
     })
   }
 
-  await fetch("https://renerp.ipzmarketing.com/api/v1/subscribers", {
+  const mailRelayApiKey = process.env.MAIL_RELAY_API_KEY || ""
+  const response = await fetch("https://renerp.ipzmarketing.com/api/v1/subscribers", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "X-AUTH-TOKEN": mailRelayApiKey
     },
-    body: {
+    body: JSON.stringify({
       status: UserStatus.ACTIVE,
       email: email,
       group_ids: [groupId]
-    } as Payload as any
+    })
   })
+
+  if (!response.ok) {
+    return new Response(response.statusText, {
+      status: response.status
+    })
+  }
 
   return new Response(`New subscriber added to group ${groupId}`, { status: 201 })
 }
