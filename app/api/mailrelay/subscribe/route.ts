@@ -36,10 +36,10 @@ export async function POST(request: Request) {
     })
   }
 
-  const groupId = payload.form.url.contains("proveedores") ? UserGroup.PROVIDERS : UserGroup.CLIENTS
+  const groupId = payload.form.url.includes("proveedores") ? UserGroup.PROVIDERS : UserGroup.CLIENTS
   const emailQuestionId =
     groupId === UserGroup.PROVIDERS ? process.env.PROVIDER_EMAIL_QUESTION_ID : process.env.CLIENT_EMAIL_QUESTION_ID
-  const email = payload.form.answer.answers.find((answer: any) => answer.q === emailQuestionId)?.t
+  const email = payload.answer.answers.find((answer: any) => answer.q === emailQuestionId)?.t
 
   if (!email) {
     return new Response("", {
