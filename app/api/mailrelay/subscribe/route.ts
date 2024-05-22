@@ -64,9 +64,9 @@ export async function POST(request: Request) {
   }
 
   const groupName = Object.keys(UserGroup).find((key) => UserGroup[key as keyof typeof UserGroup] === groupId)
-  const message = `New subscriber added to group ${groupName}!`
+  const message = `New subscriber added to group ${groupName} with email ${email}!`
 
-  await sendEmail(message, "New subscriber!")
+  await sendEmail(message, "New subscriber for `ALaOrden`!")
 
   return new Response(message, { status: 201 })
 }
