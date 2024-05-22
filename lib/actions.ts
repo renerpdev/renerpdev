@@ -2,8 +2,8 @@
 
 import { Resend } from "resend"
 import { EmailTemplate } from "@/components"
-import { ReactElement } from "react"
 import { logger } from "@/logger"
+import { ReactElement } from "react"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const emailRecipient = process.env.EMAIL_RECIPIENT
@@ -15,15 +15,26 @@ export type DataType = {
   topics: Array<string>
 }
 
-export async function sendEmail(data: DataType) {
-  const { message, email, topics, name } = data
+export async function sendEmail(content: DataType | string, customSubject?: string) {
+  let subject = "",
+    react,
+    text = ""
 
   try {
+    if (typeof content === "string") {
+      text = content as string
+    } else {
+      const { message: description, email, topics, name } = content as DataType
+      react = EmailTemplate({ description, topics, email, name }) as ReactElement
+      subject = `Potential New Client: ${name} <${email}>`
+    }
+
     const { data, error } = await resend.emails.send({
       from: "Onboarding <onboarding@resend.dev>",
       to: [`${emailRecipient}`],
-      subject: `Potential New Client: ${name} <${email}>`,
-      react: EmailTemplate({ description: message, topics, email, name }) as ReactElement
+      subject: customSubject || subject,
+      react,
+      text
     })
 
     if (error) {

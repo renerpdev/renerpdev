@@ -1,4 +1,5 @@
 import { headers } from "next/headers"
+import { sendEmail } from "@/lib/actions"
 
 enum UserStatus {
   ACTIVE = "active"
@@ -42,7 +43,8 @@ export async function POST(request: Request) {
   }
 
   const mailRelayApiKey = process.env.MAIL_RELAY_API_KEY || ""
-  const response = await fetch("https://renerp.ipzmarketing.com/api/v1/subscribers", {
+  const mailRelayApiUrl = process.env.MAIL_RELAY_API_URL || ""
+  const response = await fetch(`${mailRelayApiUrl}/subscribers`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,5 +63,10 @@ export async function POST(request: Request) {
     })
   }
 
-  return new Response(`New subscriber added to group ${groupId}`, { status: 201 })
+  const groupName = Object.keys(UserGroup).find((key) => UserGroup[key as keyof typeof UserGroup] === groupId)
+  const message = `New subscriber added to group ${groupName}!`
+
+  await sendEmail(message, "New subscriber!")
+
+  return new Response(message, { status: 201 })
 }
