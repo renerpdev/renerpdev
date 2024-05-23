@@ -32,41 +32,37 @@ export async function POST(request: Request) {
   }
 
   const groupId = payload.form.url.includes("proveedores") ? UserGroup.PROVIDERS : UserGroup.CLIENTS
-  const emailQuestionId =
-    groupId === UserGroup.PROVIDERS ? process.env.PROVIDER_EMAIL_QUESTION_ID : process.env.CLIENT_EMAIL_QUESTION_ID
+  const emailQuestionId = payload.form.questions?.find((question: any) => question.questionType === "email")?._id
   const email = payload.answer.answers.find((answer: any) => answer.q === emailQuestionId)?.t
 
-  if (!email) {
-    return new Response("", {
-      status: 204
+  if (email) {
+    const mailRelayApiKey = process.env.MAIL_RELAY_API_KEY || ""
+    const mailRelayApiUrl = process.env.MAIL_RELAY_API_URL || ""
+    const response = await fetch(`${mailRelayApiUrl}/subscribers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": mailRelayApiKey
+      },
+      body: JSON.stringify({
+        status: UserStatus.ACTIVE,
+        email: email,
+        group_ids: [groupId]
+      })
     })
-  }
 
-  const mailRelayApiKey = process.env.MAIL_RELAY_API_KEY || ""
-  const mailRelayApiUrl = process.env.MAIL_RELAY_API_URL || ""
-  const response = await fetch(`${mailRelayApiUrl}/subscribers`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-AUTH-TOKEN": mailRelayApiKey
-    },
-    body: JSON.stringify({
-      status: UserStatus.ACTIVE,
-      email: email,
-      group_ids: [groupId]
-    })
-  })
-
-  if (!response.ok) {
-    return new Response(response.statusText, {
-      status: response.status
-    })
+    if (!response.ok) {
+      return new Response(response.statusText, {
+        status: response.status
+      })
+    }
   }
 
   const groupName = Object.keys(UserGroup).find((key) => UserGroup[key as keyof typeof UserGroup] === groupId)
-  const message = `New subscriber added to group ${groupName} with email ${email}!`
+  const title = email ? "AlaOrden - New Subscriber" : "AlaOrden - New Feedback"
+  const message = email ? `New subscriber added to group ${groupName} with email ${email}!` : ""
 
-  await sendEmail(message, "New subscriber for `ALaOrden`!")
+  await sendEmail(message, title)
 
   return new Response(message, { status: 201 })
 }
