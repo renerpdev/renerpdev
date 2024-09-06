@@ -11,6 +11,7 @@ const ITEMS_THRESHOLD = 2
 
 export const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   const sortedJobs = useMemo(() => WORK_EXPERIENCE.sort((a, b) => b.start.getTime() - a.start.getTime()), [])
+  const [showAll, setShowAll] = React.useState(false)
 
   function onMouseLeave() {
     setCursorText("")
@@ -29,7 +30,7 @@ export const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationH
         <Subtitle>{"Where I've worked so far"}</Subtitle>
         <div className="mt-10">
           <Timeline>
-            {sortedJobs.slice(0, ITEMS_THRESHOLD).map((job) => (
+            {sortedJobs.slice(0, showAll ? undefined : ITEMS_THRESHOLD).map((job) => (
               <div key={job.name} className={"space-y-2"}>
                 <div className="mb-2 space-y-1">
                   <p className={"flex items-center gap-x-2 flex-wrap"}>
@@ -74,25 +75,28 @@ export const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationH
           <>
             <div
               className={
-                "h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
+                showAll
+                  ? undefined
+                  : "h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
               }
             />
-            <div className={"text-center flex items-center"}>
-              <Divider />
-              <m.a
-                href="/assets/Rene_Ricardo_Resume.pdf"
-                target="_blank"
-                rel="noreferrer noopener"
-                title="Show More"
-                whileHover={{
-                  scale: 1.2,
-                  transition: { duration: 0.2 },
-                  type: "spring"
-                }}>
-                <AddCircleIcon className="h-8 w-8 text-gray-500" />
-              </m.a>
-              <Divider />
-            </div>
+            {!showAll && (
+              <div className={"text-center flex items-center"}>
+                <Divider />
+                <m.button
+                  title="Show More"
+                  whileHover={{
+                    scale: 1.2,
+                    transition: { duration: 0.2 },
+                    type: "spring"
+                  }}
+                  onClick={() => setShowAll(!showAll)}
+                  className={"text-gray-500 hover:text-gray-700 transition-colors"}>
+                  <AddCircleIcon className="h-8 w-8 text-gray-500" />
+                </m.button>
+                <Divider />
+              </div>
+            )}
           </>
           <m.a
             onMouseEnter={linkEnter}
