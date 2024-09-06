@@ -14,7 +14,7 @@ export const Testimonials = ({ setCursorText, setCursorVariant }: CursorAnimatio
           {TESTIMONIALS.map((testimonial) => (
             <div key={testimonial.name} className={"flex flex-col items-center space-y-8"}>
               <Image
-                src={testimonial.image}
+                src={testimonial.imageUrl}
                 alt={`Photo of ${testimonial.name}`}
                 width={80}
                 height={80}
