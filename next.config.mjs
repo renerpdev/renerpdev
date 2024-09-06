@@ -11,13 +11,8 @@ const nextConfig = {
         protocol: "https",
         hostname: "media.licdn.com",
         port: "",
-        pathname: '/dms/image/**',
-      },
-      {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
-        port: "",
-        pathname: '/**',}
+        pathname: "/dms/image/**"
+      }
     ]
   }
 }

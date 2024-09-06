@@ -19,13 +19,13 @@ async function getData(slug: string): Promise<Blog> {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const blog = await getData(params.slug)
+  const blog = (await getData(params.slug)) || {}
 
   return (
     <div className={"flex flex-col"}>
       <Link href={"/"}>{"<"} Back</Link>
       <Image
-        src={urlForImage(blog.image)}
+        src={urlForImage(blog.image) || ""}
         alt={blog.title}
         width={800}
         height={800}
