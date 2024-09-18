@@ -72,9 +72,9 @@ export const Hero = ({ setCursorText, setCursorVariant }: CursorAnimationHandler
               target="_blank"
               rel="noreferrer noopener"
               className={"text-2xl md:text-3xl lg:text-4xl inline-flex text-white font-normal hover:text-cyan-600 "}>
-              Design Enthusiast
-            </a>
-            , based in Montevideo, Uruguay. {"Let's connect and build something cool together!"}
+              Design Enthusiast,
+            </a>{" "}
+            based in Montevideo, Uruguay. {"Let's connect and build something cool together!"}
           </p>
           <div className={"inline-flex flex-col sm:flex-row gap-3 sm:gap-4 "}>
             <m.a

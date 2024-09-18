@@ -13,7 +13,7 @@ export const WORK_EXPERIENCE = [
       "Worked closely with backend teams to design and implement optimal APIs for frontend consumption.",
       "Integrated third-party services and APIs using NestJS HTTP module, facilitating data exchange and external communications."
     ],
-    tags: ["React", "NestJS", "Capacitor", "Typescript", "Javascript", "Vitest"]
+    tags: ["React", "NestJS", "Capacitor", "Typescript", "Javascript", "Vitest", "RTL", "React-Query", "Azure"]
   },
   {
     name: "Altimetrik",

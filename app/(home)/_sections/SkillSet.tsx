@@ -26,18 +26,18 @@ export const SkillSet = () => {
         <Title>My Skill Set</Title>
         <Subtitle>Why we should work together...</Subtitle>
         <m.div
-          className="flex items-center justify-center flex-wrap gap-6 w-full mt-12"
+          className="flex items-center justify-center flex-wrap gap-4 w-full mt-12"
           transition={{ staggerChildren: 0.07, delayChildren: 0.2 }}>
           {SKILL_SET.map((skill, index) => (
-            <m.div key={index} animate="start">
+            <m.ul key={index} animate="start">
               <Magnet>
-                <m.span
+                <m.li
                   className="text-base bg-white text-gray-lite skill-pill opacity-0 py-2 px-5 border-2 border-cyan-800 select-none rounded-full"
                   key={index}>
                   {skill}
-                </m.span>
+                </m.li>
               </Magnet>
-            </m.div>
+            </m.ul>
           ))}
         </m.div>
       </div>
