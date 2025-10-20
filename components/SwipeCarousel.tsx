@@ -7,7 +7,7 @@ import { type CursorAnimationHandler } from "@/hooks"
 const DRAG_BUFFER = 10
 
 const SPRING_OPTIONS = {
-  type: "spring",
+  type: "spring" as const,
   mass: 3,
   stiffness: 400,
   damping: 50

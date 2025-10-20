@@ -18,8 +18,9 @@ async function getData(slug: string): Promise<Blog> {
   return client.fetch(query)
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const blog = (await getData(params.slug)) || {}
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const blog = (await getData(slug)) || {}
 
   return (
     <div className={"flex flex-col"}>

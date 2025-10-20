@@ -87,8 +87,7 @@ export const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationH
                   title="Show More"
                   whileHover={{
                     scale: 1.2,
-                    transition: { duration: 0.2 },
-                    type: "spring"
+                    transition: { duration: 0.2, type: "spring" as const }
                   }}
                   onClick={() => setShowAll(!showAll)}
                   className={"text-gray-500 hover:text-gray-700 transition-colors"}>
@@ -104,7 +103,7 @@ export const Experience = ({ setCursorText, setCursorVariant }: CursorAnimationH
             href="/assets/Rene_Ricardo_Resume.pdf"
             target="_blank"
             rel="noreferrer noopener"
-            transition={{ type: "teen", stiffness: 400, damping: 10 }}
+            transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
             className={
               "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0"
             }>

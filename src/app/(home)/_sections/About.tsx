@@ -2,7 +2,7 @@ import { CheckmarkIcon } from "@sanity/icons"
 import React from "react"
 import { type CursorAnimationHandler } from "@/hooks"
 import { Title } from "@/components"
-import { KNOWN_TECHNOLOGIES } from "@/app/(home)/_sections/constants"
+import { KNOWN_TECHNOLOGIES } from "@/src/app/(home)/_sections/constants"
 
 export const About = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   function onMouseLeave() {

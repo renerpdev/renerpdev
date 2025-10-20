@@ -7,7 +7,7 @@ export type CursorAnimationHandler = {
   setCursorVariant: (variant: "default" | "link" | "action" | "drag") => void
 }
 
-export const useCursorAnimation = (reference: RefObject<HTMLElement>) => {
+export const useCursorAnimation = (reference: RefObject<HTMLElement | null>) => {
   const [cursorText, setCursorText] = useState("")
   const [cursorVariant, setCursorVariant] = useState("default")
   const { mouseXPosition, mouseYPosition } = useFollowPointer(reference)
@@ -26,7 +26,7 @@ export const useCursorAnimation = (reference: RefObject<HTMLElement>) => {
           x: mouseXPosition,
           y: mouseYPosition,
           transition: {
-            type: "spring",
+            type: "spring" as const,
             mass: 0.6
           }
         },
@@ -61,7 +61,7 @@ export const useCursorAnimation = (reference: RefObject<HTMLElement>) => {
       }
 
   const spring = {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 500,
     damping: 28
   }

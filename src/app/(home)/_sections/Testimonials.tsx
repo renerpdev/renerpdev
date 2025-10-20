@@ -2,7 +2,7 @@ import Image from "next/image"
 import React from "react"
 import { Subtitle, SwipeCarousel, Title } from "@/components"
 import { type CursorAnimationHandler } from "@/hooks"
-import { TESTIMONIALS } from "@/app/(home)/_sections/constants"
+import { TESTIMONIALS } from "@/src/app/(home)/_sections/constants"
 
 export const Testimonials = ({ setCursorText, setCursorVariant }: CursorAnimationHandler) => {
   return (

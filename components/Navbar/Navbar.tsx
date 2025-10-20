@@ -12,7 +12,7 @@ const backdrop = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at calc(100% - 60px) calc(0% + 60px))`,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 20,
       restDelta: 2
     }
@@ -20,7 +20,7 @@ const backdrop = {
   closed: {
     clipPath: "circle(0px at calc(100% - 60px) calc(0% + 60px))",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 250,
       damping: 30
     }
@@ -32,7 +32,7 @@ const toggle = {
     background: "radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%)",
     transform: "rotate(90deg)",
     transition: {
-      type: "spring"
+      type: "spring" as const
     }
   },
   closed: {
@@ -40,7 +40,7 @@ const toggle = {
     transform: "rotate(0deg)",
     transition: {
       delay: 0.3,
-      type: "spring"
+      type: "spring" as const
     }
   }
 }

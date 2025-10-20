@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   const webhookSecretKey = process.env.WEBHOOK_KEY
 
   // Ensure secret key is provided in the request headers
-  const headersList = headers()
+  const headersList = await headers()
   const providedSecretKey = headersList.get("secret")
 
   if (!webhookSecretKey || !providedSecretKey || providedSecretKey !== webhookSecretKey) {

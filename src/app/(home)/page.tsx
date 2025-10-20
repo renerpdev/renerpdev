@@ -8,7 +8,7 @@ import { useRef } from "react"
 import { About, Contact, Experience, Hero, Projects, SkillSet, Testimonials } from "./_sections"
 
 export default function Home() {
-  const reference = useRef(null)
+  const reference = useRef<HTMLElement>(null)
   const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation(reference)
 
   return (
