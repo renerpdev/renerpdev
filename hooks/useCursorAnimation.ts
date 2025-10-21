@@ -63,7 +63,7 @@ export const useCursorAnimation = (reference: RefObject<HTMLElement | null>) => 
   const spring = {
     type: "spring" as const,
     stiffness: 500,
-    damping: 28
+    damping: 50
   }
 
   return { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring }

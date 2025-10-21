@@ -15,7 +15,8 @@ h6 {
   font-family: var(--font-ubuntu);
 }
 
-.heading, .heading > * {
+.heading,
+.heading > * {
   font-family: var(--font-ubuntu);
 }
 

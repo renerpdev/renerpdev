@@ -22,6 +22,7 @@ export default [
       'node_modules/**',
       'out/**',
       'build/**',
+      'dist/**',
       '.vercel/**',
       '*.config.js',
       '*.config.mjs',
@@ -66,7 +67,7 @@ export default [
             {
               case: 'kebab',
               target: '**/app/**',
-              excludes: ['_sections'],
+              excludes: ['_sections', '_components'],
               patterns: '^(page|layout|loading|error|not-found|route|template).tsx?$',
             },
             {
@@ -77,6 +78,10 @@ export default [
             {
               case: 'pascal',
               target: '**/_sections/**.tsx',
+            },
+            {
+              case: 'pascal',
+              target: '**/_components/**.tsx',
             },
             {
               case: 'camel',
