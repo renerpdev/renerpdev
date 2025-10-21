@@ -1,14 +1,14 @@
 import { headers } from "next/headers"
 import { sendEmail } from "@/lib/actions"
 
-enum UserStatus {
-  ACTIVE = "active"
-}
+const UserStatus = {
+  ACTIVE: "active"
+} as const
 
-enum UserGroup {
-  CLIENTS = 2,
-  PROVIDERS = 3
-}
+const UserGroup = {
+  CLIENTS: 2,
+  PROVIDERS: 3
+} as const
 
 export async function POST(request: Request) {
   const webhookSecretKey = process.env.WEBHOOK_KEY

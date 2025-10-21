@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // We're using ESLint CLI directly with flat config, so skip Next.js's built-in linting
+    ignoreDuringBuilds: true
+  },
   images: {
     remotePatterns: [
       {

@@ -13,7 +13,10 @@ export const Magnet = ({ children }: PropsWithChildren) => {
 
   const handleMouse = (event: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = event
-    const { height, width, left, top } = (reference?.current as any)?.getBoundingClientRect()
+    const element = reference?.current as HTMLElement | null
+    if (!element) return
+
+    const { height, width, left, top } = element.getBoundingClientRect()
     const middleX = clientX - (left + width / 2)
     const middleY = clientY - (top + height / 2)
     setPosition({ x: middleX, y: middleY })
