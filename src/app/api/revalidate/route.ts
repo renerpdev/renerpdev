@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache"
+import { revalidateTag } from "next/cache"
 import { type NextRequest, NextResponse } from "next/server"
 
 /**
@@ -24,24 +24,27 @@ export async function POST(request: NextRequest) {
   const token = authHeader?.replace("Bearer ", "")
 
   if (!token || token !== process.env.SANITY_REVALIDATE_SECRET) {
-    return NextResponse.json(
-      { message: "Invalid or missing authorization token" },
-      { status: 401 }
-    )
+    return NextResponse.json({ message: "Invalid or missing authorization token" }, { status: 401 })
   }
 
   try {
-    // Revalidate the home page
-    // This will regenerate the static page on the next request
-    revalidatePath("/", "page")
+    // Log the revalidation request
+    console.log("[Revalidate] Starting revalidation at", new Date().toISOString())
+
+    // Revalidate all Sanity data fetches (this is the key!)
+    // This invalidates the cache for all Sanity queries
+    revalidateTag("sanity-content")
+
+    console.log("[Revalidate] Successfully revalidated sanity-content tag")
 
     return NextResponse.json({
       revalidated: true,
-      message: "Home page revalidated successfully",
-      timestamp: new Date().toISOString()
+      message: "Home page and Sanity data revalidated successfully",
+      timestamp: new Date().toISOString(),
+      tags: ["sanity-content"]
     })
   } catch (error) {
-    console.error("Error revalidating:", error)
+    console.error("[Revalidate] Error revalidating:", error)
     return NextResponse.json(
       {
         message: "Error revalidating page",
