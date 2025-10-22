@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: var(--font-inter);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-ubuntu);
+}
+
+.heading,
+.heading > * {
+  font-family: var(--font-ubuntu);
+}
+
+.parallax {
+  overflow: hidden;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax .scroller {
+  font-weight: 500;
+  text-transform: uppercase;
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.parallax span {
+  display: block;
+}
+
+.parallax span::after {
+  content: " • ";
+}

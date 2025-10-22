@@ -8,7 +8,7 @@ const svgVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      type: "spring"
+      type: "spring" as const
     }
   }
 }

@@ -1,8 +1,8 @@
 import useMouse from "@react-hook/mouse-position"
 import { RefObject } from "react"
 
-export function useFollowPointer(reference: RefObject<HTMLElement>) {
-  const mouse = useMouse(reference, {
+export function useFollowPointer(reference: RefObject<HTMLElement | null>) {
+  const mouse = useMouse(reference as RefObject<HTMLElement>, {
     enterDelay: 100,
     leaveDelay: 100
   })
