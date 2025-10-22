@@ -90,12 +90,12 @@ export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
           <div className={"inline-flex flex-col sm:flex-row gap-3 sm:gap-4 "}>
             {hero.primaryCta && (
               <m.a
-                onMouseEnter={contactEnter}
-                onMouseLeave={onMouseLeave}
+                onMouseEnter={isMobile ? undefined : contactEnter}
+                onMouseLeave={isMobile ? undefined : onMouseLeave}
                 href={hero.primaryCta.link}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 1 }}
-                transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
+                whileHover={isMobile ? undefined : { scale: 1.1 }}
+                whileTap={isMobile ? undefined : { scale: 1 }}
+                transition={isMobile ? undefined : { type: "spring" as const, stiffness: 400, damping: 10 }}
                 className={
                   "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center items-center bg-cyan-600  px-6 sm:px-8 py-3 rounded-3xl border-none"
                 }>
@@ -105,14 +105,14 @@ export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
             )}
             {hero.secondaryCta?.file?.file?.asset?.url && (
               <m.a
-                onMouseEnter={downloadEnter}
-                onMouseLeave={onMouseLeave}
+                onMouseEnter={isMobile ? undefined : downloadEnter}
+                onMouseLeave={isMobile ? undefined : onMouseLeave}
                 href={hero.secondaryCta.file.file.asset.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 1 }}
-                transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
+                whileHover={isMobile ? undefined : { scale: 1.1 }}
+                whileTap={isMobile ? undefined : { scale: 1 }}
+                transition={isMobile ? undefined : { type: "spring" as const, stiffness: 400, damping: 10 }}
                 className={
                   "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center bg-white items-center px-6 sm:px-8 py-3 rounded-3xl border-none"
                 }>

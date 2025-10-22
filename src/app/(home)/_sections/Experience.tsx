@@ -1,7 +1,7 @@
 "use client"
 
 import { AddCircleIcon, CheckmarkCircleIcon } from "@sanity/icons"
-import { type CursorAnimationHandler } from "@/hooks"
+import { type CursorAnimationHandler, useBreakpoint } from "@/hooks"
 import React from "react"
 import { m } from "framer-motion"
 import { ExternalLink, Subtitle, Timeline, Title } from "@/components"
@@ -16,6 +16,7 @@ interface ExperienceProps extends CursorAnimationHandler {
 
 export const Experience = ({ setCursorText, setCursorVariant, experienceSection }: ExperienceProps) => {
   const [showAll, setShowAll] = React.useState(false)
+  const { isMobile } = useBreakpoint()
 
   function onMouseLeave() {
     setCursorText("")
@@ -99,10 +100,14 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
                 <Divider />
                 <m.button
                   title="Show More"
-                  whileHover={{
-                    scale: 1.2,
-                    transition: { duration: 0.2, type: "spring" as const }
-                  }}
+                  whileHover={
+                    isMobile
+                      ? undefined
+                      : {
+                          scale: 1.2,
+                          transition: { duration: 0.2, type: "spring" as const }
+                        }
+                  }
                   onClick={() => setShowAll(!showAll)}
                   className={"text-gray-500 hover:text-gray-700 transition-colors"}>
                   <AddCircleIcon className="h-8 w-8 text-gray-500" />

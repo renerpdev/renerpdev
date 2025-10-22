@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { sendEmail } from "@/lib/actions"
 import { useFormStatus } from "react-dom"
 import { m } from "framer-motion"
-import { type CursorAnimationHandler } from "@/hooks"
+import { type CursorAnimationHandler, useBreakpoint } from "@/hooks"
 import { RocketIcon, Subtitle, Title } from "@/components"
 import type { ContactSection } from "@/sanity/models"
 
@@ -109,6 +109,7 @@ const Submit = ({
   setCursorVariant
 }: CursorAnimationHandler & { submitButtonLabel: string }) => {
   const { pending } = useFormStatus()
+  const { isMobile } = useBreakpoint()
 
   function onMouseLeave() {
     setCursorText("")
@@ -122,11 +123,11 @@ const Submit = ({
 
   return (
     <m.button
-      onMouseEnter={contactEnter}
-      onMouseLeave={onMouseLeave}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 1 }}
-      transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
+      onMouseEnter={isMobile ? undefined : contactEnter}
+      onMouseLeave={isMobile ? undefined : onMouseLeave}
+      whileHover={isMobile ? undefined : { scale: 1.1 }}
+      whileTap={isMobile ? undefined : { scale: 1 }}
+      transition={isMobile ? undefined : { type: "spring" as const, stiffness: 400, damping: 10 }}
       type="submit"
       className="max-w-sm mx-auto text-lg flex justify-center text-white items-center bg-cyan-600 px-8 py-3 rounded-3xl border-none disabled:pointer-events-none disabled:opacity-50"
       disabled={pending}>

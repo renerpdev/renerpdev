@@ -1,6 +1,9 @@
+"use client"
+
 import * as React from "react"
 import { PropsWithChildren } from "react"
 import { m } from "framer-motion"
+import { useBreakpoint } from "@/hooks"
 
 const variants = {
   open: {
@@ -22,6 +25,8 @@ const variants = {
 }
 
 export const MenuItem = ({ link, children, onClick }: { link: string; onClick?: () => void } & PropsWithChildren) => {
+  const { isMobile } = useBreakpoint()
+
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     setTimeout(() => (window.location.href = link), 250)
@@ -33,11 +38,9 @@ export const MenuItem = ({ link, children, onClick }: { link: string; onClick?: 
   return (
     <m.li
       variants={variants}
-      whileHover={{
-        scale: 1.5
-      }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 800, damping: 40 }}>
+      whileHover={isMobile ? undefined : { scale: 1.5 }}
+      whileTap={isMobile ? undefined : { scale: 0.95 }}
+      transition={isMobile ? undefined : { type: "spring", stiffness: 800, damping: 40 }}>
       <a
         href={link}
         onClick={handleClick}

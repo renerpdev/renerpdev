@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import plugin from "tailwindcss/plugin"
 
 const config: Config = {
   content: [
@@ -17,6 +18,13 @@ const config: Config = {
       }
     }
   },
-  plugins: [require("@tailwindcss/typography")]
+  plugins: [
+    require("@tailwindcss/typography"),
+    // Plugin to make hover styles only apply on devices that support hover
+    plugin(function ({ addVariant }) {
+      // Override default hover variant to only apply on devices with hover capability
+      addVariant("hover", "@media (hover: hover) and (pointer: fine) { &:hover }")
+    })
+  ]
 }
 export default config

@@ -1,6 +1,8 @@
+"use client"
+
 import React from "react"
 import { m } from "framer-motion"
-import { type CursorAnimationHandler } from "@/hooks"
+import { type CursorAnimationHandler, useBreakpoint } from "@/hooks"
 import type { CallToActionSection } from "@/sanity/models"
 
 interface CallToActionProps extends CursorAnimationHandler {
@@ -8,6 +10,8 @@ interface CallToActionProps extends CursorAnimationHandler {
 }
 
 export const CallToAction = ({ setCursorText, setCursorVariant, callToActionSection }: CallToActionProps) => {
+  const { isMobile } = useBreakpoint()
+
   function onMouseLeave() {
     setCursorText("")
     setCursorVariant("default")
@@ -33,11 +37,11 @@ export const CallToAction = ({ setCursorText, setCursorVariant, callToActionSect
           <p className={"text-base md:text-lg tracking-wider max-w-2xl"}>{callToActionSection.subtitle}</p>
         )}
         <m.a
-          onMouseEnter={contactEnter}
-          onMouseLeave={onMouseLeave}
-          whileHover={{ scale: 1.1, rotate: 2 }}
-          whileTap={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          onMouseEnter={isMobile ? undefined : contactEnter}
+          onMouseLeave={isMobile ? undefined : onMouseLeave}
+          whileHover={isMobile ? undefined : { scale: 1.1, rotate: 2 }}
+          whileTap={isMobile ? undefined : { scale: 1 }}
+          transition={isMobile ? undefined : { type: "spring", stiffness: 400, damping: 10 }}
           href={callToActionSection.cta.link}
           className={
             "rounded-full ring-2 ring-white px-8 py-3 hover:bg-white hover:text-cyan-950 transition-colors whitespace-nowrap"
