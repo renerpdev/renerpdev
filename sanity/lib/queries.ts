@@ -41,18 +41,7 @@ export const heroQuery = groq`
     subheader,
     primaryCta,
     secondaryCta{
-      text,
-      file->{
-        _id,
-        title,
-        category,
-        file{
-          asset->{
-            _id,
-            url
-          }
-        }
-      }
+      text
     }
   }
 `
@@ -187,19 +176,9 @@ export const experienceSectionQuery = groq`
         color
       }
     },
+    maxDisplayedItems,
     cta{
-      text,
-      file->{
-        _id,
-        title,
-        category,
-        file{
-          asset->{
-            _id,
-            url
-          }
-        }
-      }
+      text
     }
   }
 `
@@ -421,5 +400,101 @@ export const testimonialsQuery = groq`
       }
     },
     profileUrl
+  }
+`
+
+// Resume Page Query (Singleton)
+export const resumePageQuery = groq`
+  *[_type == "resumePage"][0]{
+    _id,
+    pageTitle,
+    pageDescription,
+    profileImage{
+      asset->{
+        _id,
+        url
+      }
+    },
+    fullName,
+    jobTitle,
+    aboutText,
+    experiences[]->{
+      _id,
+      company,
+      role,
+      employmentType,
+      workMode,
+      startDate,
+      endDate,
+      tasks,
+      technologies[]->{
+        _id,
+        name,
+        slug,
+        color
+      }
+    },
+    education[]->{
+      _id,
+      degree,
+      institution,
+      location,
+      startDate,
+      endDate,
+      description
+    },
+    softSkills[]->{
+      _id,
+      name,
+      category,
+      proficiencyLevel
+    },
+    technicalSkills[]->{
+      _id,
+      name,
+      category,
+      proficiencyLevel
+    },
+    technologies[]->{
+      _id,
+      name,
+      slug,
+      color
+    },
+    projects[]->{
+      _id,
+      title,
+      description,
+      year,
+      githubRepo,
+      liveLink
+    },
+    languages,
+    contactLinks,
+    currentPdf->{
+      _id,
+      title,
+      category,
+      file{
+        asset->{
+          _id,
+          url
+        }
+      }
+    },
+    pdfGeneratedAt
+  }
+`
+
+// Education Query
+export const educationQuery = groq`
+  *[_type == "education"] | order(startDate desc){
+    _id,
+    degree,
+    institution,
+    location,
+    startDate,
+    endDate,
+    description
   }
 `

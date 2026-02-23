@@ -2,20 +2,22 @@
 
 import { AddCircleIcon, CheckmarkCircleIcon } from "@sanity/icons"
 import { type CursorAnimationHandler } from "@/hooks"
-import React from "react"
+import { useState } from "react"
 import { m } from "framer-motion"
 import { ExternalLink, Subtitle, Timeline, Title } from "@/components"
 import { format } from "date-fns"
 import type { ExperienceSection } from "@/sanity/models"
+import { useResumeDownload } from "@/hooks/useResumeDownload"
 
-const ITEMS_THRESHOLD = 2
+const DEFAULT_MAX_ITEMS = 2
 
 interface ExperienceProps extends CursorAnimationHandler {
   experienceSection: ExperienceSection | null
+  resumePdfUrl: string | null
 }
 
-export const Experience = ({ setCursorText, setCursorVariant, experienceSection }: ExperienceProps) => {
-  const [showAll, setShowAll] = React.useState(false)
+export const Experience = ({ setCursorText, setCursorVariant, experienceSection, resumePdfUrl }: ExperienceProps) => {
+  const [showAll, setShowAll] = useState(false)
 
   function onMouseLeave() {
     setCursorText("")
@@ -27,9 +29,14 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
     setCursorVariant("link")
   }
 
+  const { handleDownload, isDownloading } = useResumeDownload(resumePdfUrl)
+
   const experiences = (experienceSection?.experiences || []).sort((a, b) => {
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   })
+
+  const maxItems = experienceSection?.maxDisplayedItems ?? DEFAULT_MAX_ITEMS
+  const hasMoreExperiences = experiences.length > maxItems
 
   return (
     <div className="flex justify-center items-center  h-full mx-auto max-w-3xl lg:max-w-4xl w-full">
@@ -38,7 +45,7 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
         {experienceSection?.subtitle && <Subtitle>{experienceSection.subtitle}</Subtitle>}
         <div className="mt-10">
           <Timeline>
-            {experiences.slice(0, showAll ? undefined : ITEMS_THRESHOLD).map((job) => (
+            {experiences.slice(0, showAll ? undefined : maxItems).map((job) => (
               <div key={job._id} className={"space-y-2"}>
                 <div className="mb-2 space-y-1">
                   <p className={"flex items-center gap-x-2 flex-wrap"}>
@@ -86,15 +93,11 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
               </div>
             ))}
           </Timeline>
-          <>
-            <div
-              className={
-                showAll
-                  ? undefined
-                  : "h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
-              }
-            />
-            {!showAll && (
+          {hasMoreExperiences && !showAll && (
+            <>
+              <div
+                className="h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
+              />
               <div className={"text-center flex items-center"}>
                 <Divider />
                 <m.button
@@ -103,28 +106,29 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
                     scale: 1.2,
                     transition: { duration: 0.2, type: "spring" as const }
                   }}
-                  onClick={() => setShowAll(!showAll)}
+                  onClick={() => setShowAll(true)}
                   className={"text-gray-500 hover:text-gray-700 transition-colors"}>
-                  <AddCircleIcon className="h-8 w-8 text-gray-500" />
+                  <AddCircleIcon className="h-8 w-8" />
                 </m.button>
                 <Divider />
               </div>
-            )}
-          </>
-          {experienceSection?.cta?.file?.file?.asset?.url && (
-            <m.a
+            </>
+          )}
+          {experienceSection?.cta && (
+            <m.button
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              href={experienceSection.cta.file.file.asset.url}
-              target="_blank"
-              rel="noreferrer noopener"
+              onClick={handleDownload}
+              disabled={isDownloading}
               transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
               className={
-                "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0"
+                "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0 cursor-pointer disabled:opacity-50"
               }>
-              <span className={"text-cyan-950"}>{experienceSection.cta.text}</span>
+              <span className={"text-cyan-950"}>
+                {isDownloading ? "Downloading..." : experienceSection.cta.text}
+              </span>
               <ExternalLink />
-            </m.a>
+            </m.button>
           )}
         </div>
       </div>

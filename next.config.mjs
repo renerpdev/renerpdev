@@ -3,6 +3,9 @@ const nextConfig = {
   // Standalone output for optimized production deployments
   output: "standalone",
 
+  // Prevent bundling of Puppeteer/Chromium in serverless functions
+  serverExternalPackages: ["puppeteer-core", "@sparticuz/chromium", "puppeteer"],
+
   eslint: {
     // We're using ESLint CLI directly with flat config, so skip Next.js's built-in linting
     ignoreDuringBuilds: true

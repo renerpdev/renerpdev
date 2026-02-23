@@ -16,7 +16,9 @@ import {
   skillsQuery,
   skillsByCategoryQuery,
   testimonialSectionQuery,
-  testimonialsQuery
+  testimonialsQuery,
+  resumePageQuery,
+  educationQuery
 } from "./queries"
 import type {
   Navbar,
@@ -33,7 +35,9 @@ import type {
   SkillsSection,
   Skill,
   TestimonialSection,
-  Testimonial
+  Testimonial,
+  ResumePage,
+  Education
 } from "../models"
 
 // Fetch options for Sanity queries
@@ -125,4 +129,14 @@ export async function getTestimonialSection(): Promise<TestimonialSection | null
 // Testimonials
 export async function getTestimonials(): Promise<Testimonial[]> {
   return await client.fetch(testimonialsQuery, {}, fetchOptions)
+}
+
+// Resume Page
+export async function getResumePage(): Promise<ResumePage | null> {
+  return await client.fetch(resumePageQuery, {}, fetchOptions)
+}
+
+// Education
+export async function getEducation(): Promise<Education[]> {
+  return await client.fetch(educationQuery, {}, fetchOptions)
 }

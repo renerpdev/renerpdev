@@ -16,6 +16,8 @@ import testimonialSection from "./schemas/testimonialSection"
 import callToActionSection from "./schemas/callToActionSection"
 import contactSection from "./schemas/contactSection"
 import footer from "./schemas/footer"
+import education from "./schemas/education"
+import resumePage from "./schemas/resumePage"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -35,6 +37,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonialSection,
     callToActionSection,
     contactSection,
-    footer
+    footer,
+    education,
+    resumePage
   ]
 }

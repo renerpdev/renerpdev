@@ -6,12 +6,14 @@ import { MouseIcon, RocketIcon } from "@/components"
 import { type CursorAnimationHandler, useBreakpoint } from "@/hooks"
 import type { Hero as HeroType } from "@/sanity/models"
 import { PortableText } from "@portabletext/react"
+import { useResumeDownload } from "@/hooks/useResumeDownload"
 
 interface HeroProps extends CursorAnimationHandler {
   hero: HeroType | null
+  resumePdfUrl: string | null
 }
 
-export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
+export const Hero = ({ setCursorText, setCursorVariant, hero, resumePdfUrl }: HeroProps) => {
   const viewport = useViewportDimensions()
   const gradientX = useMotionValue(0.8)
   const gradientY = useMotionValue(0.7)
@@ -22,6 +24,8 @@ export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
   )
 
   const { isMobile } = useBreakpoint()
+
+  const { handleDownload, isDownloading } = useResumeDownload(resumePdfUrl)
 
   if (!hero) {
     return null
@@ -103,23 +107,22 @@ export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
                 <RocketIcon className="text-white" />
               </m.a>
             )}
-            {hero.secondaryCta?.file?.file?.asset?.url && (
-              <m.a
+            {hero.secondaryCta && (
+              <m.button
                 onMouseEnter={downloadEnter}
                 onMouseLeave={onMouseLeave}
-                href={hero.secondaryCta.file.file.asset.url}
-                target="_blank"
-                rel="noreferrer noopener"
+                onClick={handleDownload}
+                disabled={isDownloading}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 1 }}
                 transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
                 className={
-                  "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center bg-white items-center px-6 sm:px-8 py-3 rounded-3xl border-none"
+                  "max-w-sm mx-auto md:ml-0 text-md sm:text-lg flex md:inline-flex justify-center bg-white items-center px-6 sm:px-8 py-3 rounded-3xl border-none cursor-pointer disabled:opacity-50"
                 }>
                 <span className={"bg-gradient-to-r from-cyan-950 to-cyan-700 bg-clip-text text-transparent"}>
-                  {hero.secondaryCta.text}
+                  {isDownloading ? "Downloading..." : hero.secondaryCta.text}
                 </span>
-              </m.a>
+              </m.button>
             )}
           </div>
         </div>
