@@ -35,26 +35,24 @@ export default defineType({
       validation: (Rule) => Rule.required()
     }),
     defineField({
+      name: "maxDisplayedItems",
+      title: "Max Displayed Items",
+      type: "number",
+      description: "Maximum number of experiences to show before truncating. Remaining items are accessible via the full resume.",
+      initialValue: 2,
+      validation: (Rule) => Rule.min(1).integer()
+    }),
+    defineField({
       name: "cta",
       title: "Call to Action Button",
       type: "object",
-      description: 'Optional CTA button at the bottom of the Experience section (e.g., "See Full Resume")',
+      description: 'Optional CTA button at the bottom of the Experience section (e.g., "Download Resume")',
       fields: [
         defineField({
           name: "text",
           title: "Button Text",
           type: "string",
-          description: 'Text to display on the button (e.g., "See Full Resume")'
-        }),
-        defineField({
-          name: "file",
-          title: "File",
-          type: "reference",
-          description: "Select a file from Media Library (e.g., Resume PDF)",
-          to: [{ type: "media" }],
-          options: {
-            filter: 'category != "image"'
-          }
+          description: 'Text to display on the button (e.g., "Download Resume")'
         })
       ]
     })

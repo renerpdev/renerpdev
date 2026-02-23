@@ -1,5 +1,4 @@
 import type { Experience } from "./experience"
-import type { Media } from "./media"
 
 export interface ExperienceSection {
   _id: string
@@ -7,8 +6,8 @@ export interface ExperienceSection {
   title: string
   subtitle?: string
   experiences?: Experience[]
+  maxDisplayedItems?: number
   cta?: {
     text: string
-    file?: Media
   }
 }

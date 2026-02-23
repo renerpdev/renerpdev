@@ -13,6 +13,5 @@ export interface Hero {
   }
   secondaryCta?: {
     text: string
-    file?: Media
   }
 }

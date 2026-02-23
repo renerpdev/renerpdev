@@ -91,16 +91,6 @@ export default defineType({
           type: "string",
           description: 'Text to display on the button (e.g., "Download Resume")',
           validation: (Rule) => Rule.required()
-        }),
-        defineField({
-          name: "file",
-          title: "File",
-          type: "reference",
-          description: "Select a file from Media Library",
-          to: [{ type: "media" }],
-          options: {
-            filter: 'category != "image"'
-          }
         })
       ]
     })
