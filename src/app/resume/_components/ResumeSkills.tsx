@@ -1,13 +1,12 @@
-import type { Skill, Tag } from "@/sanity/models"
+import type { Skill } from "@/sanity/models"
 
 interface ResumeSkillsProps {
   title: string
   skills?: Skill[]
-  tags?: Tag[]
 }
 
-export function ResumeSkills({ title, skills, tags }: ResumeSkillsProps) {
-  const items = skills?.map((s) => s.name) || tags?.map((t) => t.name) || []
+export function ResumeSkills({ title, skills }: ResumeSkillsProps) {
+  const items = skills?.map((s) => s.name) || []
 
   if (items.length === 0) return null
 

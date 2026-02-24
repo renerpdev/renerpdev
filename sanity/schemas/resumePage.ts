@@ -75,21 +75,26 @@ export default defineType({
       title: "Soft Skills",
       type: "array",
       description: "Select soft skills to show on the resume",
-      of: [{ type: "reference", to: [{ type: "skill" }] }]
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "skill" }],
+          options: { filter: 'category == "soft"' }
+        }
+      ]
     }),
     defineField({
       name: "technicalSkills",
       title: "Technical Skills (Hard Skills)",
       type: "array",
       description: "Select technical/hard skills to show on the resume",
-      of: [{ type: "reference", to: [{ type: "skill" }] }]
-    }),
-    defineField({
-      name: "technologies",
-      title: "Technologies",
-      type: "array",
-      description: "Select technology tags to list on the resume",
-      of: [{ type: "reference", to: [{ type: "tag" }] }]
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "skill" }],
+          options: { filter: 'category == "hard"' }
+        }
+      ]
     }),
     defineField({
       name: "projects",

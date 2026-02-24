@@ -117,7 +117,7 @@ export async function getSkills(): Promise<Skill[]> {
   return await client.fetch(skillsQuery, {}, fetchOptions)
 }
 
-export async function getSkillsByCategory(category: "soft" | "technology"): Promise<Skill[]> {
+export async function getSkillsByCategory(category: "soft" | "hard"): Promise<Skill[]> {
   return await client.fetch(skillsByCategoryQuery(category), {}, fetchOptions)
 }
 

@@ -199,13 +199,6 @@ export default async function ResumePrintPage() {
           </SidebarSection>
         )}
 
-        {/* Technologies */}
-        {resumePage.technologies && resumePage.technologies.length > 0 && (
-          <SidebarSection title="Technologies">
-            <InlineList items={resumePage.technologies.map((t) => t.name)} />
-          </SidebarSection>
-        )}
-
         {/* Languages */}
         {resumePage.languages && resumePage.languages.length > 0 && (
           <SidebarSection title="Languages">

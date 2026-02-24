@@ -20,7 +20,7 @@ export default defineType({
       options: {
         list: [
           { title: "Soft Skills", value: "soft" },
-          { title: "Technologies", value: "technology" }
+          { title: "Hard Skills", value: "hard" }
         ]
       },
       validation: (Rule) => Rule.required()
