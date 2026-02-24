@@ -83,10 +83,6 @@ export function ResumeClient({ resumePage }: ResumeClientProps) {
               <ResumeSkills title="Hard Skills" skills={resumePage.technicalSkills} />
             )}
 
-            {resumePage.technologies && resumePage.technologies.length > 0 && (
-              <ResumeSkills title="Technologies" tags={resumePage.technologies} />
-            )}
-
             {resumePage.languages && resumePage.languages.length > 0 && (
               <ResumeLanguages languages={resumePage.languages} />
             )}

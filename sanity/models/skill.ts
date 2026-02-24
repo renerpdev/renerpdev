@@ -2,7 +2,7 @@ export interface Skill {
   _id: string
   _type: "skill"
   name: string
-  category: "soft" | "technology"
+  category: "soft" | "hard"
   proficiencyLevel?: number
   icon?: {
     asset: {

@@ -327,7 +327,7 @@ export const skillsQuery = groq`
   }
 `
 
-export const skillsByCategoryQuery = (category: "soft" | "technology") => groq`
+export const skillsByCategoryQuery = (category: "soft" | "hard") => groq`
   *[_type == "skill" && category == "${category}"] | order(name asc){
     _id,
     name,
@@ -454,12 +454,6 @@ export const resumePageQuery = groq`
       name,
       category,
       proficiencyLevel
-    },
-    technologies[]->{
-      _id,
-      name,
-      slug,
-      color
     },
     projects[]->{
       _id,

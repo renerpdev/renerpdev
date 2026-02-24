@@ -1,7 +1,6 @@
 import type { Experience } from "./experience"
 import type { Education } from "./education"
 import type { Skill } from "./skill"
-import type { Tag } from "./tag"
 import type { Project } from "./project"
 import type { Media } from "./media"
 
@@ -35,7 +34,6 @@ export interface ResumePage {
   education?: Education[]
   softSkills?: Skill[]
   technicalSkills?: Skill[]
-  technologies?: Tag[]
   projects?: Project[]
   languages?: ResumeLanguage[]
   contactLinks?: ResumeContactLink[]
