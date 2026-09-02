@@ -364,17 +364,20 @@ export const testimonialSectionQuery = groq`
       title,
       company,
       quote,
-      profileImage->{
-        _id,
-        title,
-        category,
-        image{
+      "profileImage": select(
+        defined(profileImage.asset) => profileImage{
+          asset->{
+            _id,
+            url
+          }
+        },
+        profileImage->image{
           asset->{
             _id,
             url
           }
         }
-      },
+      ),
       profileUrl
     }
   }
@@ -388,17 +391,20 @@ export const testimonialsQuery = groq`
     title,
     company,
     quote,
-    profileImage->{
-      _id,
-      title,
-      category,
-      image{
+    "profileImage": select(
+      defined(profileImage.asset) => profileImage{
+        asset->{
+          _id,
+          url
+        }
+      },
+      profileImage->image{
         asset->{
           _id,
           url
         }
       }
-    },
+    ),
     profileUrl
   }
 `

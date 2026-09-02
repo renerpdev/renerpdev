@@ -1,5 +1,3 @@
-import type { Media } from "./media"
-
 export interface Testimonial {
   _id: string
   _type: "testimonial"
@@ -7,6 +5,11 @@ export interface Testimonial {
   title: string
   company: string
   quote: string
-  profileImage?: Media
+  profileImage?: {
+    asset: {
+      _id: string
+      url: string
+    }
+  }
   profileUrl?: string
 }

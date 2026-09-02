@@ -110,10 +110,28 @@ Skills are categorized as either "soft" or "technology".
 
 ### Content Revalidation
 
-- Production content is revalidated on demand by the **Portfolio Revalidation** webhook
-- The generated resume PDF stays cached until the published **Resume Page** document changes
-- Configure the webhook for **Update** with this filter:
-  `_type == "resumePage" && !delta::changedOnly((currentPdf, pdfGeneratedAt))`
+- Production content is revalidated on demand and remains cached between webhook events
+- **Portfolio Revalidation** handles only the published **Resume Page** document and clears its generated PDF:
+  - Trigger: **Update**
+  - Filter: `_type == "resumePage" && !delta::changedOnly((currentPdf, pdfGeneratedAt))`
+- **Portfolio Content Revalidation** handles homepage and content collections at `/api/revalidate/content`:
+  - Trigger: **Create**, **Update**, and **Delete**
+  - Filter:
+    ```groq
+    _type in [
+      "navbar", "hero", "about", "marqueeSection", "callToActionSection",
+      "contactSection", "footer", "experienceSection", "experience",
+      "projectsSection", "project", "skillsSection", "skill",
+      "testimonialSection", "testimonial", "tag", "education"
+    ] || (_type == "media" && coalesce(after().category, before().category) != "resume")
+    ```
+  - Projection:
+    ```groq
+    {
+      "_id": coalesce(after()._id, before()._id),
+      "_type": coalesce(after()._type, before()._type)
+    }
+    ```
 - Changes to referenced experience, education, skill, or project documents do not invalidate the resume PDF
 - In development mode, you can refresh immediately
 
@@ -123,6 +141,7 @@ Skills are categorized as either "soft" or "technology".
 - Recommended formats: JPG, PNG, WebP
 - Profile images work best as square (1:1 aspect ratio)
 - Project images work best as landscape (16:9 aspect ratio)
+- Testimonial profile images are uploaded directly on each **Testimonials** document. After deploying this schema change, run `pnpm migrate:testimonial-profile-images` with production Sanity environment variables to preserve legacy Media Library references.
 
 ### Ordering
 

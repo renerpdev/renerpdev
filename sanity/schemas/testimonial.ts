@@ -34,11 +34,10 @@ export default defineType({
     defineField({
       name: "profileImage",
       title: "Profile Image",
-      type: "reference",
-      description: "Select an image from the media library",
-      to: [{ type: "media" }],
+      type: "image",
+      description: "Upload a profile image directly for this testimonial",
       options: {
-        filter: 'category == "image"'
+        hotspot: true
       }
     }),
     defineField({
@@ -51,7 +50,7 @@ export default defineType({
     select: {
       title: "name",
       subtitle: "company",
-      media: "profileImage.image"
+      media: "profileImage"
     },
     prepare({ title, subtitle, media }) {
       return {
