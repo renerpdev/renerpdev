@@ -32,7 +32,7 @@ export default defineType({
       validation: (Rule) => Rule.required()
     }),
     defineField({
-      name: "profileImage",
+      name: "profilePhoto",
       title: "Profile Image",
       type: "image",
       description: "Upload a profile image directly for this testimonial",
@@ -50,7 +50,7 @@ export default defineType({
     select: {
       title: "name",
       subtitle: "company",
-      media: "profileImage"
+      media: "profilePhoto"
     },
     prepare({ title, subtitle, media }) {
       return {
