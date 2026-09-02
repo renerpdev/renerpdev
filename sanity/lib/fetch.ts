@@ -136,6 +136,10 @@ export async function getResumePage(): Promise<ResumePage | null> {
   return await client.fetch(resumePageQuery, {}, fetchOptions)
 }
 
+export async function getResumePageUncached(): Promise<ResumePage | null> {
+  return await client.fetch(resumePageQuery, {}, { cache: "no-store" })
+}
+
 // Education
 export async function getEducation(): Promise<Education[]> {
   return await client.fetch(educationQuery, {}, fetchOptions)

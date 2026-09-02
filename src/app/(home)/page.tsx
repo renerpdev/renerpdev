@@ -9,8 +9,7 @@ import {
   getExperienceSection,
   getProjectsSection,
   getSkillsSection,
-  getTestimonialSection,
-  getResumePage
+  getTestimonialSection
 } from "@/sanity/lib/fetch"
 import HomeClient from "./_components/HomeClient"
 
@@ -30,8 +29,7 @@ export default async function Home() {
     experienceSection,
     projectsSection,
     skillsSection,
-    testimonialSection,
-    resumePage
+    testimonialSection
   ] = await Promise.all([
     getNavbar(),
     getHero(),
@@ -43,11 +41,8 @@ export default async function Home() {
     getExperienceSection(),
     getProjectsSection(),
     getSkillsSection(),
-    getTestimonialSection(),
-    getResumePage()
+    getTestimonialSection()
   ])
-
-  const resumePdfUrl = resumePage?.currentPdf?.file?.asset?.url || null
 
   return (
     <HomeClient
@@ -62,7 +57,6 @@ export default async function Home() {
       projectsSection={projectsSection}
       skillsSection={skillsSection}
       testimonialSection={testimonialSection}
-      resumePdfUrl={resumePdfUrl}
     />
   )
 }

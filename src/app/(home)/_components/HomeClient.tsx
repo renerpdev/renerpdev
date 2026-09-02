@@ -33,7 +33,6 @@ interface HomeClientProps {
   projectsSection: ProjectsSectionType | null
   skillsSection: SkillsSectionType | null
   testimonialSection: TestimonialSectionType | null
-  resumePdfUrl: string | null
 }
 
 export default function HomeClient({
@@ -47,8 +46,7 @@ export default function HomeClient({
   experienceSection,
   projectsSection,
   skillsSection,
-  testimonialSection,
-  resumePdfUrl
+  testimonialSection
 }: HomeClientProps) {
   const reference = useRef<HTMLElement>(null)
   const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation(reference)
@@ -73,7 +71,7 @@ export default function HomeClient({
 
           <section className="relative min-h-screen">
             <Navbar {...{ setCursorText, setCursorVariant, navbar }} />
-            <Hero {...{ setCursorText, setCursorVariant, hero, resumePdfUrl }} />
+            <Hero {...{ setCursorText, setCursorVariant, hero }} />
           </section>
 
           <section id="about" className={" -mt-10 z-10 relative px-5"}>
@@ -81,7 +79,7 @@ export default function HomeClient({
           </section>
 
           <Section id="experience">
-            <ExperienceSection {...{ setCursorText, setCursorVariant, experienceSection, resumePdfUrl }} />
+            <ExperienceSection {...{ setCursorText, setCursorVariant, experienceSection }} />
           </Section>
 
           {marqueeSection && (

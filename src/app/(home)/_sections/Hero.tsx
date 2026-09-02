@@ -10,10 +10,9 @@ import { useResumeDownload } from "@/hooks/useResumeDownload"
 
 interface HeroProps extends CursorAnimationHandler {
   hero: HeroType | null
-  resumePdfUrl: string | null
 }
 
-export const Hero = ({ setCursorText, setCursorVariant, hero, resumePdfUrl }: HeroProps) => {
+export const Hero = ({ setCursorText, setCursorVariant, hero }: HeroProps) => {
   const viewport = useViewportDimensions()
   const gradientX = useMotionValue(0.8)
   const gradientY = useMotionValue(0.7)
@@ -25,7 +24,7 @@ export const Hero = ({ setCursorText, setCursorVariant, hero, resumePdfUrl }: He
 
   const { isMobile } = useBreakpoint()
 
-  const { handleDownload, isDownloading } = useResumeDownload(resumePdfUrl)
+  const { handleDownload, isDownloading } = useResumeDownload()
 
   if (!hero) {
     return null
