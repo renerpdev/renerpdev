@@ -141,7 +141,7 @@ Skills are categorized as either "soft" or "technology".
 - Recommended formats: JPG, PNG, WebP
 - Profile images work best as square (1:1 aspect ratio)
 - Project images work best as landscape (16:9 aspect ratio)
-- Testimonial profile images are uploaded directly on each **Testimonials** document. After deploying this schema change, run `pnpm migrate:testimonial-profile-images` with production Sanity environment variables to preserve legacy Media Library references.
+- Testimonial profile images are uploaded directly on each **Testimonials** document through the `profilePhoto` field. After deploying this schema change, run `pnpm migrate:testimonial-profile-images` with production Sanity environment variables to preserve legacy data.
 
 ### Ordering
 

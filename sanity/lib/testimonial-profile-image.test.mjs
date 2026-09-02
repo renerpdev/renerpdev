@@ -21,8 +21,8 @@ test("skips legacy media documents without an image", () => {
   assert.equal(profileImage.getDirectTestimonialProfileImage({}), null)
 })
 
-test("creates a revision-guarded patch for a legacy testimonial image", () => {
-  assert.equal(typeof profileImage.getTestimonialProfileImageMigrationPatch, "function")
+test("moves a current direct image into the new Profile Photo field", () => {
+  assert.equal(typeof profileImage.getTestimonialProfilePhotoMigrationPatch, "function")
 
   const image = {
     _type: "image",
@@ -30,34 +30,28 @@ test("creates a revision-guarded patch for a legacy testimonial image", () => {
   }
 
   assert.deepEqual(
-    profileImage.getTestimonialProfileImageMigrationPatch({
+    profileImage.getTestimonialProfilePhotoMigrationPatch({
       _id: "testimonial-1",
       _rev: "revision-1",
-      legacyMedia: { image }
+      currentImage: image
     }),
     {
       patch: {
         id: "testimonial-1",
         ifRevisionID: "revision-1",
-        set: { profileImage: image }
+        set: { profilePhoto: image }
       }
     }
   )
 })
 
-test("skips direct or concurrently changed testimonial images", () => {
+test("does not overwrite an existing Profile Photo", () => {
   assert.equal(
-    profileImage.getTestimonialProfileImageMigrationPatch({
+    profileImage.getTestimonialProfilePhotoMigrationPatch({
       _id: "testimonial-1",
       _rev: "revision-1",
-      legacyMedia: null
-    }),
-    null
-  )
-  assert.equal(
-    profileImage.getTestimonialProfileImageMigrationPatch({
-      _id: "testimonial-1",
-      legacyMedia: { image: { _type: "image", asset: {} } }
+      currentImage: { _type: "image", asset: {} },
+      profilePhoto: { _type: "image", asset: {} }
     }),
     null
   )

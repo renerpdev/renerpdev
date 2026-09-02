@@ -1,9 +1,10 @@
 type SanityImage = Record<string, unknown>
 
-interface LegacyTestimonialProfileImage {
+interface TestimonialProfilePhotoMigration {
   _id?: unknown
   _rev?: unknown
-  legacyMedia?: unknown
+  currentImage?: unknown
+  profilePhoto?: unknown
 }
 
 export function getDirectTestimonialProfileImage(media: unknown): SanityImage | null {
@@ -14,15 +15,19 @@ export function getDirectTestimonialProfileImage(media: unknown): SanityImage | 
   return media.image
 }
 
-export function getTestimonialProfileImageMigrationPatch(
-  testimonial: LegacyTestimonialProfileImage
-): { patch: { id: string; ifRevisionID: string; set: { profileImage: SanityImage } } } | null {
-  if (typeof testimonial._id !== "string" || typeof testimonial._rev !== "string") {
+export function getTestimonialProfilePhotoMigrationPatch(
+  testimonial: TestimonialProfilePhotoMigration
+): { patch: { id: string; ifRevisionID: string; set: { profilePhoto: SanityImage } } } | null {
+  if (
+    typeof testimonial._id !== "string" ||
+    typeof testimonial._rev !== "string" ||
+    getDirectTestimonialProfileImage({ image: testimonial.profilePhoto })
+  ) {
     return null
   }
 
-  const profileImage = getDirectTestimonialProfileImage(testimonial.legacyMedia)
-  if (!profileImage) {
+  const profilePhoto = getDirectTestimonialProfileImage({ image: testimonial.currentImage })
+  if (!profilePhoto) {
     return null
   }
 
@@ -30,7 +35,7 @@ export function getTestimonialProfileImageMigrationPatch(
     patch: {
       id: testimonial._id,
       ifRevisionID: testimonial._rev,
-      set: { profileImage }
+      set: { profilePhoto }
     }
   }
 }
