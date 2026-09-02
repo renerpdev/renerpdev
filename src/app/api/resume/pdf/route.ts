@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createPdfDownloadResponse, selectResumePdfSource } from "@/lib/resume-pdf"
+import { createPdfDownloadResponse, fetchStoredPdf, resolveResumePdf } from "@/lib/resume-pdf"
 import { getResumePageUncached } from "@/sanity/lib/fetch"
 import { uploadPdfToSanity } from "@/sanity/lib/mutations"
 
@@ -20,32 +20,33 @@ export async function GET() {
       return NextResponse.json({ error: "Resume page not configured" }, { status: 404 })
     }
 
-    const pdfUrl = resumePage.currentPdf?.file?.asset?.url
-    const source = selectResumePdfSource({ url: pdfUrl, generatedAt: resumePage.pdfGeneratedAt }, Date.now())
-
-    if (source.kind === "sanity") {
-      try {
-        const response = await fetch(source.url, { cache: "no-store" })
-        if (!response.ok) {
-          throw new Error(`Sanity PDF request failed with status ${response.status}`)
+    const resolvedPdf = await resolveResumePdf(
+      {
+        url: resumePage.currentPdf?.file?.asset?.url,
+        generatedAt: resumePage.pdfGeneratedAt
+      },
+      Date.now(),
+      {
+        loadSanityPdf: async (url) => {
+          const pdfBytes = await fetchStoredPdf(url)
+          logStage("Fresh Sanity PDF loaded", startedAt, { bytes: pdfBytes.byteLength })
+          return pdfBytes
+        },
+        generatePdf: async () => {
+          const { pdfBytes } = await generateAndUploadPdf(resumePage._id, startedAt)
+          logStage("Generated PDF ready for download", startedAt, { bytes: pdfBytes.byteLength })
+          return pdfBytes
+        },
+        onSanityError: (error) => {
+          console.warn("[Resume PDF] Stored PDF unavailable; regenerating", {
+            elapsedMs: Date.now() - startedAt,
+            error: error instanceof Error ? error.message : String(error)
+          })
         }
-
-        const pdfBytes = new Uint8Array(await response.arrayBuffer())
-        logStage("Fresh Sanity PDF loaded", startedAt, { bytes: pdfBytes.byteLength })
-
-        return createPdfDownloadResponse(pdfBytes, "sanity")
-      } catch (error) {
-        console.warn("[Resume PDF] Stored PDF unavailable; regenerating", {
-          elapsedMs: Date.now() - startedAt,
-          error: error instanceof Error ? error.message : String(error)
-        })
       }
-    }
+    )
 
-    const { pdfBytes } = await generateAndUploadPdf(resumePage._id, startedAt)
-    logStage("Generated PDF ready for download", startedAt, { bytes: pdfBytes.byteLength })
-
-    return createPdfDownloadResponse(pdfBytes, "generated")
+    return createPdfDownloadResponse(resolvedPdf.pdfBytes, resolvedPdf.source)
   } catch (error) {
     console.error("[Resume PDF] Request failed", {
       elapsedMs: Date.now() - startedAt,

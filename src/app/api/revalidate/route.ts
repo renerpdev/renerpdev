@@ -1,13 +1,14 @@
 import { revalidateTag } from "next/cache"
 import { type NextRequest, NextResponse } from "next/server"
-import { clearResumePdf } from "@/sanity/lib/mutations"
+
+/* eslint-disable no-console -- webhook revalidation needs production diagnostics */
 
 /**
  * On-Demand Revalidation API Route
  *
  * This endpoint is called by Sanity webhooks to trigger revalidation
- * whenever content is updated in the CMS. It also clears the cached
- * resume PDF reference so it gets regenerated on the next download.
+ * whenever content is updated in the CMS. Generated resume PDFs keep
+ * their independent 30-minute TTL.
  *
  * Setup:
  * 1. Set SANITY_REVALIDATE_SECRET in your environment variables
@@ -35,14 +36,11 @@ export async function POST(request: NextRequest) {
     // Revalidate all Sanity data fetches
     revalidateTag("sanity-content")
 
-    // Clear the cached resume PDF so it gets regenerated on next download
-    await clearResumePdf()
-
-    console.log("[Revalidate] Successfully revalidated sanity-content tag and cleared resume PDF cache")
+    console.log("[Revalidate] Successfully revalidated sanity-content tag")
 
     return NextResponse.json({
       revalidated: true,
-      message: "Sanity content revalidated and resume PDF cache cleared successfully",
+      message: "Sanity content revalidated successfully",
       timestamp: new Date().toISOString(),
       tags: ["sanity-content"]
     })

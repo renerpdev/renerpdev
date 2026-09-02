@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react"
+import { downloadBlob } from "@/lib/browser-download"
 
 /**
  * Shared hook for downloading the resume PDF.
@@ -17,17 +18,7 @@ export function useResumeDownload() {
       }
 
       const pdfBlob = await response.blob()
-      const downloadUrl = URL.createObjectURL(pdfBlob)
-      const anchor = document.createElement("a")
-
-      anchor.href = downloadUrl
-      anchor.download = "rene-ricardo-resume.pdf"
-      anchor.hidden = true
-      document.body.append(anchor)
-      anchor.click()
-      anchor.remove()
-
-      window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 0)
+      downloadBlob(pdfBlob, "rene-ricardo-resume.pdf")
     } catch (error) {
       // eslint-disable-next-line no-console -- client-side failures need a visible browser diagnostic
       console.error("[Resume PDF] Download failed", error)
