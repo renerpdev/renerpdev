@@ -1,4 +1,5 @@
 import { client } from "./client"
+import { SANITY_CACHE_TAGS, withSanityTags } from "./cache-tags"
 import {
   navbarQuery,
   heroQuery,
@@ -40,100 +41,106 @@ import type {
   Education
 } from "../models"
 
-// Fetch options for Sanity queries
-// Use cache tag for revalidation via revalidateTag()
-const fetchOptions = {
-  next: {
-    tags: ["sanity-content"]
-  }
-}
-
 // Navbar
 export async function getNavbar(): Promise<Navbar | null> {
-  return await client.fetch(navbarQuery, {}, fetchOptions)
+  return await client.fetch(navbarQuery, {}, withSanityTags(SANITY_CACHE_TAGS.navbar, SANITY_CACHE_TAGS.media))
 }
 
 // Hero
 export async function getHero(): Promise<Hero | null> {
-  return await client.fetch(heroQuery, {}, fetchOptions)
+  return await client.fetch(heroQuery, {}, withSanityTags(SANITY_CACHE_TAGS.hero, SANITY_CACHE_TAGS.media))
 }
 
 // About
 export async function getAbout(): Promise<About | null> {
-  return await client.fetch(aboutQuery, {}, fetchOptions)
+  return await client.fetch(aboutQuery, {}, withSanityTags(SANITY_CACHE_TAGS.about))
 }
 
 // Marquee Section
 export async function getMarqueeSection(): Promise<MarqueeSection | null> {
-  return await client.fetch(marqueeSectionQuery, {}, fetchOptions)
+  return await client.fetch(marqueeSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.marquee))
 }
 
 // Call to Action Section
 export async function getCallToActionSection(): Promise<CallToActionSection | null> {
-  return await client.fetch(callToActionSectionQuery, {}, fetchOptions)
+  return await client.fetch(callToActionSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.callToAction))
 }
 
 // Contact Section
 export async function getContactSection(): Promise<ContactSection | null> {
-  return await client.fetch(contactSectionQuery, {}, fetchOptions)
+  return await client.fetch(contactSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.contact))
 }
 
 // Footer
 export async function getFooter(): Promise<Footer | null> {
-  return await client.fetch(footerQuery, {}, fetchOptions)
+  return await client.fetch(footerQuery, {}, withSanityTags(SANITY_CACHE_TAGS.footer, SANITY_CACHE_TAGS.media))
 }
 
 // Experience Section
 export async function getExperienceSection(): Promise<ExperienceSection | null> {
-  return await client.fetch(experienceSectionQuery, {}, fetchOptions)
+  return await client.fetch(experienceSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.experience))
 }
 
 // Experience
 export async function getExperience(): Promise<Experience[]> {
-  return await client.fetch(experienceQuery, {}, fetchOptions)
+  return await client.fetch(experienceQuery, {}, withSanityTags(SANITY_CACHE_TAGS.experience))
 }
 
 // Projects Section
 export async function getProjectsSection(): Promise<ProjectsSection | null> {
-  return await client.fetch(projectsSectionQuery, {}, fetchOptions)
+  return await client.fetch(projectsSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.projects))
 }
 
 // Projects
 export async function getProjects(): Promise<Project[]> {
-  return await client.fetch(projectsQuery, {}, fetchOptions)
+  return await client.fetch(projectsQuery, {}, withSanityTags(SANITY_CACHE_TAGS.projects))
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-  return await client.fetch(featuredProjectsQuery, {}, fetchOptions)
+  return await client.fetch(featuredProjectsQuery, {}, withSanityTags(SANITY_CACHE_TAGS.projects))
 }
 
 // Skills Section
 export async function getSkillsSection(): Promise<SkillsSection | null> {
-  return await client.fetch(skillsSectionQuery, {}, fetchOptions)
+  return await client.fetch(skillsSectionQuery, {}, withSanityTags(SANITY_CACHE_TAGS.skills))
 }
 
 // Skills
 export async function getSkills(): Promise<Skill[]> {
-  return await client.fetch(skillsQuery, {}, fetchOptions)
+  return await client.fetch(skillsQuery, {}, withSanityTags(SANITY_CACHE_TAGS.skills))
 }
 
 export async function getSkillsByCategory(category: "soft" | "hard"): Promise<Skill[]> {
-  return await client.fetch(skillsByCategoryQuery(category), {}, fetchOptions)
+  return await client.fetch(skillsByCategoryQuery(category), {}, withSanityTags(SANITY_CACHE_TAGS.skills))
 }
 
 // Testimonial Section
 export async function getTestimonialSection(): Promise<TestimonialSection | null> {
-  return await client.fetch(testimonialSectionQuery, {}, fetchOptions)
+  return await client.fetch(
+    testimonialSectionQuery,
+    {},
+    withSanityTags(SANITY_CACHE_TAGS.testimonials, SANITY_CACHE_TAGS.media)
+  )
 }
 
 // Testimonials
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return await client.fetch(testimonialsQuery, {}, fetchOptions)
+  return await client.fetch(testimonialsQuery, {}, withSanityTags(SANITY_CACHE_TAGS.testimonials))
 }
 
 // Resume Page
 export async function getResumePage(): Promise<ResumePage | null> {
-  return await client.fetch(resumePageQuery, {}, fetchOptions)
+  return await client.fetch(
+    resumePageQuery,
+    {},
+    withSanityTags(
+      SANITY_CACHE_TAGS.resume,
+      SANITY_CACHE_TAGS.education,
+      SANITY_CACHE_TAGS.experience,
+      SANITY_CACHE_TAGS.projects,
+      SANITY_CACHE_TAGS.skills
+    )
+  )
 }
 
 export async function getResumePageUncached(): Promise<ResumePage | null> {
@@ -142,5 +149,5 @@ export async function getResumePageUncached(): Promise<ResumePage | null> {
 
 // Education
 export async function getEducation(): Promise<Education[]> {
-  return await client.fetch(educationQuery, {}, fetchOptions)
+  return await client.fetch(educationQuery, {}, withSanityTags(SANITY_CACHE_TAGS.education))
 }

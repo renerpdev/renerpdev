@@ -3,13 +3,13 @@ interface SanityWebhookDocument {
   _type?: unknown
 }
 
-export function getPublishedResumePageId(payload: unknown): string | null {
+export function getPublishedSanityWebhookDocument(payload: unknown): { id: string; type: string } | null {
   if (!payload || typeof payload !== "object") {
     return null
   }
 
   const document = payload as SanityWebhookDocument
-  if (document._type !== "resumePage" || typeof document._id !== "string" || !document._id) {
+  if (typeof document._type !== "string" || typeof document._id !== "string" || !document._id) {
     return null
   }
 
@@ -17,5 +17,10 @@ export function getPublishedResumePageId(payload: unknown): string | null {
     return null
   }
 
-  return document._id
+  return { id: document._id, type: document._type }
+}
+
+export function getPublishedResumePageId(payload: unknown): string | null {
+  const document = getPublishedSanityWebhookDocument(payload)
+  return document?.type === "resumePage" ? document.id : null
 }

@@ -7,11 +7,12 @@
     "build": "next build",
     "vercel-build": "./scripts/vercel-build.sh",
     "start": "next start",
-    "test": "node --no-warnings --experimental-strip-types --test lib/*.test.mjs",
+    "test": "node --no-warnings --experimental-strip-types --test lib/*.test.mjs sanity/lib/*.test.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
+    "migrate:testimonial-profile-images": "node --no-warnings --experimental-strip-types scripts/migrate-testimonial-profile-images.mjs",
     "prepare": "husky"
   },
   "dependencies": {

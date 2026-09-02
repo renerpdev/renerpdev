@@ -1,5 +1,6 @@
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { type NextRequest, NextResponse } from "next/server"
+import { SANITY_CACHE_TAGS } from "@/sanity/lib/cache-tags"
 import { getPublishedResumePageId } from "@/lib/sanity-webhook"
 import { clearResumePdf } from "@/sanity/lib/mutations"
 
@@ -41,8 +42,9 @@ export async function POST(request: NextRequest) {
 
     console.log("[Revalidate] Starting revalidation at", new Date().toISOString())
 
-    // Revalidate all Sanity data fetches
-    revalidateTag("sanity-content")
+    revalidateTag(SANITY_CACHE_TAGS.resume)
+    revalidatePath("/resume")
+    revalidatePath("/resume/print")
 
     await clearResumePdf(resumePageId)
 
@@ -52,7 +54,7 @@ export async function POST(request: NextRequest) {
       revalidated: true,
       message: "Sanity content revalidated and generated resume PDF cleared successfully",
       timestamp: new Date().toISOString(),
-      tags: ["sanity-content"]
+      tags: [SANITY_CACHE_TAGS.resume]
     })
   } catch (error) {
     console.error("[Revalidate] Error revalidating:", error)

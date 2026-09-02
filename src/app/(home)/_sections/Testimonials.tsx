@@ -25,9 +25,9 @@ export const Testimonials = ({ setCursorText, setCursorVariant, testimonialSecti
         <SwipeCarousel className={"mt-8 md:mt-12"} {...{ setCursorText, setCursorVariant }}>
           {testimonials.map((testimonial) => (
             <div key={testimonial._id} className={"flex flex-col items-center space-y-8"}>
-              {testimonial.profileImage?.image?.asset?.url && (
+              {testimonial.profileImage?.asset?.url && (
                 <Image
-                  src={testimonial.profileImage.image.asset.url}
+                  src={testimonial.profileImage.asset.url}
                   alt={`Photo of ${testimonial.name}`}
                   width={80}
                   height={80}
