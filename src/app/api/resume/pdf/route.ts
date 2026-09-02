@@ -22,10 +22,8 @@ export async function GET() {
 
     const resolvedPdf = await resolveResumePdf(
       {
-        url: resumePage.currentPdf?.file?.asset?.url,
-        generatedAt: resumePage.pdfGeneratedAt
+        url: resumePage.currentPdf?.file?.asset?.url
       },
-      Date.now(),
       {
         loadSanityPdf: async (url) => {
           const pdfBytes = await fetchStoredPdf(url)

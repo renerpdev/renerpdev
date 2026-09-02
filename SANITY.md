@@ -110,8 +110,11 @@ Skills are categorized as either "soft" or "technology".
 
 ### Content Revalidation
 
-- The homepage revalidates every **60 seconds**
-- After publishing changes in Sanity, wait up to 1 minute to see updates on the live site
+- Production content is revalidated on demand by the **Portfolio Revalidation** webhook
+- The generated resume PDF stays cached until the published **Resume Page** document changes
+- Configure the webhook for **Update** with this filter:
+  `_type == "resumePage" && !delta::changedOnly((currentPdf, pdfGeneratedAt))`
+- Changes to referenced experience, education, skill, or project documents do not invalidate the resume PDF
 - In development mode, you can refresh immediately
 
 ### Image Handling
@@ -152,8 +155,8 @@ After adding data to Sanity:
 
 **Problem: Changes don't appear on the site**
 
-- Wait 60 seconds for revalidation
 - Check if document is **Published** (not just saved as draft)
+- Check the **Portfolio Revalidation** webhook delivery log in Sanity
 - Check browser console for errors
 
 **Problem: Section is empty**

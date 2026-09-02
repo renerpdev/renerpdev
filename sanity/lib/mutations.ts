@@ -66,3 +66,7 @@ export async function uploadPdfToSanity(
     generatedAt: now
   }
 }
+
+export async function clearResumePdf(resumePageId: string): Promise<void> {
+  await writeClient.patch(resumePageId).unset(["currentPdf", "pdfGeneratedAt"]).commit()
+}
