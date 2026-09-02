@@ -13,10 +13,9 @@ const DEFAULT_MAX_ITEMS = 2
 
 interface ExperienceProps extends CursorAnimationHandler {
   experienceSection: ExperienceSection | null
-  resumePdfUrl: string | null
 }
 
-export const Experience = ({ setCursorText, setCursorVariant, experienceSection, resumePdfUrl }: ExperienceProps) => {
+export const Experience = ({ setCursorText, setCursorVariant, experienceSection }: ExperienceProps) => {
   const [showAll, setShowAll] = useState(false)
 
   function onMouseLeave() {
@@ -29,7 +28,7 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection,
     setCursorVariant("link")
   }
 
-  const { handleDownload, isDownloading } = useResumeDownload(resumePdfUrl)
+  const { handleDownload, isDownloading } = useResumeDownload()
 
   const experiences = (experienceSection?.experiences || []).sort((a, b) => {
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
@@ -95,9 +94,7 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection,
           </Timeline>
           {hasMoreExperiences && !showAll && (
             <>
-              <div
-                className="h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10"
-              />
+              <div className="h-28 -mt-28 bg-gradient-to-b from-transparent from-0% via-white/60 via-10% to-white to-80% w-full scale-x-110 relative z-10" />
               <div className={"text-center flex items-center"}>
                 <Divider />
                 <m.button
@@ -124,9 +121,7 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection,
               className={
                 "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0 cursor-pointer disabled:opacity-50"
               }>
-              <span className={"text-cyan-950"}>
-                {isDownloading ? "Downloading..." : experienceSection.cta.text}
-              </span>
+              <span className={"text-cyan-950"}>{isDownloading ? "Downloading..." : experienceSection.cta.text}</span>
               <ExternalLink />
             </m.button>
           )}

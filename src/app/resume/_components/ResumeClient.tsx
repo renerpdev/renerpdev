@@ -9,35 +9,14 @@ import { ResumeSkills } from "./ResumeSkills"
 import { ResumeProjects } from "./ResumeProjects"
 import { ResumeLanguages } from "./ResumeLanguages"
 import { ResumeContactLinks } from "./ResumeContactLinks"
-import { useState } from "react"
+import { useResumeDownload } from "@/hooks/useResumeDownload"
 
 interface ResumeClientProps {
   resumePage: ResumePage
 }
 
 export function ResumeClient({ resumePage }: ResumeClientProps) {
-  const [isDownloading, setIsDownloading] = useState(false)
-
-  const handleDownload = async () => {
-    setIsDownloading(true)
-    try {
-      // If a cached PDF exists, open it directly from Sanity CDN
-      if (resumePage.currentPdf?.file?.asset?.url) {
-        window.open(resumePage.currentPdf.file.asset.url, "_blank")
-        return
-      }
-      // Otherwise trigger PDF generation
-      const response = await fetch("/api/resume/pdf")
-      if (response.ok) {
-        const data = await response.json()
-        if (data.url) {
-          window.open(data.url, "_blank")
-        }
-      }
-    } finally {
-      setIsDownloading(false)
-    }
-  }
+  const { handleDownload, isDownloading } = useResumeDownload()
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4 print:bg-white print:p-0">
@@ -47,7 +26,7 @@ export function ResumeClient({ resumePage }: ResumeClientProps) {
           onClick={handleDownload}
           disabled={isDownloading}
           className="bg-cyan-900 text-white px-6 py-2 rounded-lg hover:bg-cyan-800 transition-colors disabled:opacity-50 text-sm font-medium">
-          {isDownloading ? "Generating..." : "Download PDF"}
+          {isDownloading ? "Downloading..." : "Download PDF"}
         </button>
       </div>
 
@@ -87,9 +66,7 @@ export function ResumeClient({ resumePage }: ResumeClientProps) {
               <ResumeLanguages languages={resumePage.languages} />
             )}
 
-            {resumePage.projects && resumePage.projects.length > 0 && (
-              <ResumeProjects projects={resumePage.projects} />
-            )}
+            {resumePage.projects && resumePage.projects.length > 0 && <ResumeProjects projects={resumePage.projects} />}
 
             {resumePage.contactLinks && resumePage.contactLinks.length > 0 && (
               <ResumeContactLinks contactLinks={resumePage.contactLinks} />
