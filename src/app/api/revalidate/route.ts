@@ -1,5 +1,6 @@
 import { revalidateTag } from "next/cache"
 import { type NextRequest, NextResponse } from "next/server"
+import { getPublishedResumePageId } from "@/lib/sanity-webhook"
 import { clearResumePdf } from "@/sanity/lib/mutations"
 
 /* eslint-disable no-console -- webhook revalidation needs production diagnostics */
@@ -33,12 +34,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const resumePageId = getPublishedResumePageId(await request.json().catch(() => null))
+    if (!resumePageId) {
+      return NextResponse.json({ message: "Invalid Resume Page webhook payload" }, { status: 400 })
+    }
+
     console.log("[Revalidate] Starting revalidation at", new Date().toISOString())
 
     // Revalidate all Sanity data fetches
     revalidateTag("sanity-content")
 
-    await clearResumePdf()
+    await clearResumePdf(resumePageId)
 
     console.log("[Revalidate] Successfully revalidated content and cleared the generated resume PDF")
 

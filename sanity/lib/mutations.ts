@@ -67,9 +67,6 @@ export async function uploadPdfToSanity(
   }
 }
 
-export async function clearResumePdf(): Promise<void> {
-  const resumePage = await writeClient.fetch<{ _id: string } | null>(`*[_type == "resumePage"][0]{ _id }`)
-  if (resumePage) {
-    await writeClient.patch(resumePage._id).unset(["currentPdf", "pdfGeneratedAt"]).commit()
-  }
+export async function clearResumePdf(resumePageId: string): Promise<void> {
+  await writeClient.patch(resumePageId).unset(["currentPdf", "pdfGeneratedAt"]).commit()
 }
