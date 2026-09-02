@@ -1,9 +1,7 @@
-export const RESUME_PDF_TTL_MS = 24 * 60 * 60 * 1000
 export const SANITY_PDF_FETCH_TIMEOUT_MS = 5000
 
 interface StoredResumePdf {
   url?: string
-  generatedAt?: string
 }
 
 type ResumePdfSource = { kind: "sanity"; url: string } | { kind: "generate" }
@@ -20,14 +18,8 @@ interface ResolvedResumePdf {
   source: ResumePdfDownloadSource
 }
 
-export function selectResumePdfSource(pdf: StoredResumePdf, nowMs: number): ResumePdfSource {
-  if (!pdf.url || !pdf.generatedAt) {
-    return { kind: "generate" }
-  }
-
-  const generatedAtMs = Date.parse(pdf.generatedAt)
-  const ageMs = nowMs - generatedAtMs
-  if (!Number.isFinite(generatedAtMs) || ageMs < 0 || ageMs >= RESUME_PDF_TTL_MS) {
+export function selectResumePdfSource(pdf: StoredResumePdf): ResumePdfSource {
+  if (!pdf.url) {
     return { kind: "generate" }
   }
 
@@ -36,10 +28,9 @@ export function selectResumePdfSource(pdf: StoredResumePdf, nowMs: number): Resu
 
 export async function resolveResumePdf(
   pdf: StoredResumePdf,
-  nowMs: number,
   dependencies: ResumePdfDependencies
 ): Promise<ResolvedResumePdf> {
-  const source = selectResumePdfSource(pdf, nowMs)
+  const source = selectResumePdfSource(pdf)
 
   if (source.kind === "sanity") {
     try {
