@@ -1,4 +1,4 @@
-export const RESUME_PDF_TTL_MS = 30 * 60 * 1000
+export const RESUME_PDF_TTL_MS = 24 * 60 * 60 * 1000
 export const SANITY_PDF_FETCH_TIMEOUT_MS = 5000
 
 interface StoredResumePdf {

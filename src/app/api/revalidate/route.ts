@@ -8,7 +8,7 @@ import { type NextRequest, NextResponse } from "next/server"
  *
  * This endpoint is called by Sanity webhooks to trigger revalidation
  * whenever content is updated in the CMS. Generated resume PDFs keep
- * their independent 30-minute TTL.
+ * their independent 24-hour TTL.
  *
  * Setup:
  * 1. Set SANITY_REVALIDATE_SECRET in your environment variables
