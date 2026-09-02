@@ -125,7 +125,11 @@ export async function getTestimonialSection(): Promise<TestimonialSection | null
 
 // Testimonials
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return await client.fetch(testimonialsQuery, {}, withSanityTags(SANITY_CACHE_TAGS.testimonials))
+  return await client.fetch(
+    testimonialsQuery,
+    {},
+    withSanityTags(SANITY_CACHE_TAGS.testimonials, SANITY_CACHE_TAGS.media)
+  )
 }
 
 // Resume Page

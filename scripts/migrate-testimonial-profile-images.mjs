@@ -1,6 +1,6 @@
 import { createClient } from "@sanity/client"
 
-import { getDirectTestimonialProfileImage } from "../sanity/lib/testimonial-profile-image.ts"
+import { getTestimonialProfileImageMigrationPatch } from "../sanity/lib/testimonial-profile-image.ts"
 
 /* eslint-disable no-console -- this migration reports its terminal result */
 
@@ -21,15 +21,16 @@ const client = createClient({
 })
 
 const testimonials = await client.fetch(
-  `*[_type == "testimonial" && defined(profileImage)]{
+  `*[_type == "testimonial" && profileImage._type == "reference"]{
     _id,
+    _rev,
     "legacyMedia": profileImage->{image}
   }`
 )
 
-const patches = testimonials.flatMap(({ _id, legacyMedia }) => {
-  const profileImage = getDirectTestimonialProfileImage(legacyMedia)
-  return profileImage ? [{ patch: { id: _id, set: { profileImage } } }] : []
+const patches = testimonials.flatMap((testimonial) => {
+  const patch = getTestimonialProfileImageMigrationPatch(testimonial)
+  return patch ? [patch] : []
 })
 
 if (patches.length === 0) {

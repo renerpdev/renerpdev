@@ -33,3 +33,13 @@ test("revalidates every rendered route affected by shared content", () => {
   assert.deepEqual(cacheTags.getContentRevalidationPaths("experience"), ["/", "/resume"])
   assert.deepEqual(cacheTags.getContentRevalidationPaths("education"), ["/resume"])
 })
+
+test("builds a content revalidation plan only for supported published content types", () => {
+  assert.equal(typeof cacheTags.getContentRevalidationPlan, "function")
+
+  assert.deepEqual(cacheTags.getContentRevalidationPlan("testimonial"), {
+    paths: ["/"],
+    tags: ["sanity:testimonials"]
+  })
+  assert.equal(cacheTags.getContentRevalidationPlan("resumePage"), null)
+})

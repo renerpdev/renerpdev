@@ -67,6 +67,15 @@ export function getContentRevalidationPaths(documentType: string): readonly stri
   return CONTENT_REVALIDATION_PATHS[documentType] ?? null
 }
 
+export function getContentRevalidationPlan(
+  documentType: string
+): { paths: readonly string[]; tags: readonly SanityCacheTag[] } | null {
+  const tags = getContentRevalidationTags(documentType)
+  const paths = getContentRevalidationPaths(documentType)
+
+  return tags && paths ? { paths, tags } : null
+}
+
 export function withSanityTags(...tags: SanityCacheTag[]) {
   return {
     next: {
