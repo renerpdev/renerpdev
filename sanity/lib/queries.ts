@@ -75,17 +75,6 @@ export const callToActionSectionQuery = groq`
   }
 `
 
-// Contact Section Query (Singleton)
-export const contactSectionQuery = groq`
-  *[_type == "contactSection"][0]{
-    _id,
-    title,
-    subtitle,
-    topics,
-    submitButtonLabel
-  }
-`
-
 // Footer Query (Singleton)
 export const footerQuery = groq`
   *[_type == "footer"][0]{

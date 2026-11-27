@@ -5,7 +5,6 @@ import {
   aboutQuery,
   marqueeSectionQuery,
   callToActionSectionQuery,
-  contactSectionQuery,
   footerQuery,
   experienceSectionQuery,
   experienceQuery,
@@ -26,7 +25,6 @@ import type {
   About,
   MarqueeSection,
   CallToActionSection,
-  ContactSection,
   Footer,
   ExperienceSection,
   Experience,
@@ -63,11 +61,6 @@ export async function getMarqueeSection(): Promise<MarqueeSection | null> {
 // Call to Action Section
 export async function getCallToActionSection(): Promise<CallToActionSection | null> {
   return client.fetch(callToActionSectionQuery)
-}
-
-// Contact Section
-export async function getContactSection(): Promise<ContactSection | null> {
-  return client.fetch(contactSectionQuery)
 }
 
 // Footer

@@ -28,7 +28,6 @@ The Profile is a **singleton** - only one should exist.
    - **Resume File**: Upload your resume PDF
    - **Social Links**: Add links to GitHub, LinkedIn, Twitter, etc.
    - **CTA Buttons**: Define your call-to-action buttons (e.g., "View Resume", "Contact Me")
-   - **Contact Topics**: Array of topics for the contact form (e.g., ["Web Development", "Web Design", "Mobile Development"])
 
 3. Click **Publish**
 
@@ -119,7 +118,7 @@ Use this GROQ filter.
 ```groq
 coalesce(after()._type, before()._type) in [
   "navbar", "hero", "about", "marqueeSection", "callToActionSection",
-  "contactSection", "footer", "experienceSection", "experience",
+  "footer", "experienceSection", "experience",
   "projectsSection", "project", "skillsSection", "skill",
   "testimonialSection", "testimonial", "tag", "education", "resumePage"
 ] || (
@@ -158,7 +157,7 @@ After adding data to Sanity:
    - ✅ Projects: Shows your projects
    - ✅ My Skill Set: Shows soft skills
    - ✅ Testimonials: Shows recommendations
-   - ✅ Contact: Shows your configured topics
+   - ✅ Footer: Shows your social links and serves as the destination for `#contact` links
 
 3. Verify animations work correctly
 4. Test all links (social media, project links, resume download)

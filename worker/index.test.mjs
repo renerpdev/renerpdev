@@ -9,11 +9,6 @@ const env = {
   WEBHOOK_KEY: "webhook-secret",
   MAIL_RELAY_API_URL: "https://mailrelay.example/api",
   MAIL_RELAY_API_KEY: "mailrelay-token",
-  CONTACT_RATE_LIMITER: {
-    async limit() {
-      return { success: true }
-    }
-  },
   ASSETS: {
     async fetch(input) {
       const url = new URL(input.url ?? input)
@@ -34,27 +29,9 @@ function get(path) {
   return new Request(origin + path, { headers: { Accept: "text/html" } })
 }
 
-test("contact reports success only after Resend accepts the message", async (t) => {
-  const fetcher = t.mock.method(globalThis, "fetch", async () => new Response(null, { status: 200 }))
-  const body = { name: "Visitor", email: "visitor@example.com", message: "Hello", topics: "Web development" }
-  const send = () => worker.fetch(post("/api/contact", body, { Origin: origin }), env)
-
-  const success = await send()
-  assert.equal(success.status, 200)
-  const [url, options] = fetcher.mock.calls[0].arguments
-  assert.equal(url, "https://api.resend.com/emails")
-  assert.equal(JSON.parse(options.body).reply_to, body.email)
-
-  fetcher.mock.mockImplementation(async () => new Response(null, { status: 422 }))
-  const failure = await send()
-  assert.equal(failure.status, 502)
-})
-
-test("contact rejects a cross-origin submission and an incomplete message", async () => {
-  const crossOrigin = await worker.fetch(post("/api/contact", {}), env)
-  const incomplete = await worker.fetch(post("/api/contact", {}, { Origin: origin }), env)
-  assert.equal(crossOrigin.status, 403)
-  assert.equal(incomplete.status, 400)
+test("returns 404 for the retired contact endpoint", async () => {
+  const response = await worker.fetch(post("/api/contact", {}, { Origin: origin }), env)
+  assert.equal(response.status, 404)
 })
 
 test("Mailrelay preserves callback authentication and the provider group", async (t) => {

@@ -11,7 +11,6 @@ import type {
   About as AboutType,
   MarqueeSection as MarqueeSectionType,
   CallToActionSection as CallToActionSectionType,
-  ContactSection as ContactSectionType,
   Footer as FooterType,
   ExperienceSection as ExperienceSectionType,
   ProjectsSection as ProjectsSectionType,
@@ -19,7 +18,7 @@ import type {
   TestimonialSection as TestimonialSectionType
 } from "@/sanity/models"
 
-import { About, Contact, Experience as ExperienceSection, Hero, Projects, SkillSet, Testimonials } from "../_sections"
+import { About, Experience as ExperienceSection, Hero, Projects, SkillSet, Testimonials } from "../_sections"
 import ReactLenis from "lenis/react"
 
 interface HomeClientProps {
@@ -28,7 +27,6 @@ interface HomeClientProps {
   about: AboutType | null
   marqueeSection: MarqueeSectionType | null
   callToActionSection: CallToActionSectionType | null
-  contactSection: ContactSectionType | null
   footer: FooterType | null
   experienceSection: ExperienceSectionType | null
   projectsSection: ProjectsSectionType | null
@@ -42,7 +40,6 @@ export default function HomeClient({
   about,
   marqueeSection,
   callToActionSection,
-  contactSection,
   footer,
   experienceSection,
   projectsSection,
@@ -122,10 +119,6 @@ export default function HomeClient({
                 : "#1d2839"
             }}>
             <Testimonials {...{ setCursorText, setCursorVariant, testimonialSection }} />
-          </Section>
-
-          <Section id="contact">
-            <Contact {...{ setCursorText, setCursorVariant, contactSection }} />
           </Section>
 
           <Footer {...{ setCursorText, setCursorVariant, footer }} />

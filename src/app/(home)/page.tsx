@@ -4,7 +4,6 @@ import {
   getAbout,
   getMarqueeSection,
   getCallToActionSection,
-  getContactSection,
   getFooter,
   getExperienceSection,
   getProjectsSection,
@@ -21,7 +20,6 @@ export default async function Home() {
     about,
     marqueeSection,
     callToActionSection,
-    contactSection,
     footer,
     experienceSection,
     projectsSection,
@@ -33,7 +31,6 @@ export default async function Home() {
     getAbout(),
     getMarqueeSection(),
     getCallToActionSection(),
-    getContactSection(),
     getFooter(),
     getExperienceSection(),
     getProjectsSection(),
@@ -48,7 +45,6 @@ export default async function Home() {
       about={about}
       marqueeSection={marqueeSection}
       callToActionSection={callToActionSection}
-      contactSection={contactSection}
       footer={footer}
       experienceSection={experienceSection}
       projectsSection={projectsSection}

@@ -11,11 +11,11 @@ export default {
     const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, "")
 
-    if (pathname === "/api/contact" || pathname === "/api/mailrelay/subscribe") {
+    if (pathname === "/api/mailrelay/subscribe") {
       if (request.method !== "POST") {
         return new Response("Method not allowed", { status: 405, headers: { Allow: "POST" } })
       }
-      return pathname === "/api/contact" ? sendContact(request, env) : subscribe(request, env)
+      return subscribe(request, env)
     }
 
     const asset = await env.ASSETS.fetch(request)
@@ -30,37 +30,6 @@ export default {
     return asset
   }
 } satisfies ExportedHandler<Env>
-
-async function sendContact(request: Request, env: Env) {
-  if (request.headers.get("Origin") !== new URL(request.url).origin) {
-    return new Response("Invalid origin", { status: 403 })
-  }
-
-  const { success } = await env.CONTACT_RATE_LIMITER.limit({
-    key: request.headers.get("CF-Connecting-IP") ?? "local"
-  })
-  if (!success) return new Response("Too many requests", { status: 429, headers: { "Retry-After": "60" } })
-
-  const formSubmission = request.headers.get("Content-Type")?.startsWith("application/x-www-form-urlencoded")
-  const body = await readBody(request, formSubmission)
-  const name = boundedText(body?.name, 120)
-  const email = boundedText(body?.email, 254)
-  const message = boundedText(body?.message, 4000)
-  const topic = boundedText(body?.topics, 240)
-  if (!name || /[\r\n]/.test(name) || !email || !isEmail(email) || !message) {
-    return new Response("Invalid contact information", { status: 400 })
-  }
-
-  const text = [`Name: ${name}`, `Email: ${email}`, topic ? `Topic: ${topic}` : "", "", message].join("\n")
-  const sent = await sendEmail(env, `Potential New Client: ${name} <${email}>`, text, email)
-  if (formSubmission) {
-    return new Response(
-      sent ? "Thank you for your interest. I will get back to you shortly." : "Your message could not be sent.",
-      { status: sent ? 200 : 502 }
-    )
-  }
-  return Response.json({ sent }, { status: sent ? 200 : 502 })
-}
 
 async function subscribe(request: Request, env: Env) {
   const secret = request.headers.get("secret")
@@ -109,7 +78,7 @@ async function subscribe(request: Request, env: Env) {
   return new Response(message, { status: sent || email ? 201 : 502 })
 }
 
-async function sendEmail(env: Env, subject: string, text: string, replyTo?: string) {
+async function sendEmail(env: Env, subject: string, text: string) {
   try {
     const response = await fetch(RESEND_URL, {
       method: "POST",
@@ -118,8 +87,7 @@ async function sendEmail(env: Env, subject: string, text: string, replyTo?: stri
         from: "Onboarding <onboarding@resend.dev>",
         to: [env.EMAIL_RECIPIENT],
         subject,
-        text,
-        reply_to: replyTo
+        text
       }),
       signal: AbortSignal.timeout(10_000)
     })
@@ -135,7 +103,7 @@ async function sendEmail(env: Env, subject: string, text: string, replyTo?: stri
   }
 }
 
-async function readBody(request: Request, formSubmission = false) {
+async function readBody(request: Request) {
   const reader = request.body?.getReader()
   if (!reader) return
 
@@ -145,10 +113,7 @@ async function readBody(request: Request, formSubmission = false) {
   try {
     for (;;) {
       const { done, value } = await reader.read()
-      if (done) {
-        text += decoder.decode()
-        return formSubmission ? Object.fromEntries(new URLSearchParams(text)) : asRecord(JSON.parse(text))
-      }
+      if (done) return asRecord(JSON.parse(text + decoder.decode()))
       size += value.byteLength
       if (size > MAX_BODY_BYTES) {
         await reader.cancel()

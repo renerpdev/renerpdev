@@ -13,18 +13,8 @@
     "directory": "./out",
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": [
-      "/api/contact",
-      "/api/contact/",
-      "/api/mailrelay/subscribe",
-      "/api/mailrelay/subscribe/",
-      "/studio/*",
-      "!/studio/static/*"
-    ]
+    "run_worker_first": ["/api/mailrelay/subscribe", "/api/mailrelay/subscribe/", "/studio/*", "!/studio/static/*"]
   },
-  "ratelimits": [
-    { "name": "CONTACT_RATE_LIMITER", "namespace_id": "26112701", "simple": { "limit": 5, "period": 60 } }
-  ],
   "secrets": {
     "required": ["RESEND_API_KEY", "EMAIL_RECIPIENT", "WEBHOOK_KEY", "MAIL_RELAY_API_KEY", "MAIL_RELAY_API_URL"]
   },

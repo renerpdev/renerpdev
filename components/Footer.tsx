@@ -38,7 +38,10 @@ export const Footer = ({ setCursorText, setCursorVariant, footer }: FooterProps)
   }
 
   return (
-    <footer className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8 relative" style={bgStyle}>
+    <footer
+      id="contact"
+      className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8 relative"
+      style={bgStyle}>
       {footer.logo?.image?.asset?.url && (
         <SanityImage
           src={footer.logo.image.asset.url}
