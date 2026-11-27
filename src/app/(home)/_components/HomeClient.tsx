@@ -136,7 +136,7 @@ export default function HomeClient({
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="inline-flex items-center gap-2.5 rounded-full border border-white/50 px-6 py-3 text-base font-medium transition-colors hover:border-white hover:bg-white hover:text-cyan-950 active:bg-cyan-100 active:text-cyan-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 motion-reduce:transition-none">
                 <EnvelopeIcon aria-hidden="true" className="h-5 w-5 shrink-0" />
-                {CONTACT_EMAIL}
+                Email me
               </a>
             </div>
           </section>
