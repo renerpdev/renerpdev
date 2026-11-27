@@ -1,4 +1,4 @@
-import { groq } from "next-sanity"
+import groq from "groq"
 
 // Navbar Query (Singleton)
 export const navbarQuery = groq`
@@ -72,17 +72,6 @@ export const callToActionSectionQuery = groq`
     title,
     subtitle,
     cta
-  }
-`
-
-// Contact Section Query (Singleton)
-export const contactSectionQuery = groq`
-  *[_type == "contactSection"][0]{
-    _id,
-    title,
-    subtitle,
-    topics,
-    submitButtonLabel
   }
 `
 
@@ -482,19 +471,7 @@ export const resumePageQuery = groq`
       liveLink
     },
     languages,
-    contactLinks,
-    currentPdf->{
-      _id,
-      title,
-      category,
-      file{
-        asset->{
-          _id,
-          url
-        }
-      }
-    },
-    pdfGeneratedAt
+    contactLinks
   }
 `
 

@@ -1,101 +1,39 @@
-# Deployment Guide
+# Cloudflare deployment
 
-## Vercel Deployment Strategy
+Workers Static Assets serves the contents of `out/` on `portfolio.renerp.dev`. The build exports the Next.js pages, compiles Sanity Studio into `out/studio/`, and prints the exported resume to `out/rene-ricardo-resume.pdf`. The Worker serves the Studio shell on deep links.
 
-This project uses a custom build process for Vercel deployments that optimizes for speed on production builds while maintaining code quality on preview deployments.
+## Build and verify locally
 
-### How It Works
+Use Node and pnpm from `.nvmrc` and `package.json`. Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in the local environment or `.env.local`. The optional `NEXT_PUBLIC_SANITY_API_VERSION` defaults to `2024-02-10`. The build clears the persisted Next.js fetch cache and reads published data directly from the Sanity API. Studio uses the same project and dataset.
 
-The deployment process uses different strategies based on the environment:
-
-#### Preview Deployments (PRs, branches)
-
-- ✅ **Runs ESLint** before building
-- ✅ Catches linting errors early
-- ✅ Ensures code quality in previews
-- Command: `pnpm lint && pnpm build`
-
-#### Production Deployments (main branch)
-
-- ⚡ **Skips ESLint** during build
-- ⚡ Faster deployments
-- ✅ Assumes code quality already validated via:
-  - Pre-commit hooks (husky + lint-staged)
-  - PR review process
-  - Preview deployment checks
-- Command: `pnpm build`
-
-### Configuration Files
-
-#### `vercel.json`
-
-```json
-{
-  "buildCommand": "pnpm vercel-build",
-  "installCommand": "pnpm install"
-}
+```sh
+corepack pnpm@10.20.0 install --frozen-lockfile
+corepack pnpm@10.20.0 test
+corepack pnpm@10.20.0 check:worker
+corepack pnpm@10.20.0 build
+corepack pnpm@10.20.0 preview
 ```
 
-#### `scripts/vercel-build.sh`
+The PDF build uses bundled Chromium on Linux and Google Chrome on macOS. Set `PUPPETEER_EXECUTABLE_PATH` to use another Chrome or Chromium executable. The resume download URL from the previous deployment redirects to the generated PDF.
 
-Conditional build script that checks `VERCEL_ENV` environment variable:
+## Workers Builds
 
-- `production` → Skip lint, build only
-- `preview` → Run lint + build
+Connect the `renerpdev-portfolio` Worker to `renerpdev/renerpdev` on GitHub and select `cloudflare-production` as the production branch, with repository root `/`. The repository's protected `main` branch remains the integration branch. Configure the build with the Sanity project and `NEXT_PUBLIC_SANITY_DATASET=production`, `NODE_VERSION=22.12.0`, and `HUSKY=0`. Enable build caching and let Workers Builds install the dependencies from the lockfile.
 
-#### `package.json`
+| Setting | Value |
+| --- | --- |
+| Build command | `corepack pnpm@10.20.0 test && corepack pnpm@10.20.0 check:worker && corepack pnpm@10.20.0 build` |
+| Deploy command | `corepack pnpm@10.20.0 run deploy` |
+| Other branches | Automatic deployments disabled |
+| Custom domain | `portfolio.renerp.dev` |
 
-```json
-{
-  "scripts": {
-    "vercel-build": "./scripts/vercel-build.sh"
-  }
-}
-```
+Create a Workers Builds Deploy Hook for `cloudflare-production` and connect it to Sanity as described in [SANITY.md](SANITY.md). Keep its URL in the provider settings. Cloudflare keeps the previous deployment available when a build fails.
 
-### Environment Variables
+## Release checks
 
-Vercel automatically sets these:
+- Confirm the home page, resume, print page, and PDF respond on the custom domain. Check `/api/resume/pdf` redirects to the file and a nonexistent page responds with HTTP 404.
+- Open `/studio` and refresh a document deep link. Confirm Sanity authentication is available and the assets load.
+- Confirm the portfolio serves responsive Sanity image URLs and the published content is present in the exported HTML.
+- Check the Sanity webhook delivery and the matching Deploy Hook build on Cloudflare. After it finishes, verify the updated page or PDF.
 
-- `VERCEL_ENV`: `production` | `preview` | `development`
-- `VERCEL_GIT_COMMIT_REF`: Branch name
-
-### Local Testing
-
-Test preview mode:
-
-```bash
-VERCEL_ENV=preview pnpm vercel-build
-```
-
-Test production mode:
-
-```bash
-VERCEL_ENV=production pnpm vercel-build
-```
-
-### Benefits
-
-1. **Faster Production Deploys** - No linting overhead
-2. **Code Quality Maintained** - Linting happens at multiple checkpoints:
-   - Pre-commit (husky + lint-staged)
-   - PR previews (full lint)
-   - Manual runs (`pnpm lint`)
-3. **Consistent CI/CD** - Same commands work locally and in Vercel
-4. **Cost Efficient** - Faster builds = lower build minutes usage
-
-### Troubleshooting
-
-If you need to force linting on production:
-
-```bash
-# Temporarily modify scripts/vercel-build.sh
-# Remove the VERCEL_ENV check
-pnpm lint && pnpm build
-```
-
-Or run lint separately:
-
-```bash
-pnpm lint
-```
+[Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/) · [Workers Builds Deploy Hooks](https://developers.cloudflare.com/workers/ci-cd/builds/deploy-hooks/)

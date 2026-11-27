@@ -135,6 +135,7 @@ const Project = ({ project, setCursorText, setCursorVariant, index }: ProjectPro
               rel={"noreferrer noopener"}
               className={"translate-y-[5px]"}>
               <Image
+                unoptimized
                 src={"/assets/arrow-diagonal-up.svg"}
                 alt={project.title}
                 title="See live project"

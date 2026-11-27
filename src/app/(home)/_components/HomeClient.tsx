@@ -4,13 +4,14 @@ import { domAnimation, LazyMotion, m } from "framer-motion"
 import { CallToAction, Footer, Navbar, ParallaxText } from "@/components"
 import { useCursorAnimation } from "@/hooks"
 import { useRef } from "react"
+import { EnvelopeIcon } from "@sanity/icons"
+import { sanityImageUrl } from "@/sanity/lib/image"
 import type {
   Navbar as NavbarType,
   Hero as HeroType,
   About as AboutType,
   MarqueeSection as MarqueeSectionType,
   CallToActionSection as CallToActionSectionType,
-  ContactSection as ContactSectionType,
   Footer as FooterType,
   ExperienceSection as ExperienceSectionType,
   ProjectsSection as ProjectsSectionType,
@@ -18,8 +19,10 @@ import type {
   TestimonialSection as TestimonialSectionType
 } from "@/sanity/models"
 
-import { About, Contact, Experience as ExperienceSection, Hero, Projects, SkillSet, Testimonials } from "../_sections"
+import { About, Experience as ExperienceSection, Hero, Projects, SkillSet, Testimonials } from "../_sections"
 import ReactLenis from "lenis/react"
+
+const CONTACT_EMAIL = "hello@renerp.dev"
 
 interface HomeClientProps {
   navbar: NavbarType | null
@@ -27,7 +30,6 @@ interface HomeClientProps {
   about: AboutType | null
   marqueeSection: MarqueeSectionType | null
   callToActionSection: CallToActionSectionType | null
-  contactSection: ContactSectionType | null
   footer: FooterType | null
   experienceSection: ExperienceSectionType | null
   projectsSection: ProjectsSectionType | null
@@ -41,7 +43,6 @@ export default function HomeClient({
   about,
   marqueeSection,
   callToActionSection,
-  contactSection,
   footer,
   experienceSection,
   projectsSection,
@@ -50,6 +51,7 @@ export default function HomeClient({
 }: HomeClientProps) {
   const reference = useRef<HTMLElement>(null)
   const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation(reference)
+  const testimonialsBackground = sanityImageUrl(testimonialSection?.bgImage?.image?.asset?.url, 640)
 
   return (
     <>
@@ -115,14 +117,29 @@ export default function HomeClient({
             id="testimonials"
             className="bg-[_#1d2838] text-white"
             style={{
-              background: `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url(${testimonialSection?.bgImage?.image?.asset.url}) repeat center/25% #1d2839`
+              background: testimonialsBackground
+                ? `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url("${testimonialsBackground}") repeat center/25% #1d2839`
+                : "#1d2839"
             }}>
             <Testimonials {...{ setCursorText, setCursorVariant, testimonialSection }} />
           </Section>
 
-          <Section id="contact">
-            <Contact {...{ setCursorText, setCursorVariant, contactSection }} />
-          </Section>
+          <section
+            id="contact"
+            aria-labelledby="contact-heading"
+            className="border-t border-white/10 bg-cyan-900 px-5 py-12 text-white sm:px-8 lg:py-16">
+            <div className="mx-auto flex max-w-4xl flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <h2 id="contact-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+                Let&apos;s talk
+              </h2>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-center gap-2.5 rounded-full border border-white/50 px-6 py-3 text-base font-medium transition-colors hover:border-white hover:bg-white hover:text-cyan-950 active:bg-cyan-100 active:text-cyan-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 motion-reduce:transition-none">
+                <EnvelopeIcon aria-hidden="true" className="h-5 w-5 shrink-0" />
+                Email me
+              </a>
+            </div>
+          </section>
 
           <Footer {...{ setCursorText, setCursorVariant, footer }} />
         </main>

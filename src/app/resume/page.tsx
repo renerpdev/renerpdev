@@ -2,8 +2,6 @@ import { getResumePage } from "@/sanity/lib/fetch"
 import { ResumeClient } from "./_components/ResumeClient"
 import type { Metadata } from "next"
 
-export const revalidate = false
-
 export async function generateMetadata(): Promise<Metadata> {
   const resumePage = await getResumePage()
   return {

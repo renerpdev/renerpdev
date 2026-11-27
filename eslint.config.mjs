@@ -27,6 +27,9 @@ export default [
       "build/**",
       "dist/**",
       ".vercel/**",
+      ".sanity/**",
+      ".wrangler/**",
+      "worker/env.d.ts",
       "*.config.js",
       "*.config.mjs",
       ".lintstagedrc.js"

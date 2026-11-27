@@ -4,7 +4,6 @@ import {
   getAbout,
   getMarqueeSection,
   getCallToActionSection,
-  getContactSection,
   getFooter,
   getExperienceSection,
   getProjectsSection,
@@ -12,9 +11,6 @@ import {
   getTestimonialSection
 } from "@/sanity/lib/fetch"
 import HomeClient from "./_components/HomeClient"
-
-// No automatic revalidation - using on-demand revalidation via Sanity webhook
-export const revalidate = false
 
 export default async function Home() {
   // Fetch all data in parallel
@@ -24,7 +20,6 @@ export default async function Home() {
     about,
     marqueeSection,
     callToActionSection,
-    contactSection,
     footer,
     experienceSection,
     projectsSection,
@@ -36,7 +31,6 @@ export default async function Home() {
     getAbout(),
     getMarqueeSection(),
     getCallToActionSection(),
-    getContactSection(),
     getFooter(),
     getExperienceSection(),
     getProjectsSection(),
@@ -51,7 +45,6 @@ export default async function Home() {
       about={about}
       marqueeSection={marqueeSection}
       callToActionSection={callToActionSection}
-      contactSection={contactSection}
       footer={footer}
       experienceSection={experienceSection}
       projectsSection={projectsSection}

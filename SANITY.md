@@ -4,13 +4,13 @@
 
 ### 1. Access Sanity Studio
 
-Start your development server:
+Start the standalone development Studio.
 
 ```bash
-pnpm dev
+corepack pnpm@10.20.0 dev:studio
 ```
 
-Then visit: **http://localhost:3000/studio**
+Open **http://localhost:3003/studio**. The deployed Studio uses **https://portfolio.renerp.dev/studio**. Both origins require credentials enabled in the Sanity project CORS settings for Studio authentication.
 
 ### 2. Required Data Setup
 
@@ -28,7 +28,6 @@ The Profile is a **singleton** - only one should exist.
    - **Resume File**: Upload your resume PDF
    - **Social Links**: Add links to GitHub, LinkedIn, Twitter, etc.
    - **CTA Buttons**: Define your call-to-action buttons (e.g., "View Resume", "Contact Me")
-   - **Contact Topics**: Array of topics for the contact form (e.g., ["Web Development", "Web Design", "Mobile Development"])
 
 3. Click **Publish**
 
@@ -108,40 +107,35 @@ Skills are categorized as either "soft" or "technology".
 - **Technologies**: At least 1 technology skill for the "About" section
 - If any section is empty, it will display but with no items (animations will be skipped safely)
 
-### Content Revalidation
+### Publish to Cloudflare
 
-- Production content is revalidated on demand and remains cached between webhook events
-- **Portfolio Revalidation** handles only the published **Resume Page** document and clears its generated PDF:
-  - Trigger: **Update**
-  - Filter: `_type == "resumePage" && !delta::changedOnly((currentPdf, pdfGeneratedAt))`
-- **Portfolio Content Revalidation** handles homepage and content collections at `/api/revalidate/content`:
-  - Trigger: **Create**, **Update**, and **Delete**
-  - Filter:
-    ```groq
-    _type in [
-      "navbar", "hero", "about", "marqueeSection", "callToActionSection",
-      "contactSection", "footer", "experienceSection", "experience",
-      "projectsSection", "project", "skillsSection", "skill",
-      "testimonialSection", "testimonial", "tag", "education"
-    ] || (_type == "media" && coalesce(after().category, before().category) != "resume")
-    ```
-  - Projection:
-    ```groq
-    {
-      "_id": coalesce(after()._id, before()._id),
-      "_type": coalesce(after()._type, before()._type)
-    }
-    ```
-- Changes to referenced experience, education, skill, or project documents do not invalidate the resume PDF
-- In development mode, you can refresh immediately
+Publish from Studio to rebuild the site and resume PDF in Cloudflare. The update appears after the new build deploys. A change to experience, education, skills, or projects can also update the PDF when the resume references those documents.
+
+In Sanity API settings, configure a document webhook named **Cloudflare portfolio production** for the portfolio's production dataset. Set its URL to the Workers Builds Deploy Hook for `cloudflare-production`, use **POST** and GROQ API version `v2025-02-19`, enable **Create**, **Update**, and **Delete**, and leave drafts and release versions disabled.
+
+Use this GROQ filter.
+
+```groq
+coalesce(after()._type, before()._type) in [
+  "navbar", "hero", "about", "marqueeSection", "callToActionSection",
+  "footer", "experienceSection", "experience",
+  "projectsSection", "project", "skillsSection", "skill",
+  "testimonialSection", "testimonial", "tag", "education", "resumePage"
+] || (
+  coalesce(after()._type, before()._type) == "media"
+  && coalesce(after().category, before().category) != "resume"
+)
+```
+
+Use the projection `{"_type": coalesce(after()._type, before()._type)}` to send only the document type.
 
 ### Image Handling
 
-- All images are processed through Sanity CDN
+- Published image references are rendered at build time. The Sanity CDN delivers responsive sizes for photos and fixed sizes for backgrounds.
 - Recommended formats: JPG, PNG, WebP
 - Profile images work best as square (1:1 aspect ratio)
 - Project images work best as landscape (16:9 aspect ratio)
-- Testimonial profile images are uploaded directly on each **Testimonials** document through the `profilePhoto` field. After deploying this schema change, run `pnpm migrate:testimonial-profile-images` with production Sanity environment variables to preserve legacy data.
+- Upload testimonial images through **Profile Photo**. The site also reads legacy profile images.
 
 ### Ordering
 
@@ -163,7 +157,7 @@ After adding data to Sanity:
    - ✅ Projects: Shows your projects
    - ✅ My Skill Set: Shows soft skills
    - ✅ Testimonials: Shows recommendations
-   - ✅ Contact: Shows your configured topics
+   - ✅ Footer: Shows your social links and serves as the destination for `#contact` links
 
 3. Verify animations work correctly
 4. Test all links (social media, project links, resume download)
@@ -175,7 +169,7 @@ After adding data to Sanity:
 **Problem: Changes don't appear on the site**
 
 - Check if document is **Published** (not just saved as draft)
-- Check the **Portfolio Revalidation** webhook delivery log in Sanity
+- Check the **Cloudflare portfolio production** webhook delivery in Sanity and its build in the Cloudflare dashboard.
 - Check browser console for errors
 
 **Problem: Section is empty**
@@ -199,4 +193,4 @@ After adding data to Sanity:
 
 ## 🎉 You're All Set!
 
-Once you've populated your Sanity Studio with data, your portfolio will be fully dynamic and manageable through the CMS. You can update content anytime without touching code!
+Once the webhook is configured, publishing in Sanity updates the static portfolio without a code change.

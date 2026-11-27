@@ -2,3 +2,8 @@
 build
 .next
 coverage
+out
+dist
+.wrangler
+.sanity
+worker/env.d.ts

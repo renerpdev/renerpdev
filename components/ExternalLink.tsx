@@ -3,6 +3,7 @@ import React from "react"
 
 export const ExternalLink = () => (
   <Image
+    unoptimized
     width={18}
     height={18}
     src={"/assets/arrow-diagonal-up.svg"}
