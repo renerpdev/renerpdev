@@ -111,7 +111,7 @@ Skills are categorized as either "soft" or "technology".
 
 Publish from Studio to rebuild the site and resume PDF in Cloudflare. The update appears after the new build deploys. A change to experience, education, skills, or projects can also update the PDF when the resume references those documents.
 
-In Sanity API settings, configure a document webhook named **Cloudflare portfolio production** for the portfolio's production dataset. Set its URL to the Workers Builds Deploy Hook for `cloudflare-production`, use **POST**, enable **Create**, **Update**, and **Delete**, and leave drafts and release versions disabled.
+In Sanity API settings, configure a document webhook named **Cloudflare portfolio production** for the portfolio's production dataset. Set its URL to the Workers Builds Deploy Hook for `cloudflare-production`, use **POST** and GROQ API version `v2025-02-19`, enable **Create**, **Update**, and **Delete**, and leave drafts and release versions disabled.
 
 Use this GROQ filter.
 

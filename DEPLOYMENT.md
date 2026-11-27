@@ -18,12 +18,12 @@ The PDF build uses bundled Chromium on Linux and Google Chrome on macOS. Set `PU
 
 ## Workers Builds
 
-Connect the `renerpdev-portfolio` Worker to `renerpdev/renerpdev` on GitHub and select `cloudflare-production` as the production branch, with repository root `/`. The repository's protected `main` branch remains the integration branch. Configure the build with the Sanity project and `NEXT_PUBLIC_SANITY_DATASET=production`, `NODE_VERSION=22.12.0`, `SKIP_DEPENDENCY_INSTALL=true`, and `HUSKY=0`.
+Connect the `renerpdev-portfolio` Worker to `renerpdev/renerpdev` on GitHub and select `cloudflare-production` as the production branch, with repository root `/`. The repository's protected `main` branch remains the integration branch. Configure the build with the Sanity project and `NEXT_PUBLIC_SANITY_DATASET=production`, `NODE_VERSION=22.12.0`, and `HUSKY=0`. Enable build caching and let Workers Builds install the dependencies from the lockfile.
 
 | Setting | Value |
 | --- | --- |
-| Build command | `corepack pnpm@10.20.0 install --frozen-lockfile && corepack pnpm@10.20.0 test && corepack pnpm@10.20.0 check:worker && corepack pnpm@10.20.0 build` |
-| Deploy command | `corepack pnpm@10.20.0 deploy` |
+| Build command | `corepack pnpm@10.20.0 test && corepack pnpm@10.20.0 check:worker && corepack pnpm@10.20.0 build` |
+| Deploy command | `corepack pnpm@10.20.0 run deploy` |
 | Other branches | Automatic deployments disabled |
 | Custom domain | `portfolio.renerp.dev` |
 
