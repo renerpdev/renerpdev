@@ -1,8 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
-import { sendEmail } from "@/lib/actions"
-import { useFormStatus } from "react-dom"
+import React, { type FormEvent, useState } from "react"
 import { m } from "framer-motion"
 import { type CursorAnimationHandler } from "@/hooks"
 import { RocketIcon, Subtitle, Title } from "@/components"
@@ -14,18 +12,36 @@ interface ContactProps extends CursorAnimationHandler {
 
 export const Contact = ({ setCursorText, setCursorVariant, contactSection }: ContactProps) => {
   const [dataSent, setDataSent] = useState(false)
+  const [pending, setPending] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleSubmit = async (formData: FormData) => {
-    const { name, message, email, topics } = Object.fromEntries(formData) as Record<string, string>
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (pending) return
 
-    await sendEmail({
-      name,
-      message,
-      email,
-      topics: topics.split(",")
-    })
-
-    setDataSent(true)
+    const formData = new FormData(event.currentTarget)
+    setError("")
+    setPending(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData))
+      })
+      if (response.ok) {
+        setDataSent(true)
+      } else {
+        setError(
+          response.status === 429
+            ? "Too many attempts. Please try again in a minute."
+            : "Your message could not be sent. Please try again."
+        )
+      }
+    } catch {
+      setError("Your message could not be sent. Please try again.")
+    } finally {
+      setPending(false)
+    }
   }
 
   if (!contactSection) {
@@ -43,7 +59,11 @@ export const Contact = ({ setCursorText, setCursorVariant, contactSection }: Con
           <>
             <Title>{contactSection.title}</Title>
             {contactSection.subtitle && <Subtitle>{contactSection.subtitle}</Subtitle>}
-            <Form action={handleSubmit} contactSection={contactSection} {...{ setCursorText, setCursorVariant }} />
+            <Form
+              onSubmit={handleSubmit}
+              contactSection={contactSection}
+              {...{ error, pending, setCursorText, setCursorVariant }}
+            />
           </>
         )}
       </div>
@@ -52,19 +72,27 @@ export const Contact = ({ setCursorText, setCursorVariant, contactSection }: Con
 }
 
 const Form = ({
-  action,
+  onSubmit,
+  error,
+  pending,
   setCursorVariant,
   setCursorText,
   contactSection
-}: { action: (data: FormData) => Promise<void>; contactSection: ContactSection } & CursorAnimationHandler) => {
-  const topics = contactSection.topics
+}: {
+  onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
+  error: string
+  pending: boolean
+  contactSection: ContactSection
+} & CursorAnimationHandler) => {
+  const topics = contactSection.topics ?? []
   return (
-    <form className="mt-8 space-y-4" action={action}>
+    <form className="mt-8 space-y-4" method="post" action="/api/contact" onSubmit={onSubmit}>
       <input
         type="text"
         required
         placeholder="Name"
         name="name"
+        maxLength={120}
         className="w-full rounded-md py-3 px-4 bg-gray-100 text-sm outline-blue-500"
       />
       <input
@@ -72,12 +100,14 @@ const Form = ({
         required
         placeholder="Email"
         name="email"
+        maxLength={254}
         className="w-full rounded-md py-3 px-4 bg-gray-100 text-sm outline-blue-500"
       />
       <textarea
         placeholder="Message"
         rows={6}
         name="message"
+        maxLength={4000}
         className="w-full min-h-32 rounded-md px-4 bg-gray-100 text-sm pt-3 outline-blue-500"
         required
       />
@@ -98,18 +128,18 @@ const Form = ({
           </div>
         ))}
       </div>
-      <Submit submitButtonLabel={contactSection.submitButtonLabel} {...{ setCursorText, setCursorVariant }} />
+      {error && <p role="alert">{error}</p>}
+      <Submit submitButtonLabel={contactSection.submitButtonLabel} {...{ pending, setCursorText, setCursorVariant }} />
     </form>
   )
 }
 
 const Submit = ({
   submitButtonLabel,
+  pending,
   setCursorText,
   setCursorVariant
-}: CursorAnimationHandler & { submitButtonLabel: string }) => {
-  const { pending } = useFormStatus()
-
+}: CursorAnimationHandler & { submitButtonLabel: string; pending: boolean }) => {
   function onMouseLeave() {
     setCursorText("")
     setCursorVariant("default")

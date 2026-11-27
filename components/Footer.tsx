@@ -1,8 +1,9 @@
 import React from "react"
 import { type CursorAnimationHandler } from "@/hooks"
 import { Magnet } from "@/components/Magnet"
-import Image from "next/image"
+import { SanityImage } from "@/components/SanityImage"
 import type { Footer as FooterType } from "@/sanity/models"
+import { sanityImageUrl } from "@/sanity/lib/image"
 import { PortableText } from "@portabletext/react"
 
 interface FooterProps extends CursorAnimationHandler {
@@ -29,14 +30,17 @@ export const Footer = ({ setCursorText, setCursorVariant, footer }: FooterProps)
     return null
   }
 
+  const backgroundUrl = sanityImageUrl(footer.bgImage?.image?.asset?.url, 640)
   const bgStyle = {
-    background: `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url(${footer.bgImage?.image?.asset.url}) repeat center/25% #1d2839`
+    background: backgroundUrl
+      ? `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url("${backgroundUrl}") repeat center/25% #1d2839`
+      : "#1d2839"
   }
 
   return (
     <footer className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8 relative" style={bgStyle}>
       {footer.logo?.image?.asset?.url && (
-        <Image
+        <SanityImage
           src={footer.logo.image.asset.url}
           alt={footer.logo.title || "Logo"}
           width={40}
@@ -82,7 +86,7 @@ export const Footer = ({ setCursorText, setCursorVariant, footer }: FooterProps)
               className={"inline-flex text-white hover:text-cyan-600"}
               aria-label={link.name}>
               {link.icon?.image?.asset?.url && (
-                <Image
+                <SanityImage
                   src={link.icon.image.asset.url}
                   alt={link.icon.title || link.name}
                   width={20}
@@ -154,7 +158,7 @@ export const Footer = ({ setCursorText, setCursorVariant, footer }: FooterProps)
               href={footer.scrollToTopButton.link || "#"}
               className={"w-16 h-16 rounded-full flex items-center justify-center "}
               aria-label="Scroll to top">
-              <Image
+              <SanityImage
                 src={footer.scrollToTopButton.icon.image.asset.url}
                 alt={footer.scrollToTopButton.icon.title || "Scroll to top"}
                 width={40}

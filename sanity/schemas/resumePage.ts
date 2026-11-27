@@ -191,20 +191,20 @@ export default defineType({
       ]
     }),
 
-    // --- PDF Tracking ---
+    // Legacy generated PDF fields from the previous hosting setup.
     defineField({
       name: "currentPdf",
-      title: "Current Generated PDF",
+      title: "Legacy Generated PDF",
       type: "reference",
-      description: "Auto-populated: reference to the current generated PDF in the Media Library",
       to: [{ type: "media" }],
+      hidden: true,
       readOnly: true
     }),
     defineField({
       name: "pdfGeneratedAt",
       title: "PDF Generated At",
       type: "datetime",
-      description: "Timestamp of when the current PDF was last generated",
+      hidden: true,
       readOnly: true
     })
   ],

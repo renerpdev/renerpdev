@@ -30,6 +30,9 @@ pnpm-debug.log*
 
 # local env files
 .env*.local
+.dev.vars*
+.wrangler/
+/worker/env.d.ts
 
 # vercel
 .vercel

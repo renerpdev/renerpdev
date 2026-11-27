@@ -13,9 +13,6 @@ import {
 } from "@/sanity/lib/fetch"
 import HomeClient from "./_components/HomeClient"
 
-// No automatic revalidation - using on-demand revalidation via Sanity webhook
-export const revalidate = false
-
 export default async function Home() {
   // Fetch all data in parallel
   const [

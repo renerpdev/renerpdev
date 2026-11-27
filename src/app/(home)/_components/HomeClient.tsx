@@ -4,6 +4,7 @@ import { domAnimation, LazyMotion, m } from "framer-motion"
 import { CallToAction, Footer, Navbar, ParallaxText } from "@/components"
 import { useCursorAnimation } from "@/hooks"
 import { useRef } from "react"
+import { sanityImageUrl } from "@/sanity/lib/image"
 import type {
   Navbar as NavbarType,
   Hero as HeroType,
@@ -50,6 +51,7 @@ export default function HomeClient({
 }: HomeClientProps) {
   const reference = useRef<HTMLElement>(null)
   const { cursorText, setCursorText, cursorVariant, setCursorVariant, variants, spring } = useCursorAnimation(reference)
+  const testimonialsBackground = sanityImageUrl(testimonialSection?.bgImage?.image?.asset?.url, 640)
 
   return (
     <>
@@ -115,7 +117,9 @@ export default function HomeClient({
             id="testimonials"
             className="bg-[_#1d2838] text-white"
             style={{
-              background: `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url(${testimonialSection?.bgImage?.image?.asset.url}) repeat center/25% #1d2839`
+              background: testimonialsBackground
+                ? `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url("${testimonialsBackground}") repeat center/25% #1d2839`
+                : "#1d2839"
             }}>
             <Testimonials {...{ setCursorText, setCursorVariant, testimonialSection }} />
           </Section>

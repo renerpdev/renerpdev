@@ -1,4 +1,4 @@
-import { groq } from "next-sanity"
+import groq from "groq"
 
 // Navbar Query (Singleton)
 export const navbarQuery = groq`
@@ -482,19 +482,7 @@ export const resumePageQuery = groq`
       liveLink
     },
     languages,
-    contactLinks,
-    currentPdf->{
-      _id,
-      title,
-      category,
-      file{
-        asset->{
-          _id,
-          url
-        }
-      }
-    },
-    pdfGeneratedAt
+    contactLinks
   }
 `
 

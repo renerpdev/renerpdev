@@ -1,9 +1,10 @@
+import { SanityImage } from "@/components/SanityImage"
+
 interface ResumeHeaderProps {
   fullName: string
   jobTitle: string
   profileImageUrl?: string
 }
-
 export function ResumeHeader({ fullName, jobTitle, profileImageUrl }: ResumeHeaderProps) {
   const nameParts = fullName.split(" ")
   const firstName = nameParts.slice(0, -1).join(" ")
@@ -13,10 +14,11 @@ export function ResumeHeader({ fullName, jobTitle, profileImageUrl }: ResumeHead
     <div className="mb-6 text-center">
       {profileImageUrl && (
         <div className="mb-4 flex justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SanityImage
             src={profileImageUrl}
             alt={fullName}
+            width={112}
+            height={112}
             className="w-28 h-28 rounded-full object-cover border-2 border-white/20"
           />
         </div>

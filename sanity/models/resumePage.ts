@@ -2,7 +2,6 @@ import type { Experience } from "./experience"
 import type { Education } from "./education"
 import type { Skill } from "./skill"
 import type { Project } from "./project"
-import type { Media } from "./media"
 
 export interface ResumeLanguage {
   name: string
@@ -37,6 +36,4 @@ export interface ResumePage {
   projects?: Project[]
   languages?: ResumeLanguage[]
   contactLinks?: ResumeContactLink[]
-  currentPdf?: Media
-  pdfGeneratedAt?: string
 }

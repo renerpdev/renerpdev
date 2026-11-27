@@ -9,25 +9,23 @@ import { ResumeSkills } from "./ResumeSkills"
 import { ResumeProjects } from "./ResumeProjects"
 import { ResumeLanguages } from "./ResumeLanguages"
 import { ResumeContactLinks } from "./ResumeContactLinks"
-import { useResumeDownload } from "@/hooks/useResumeDownload"
+import { RESUME_PDF_PATH } from "@/lib/resume.mjs"
 
 interface ResumeClientProps {
   resumePage: ResumePage
 }
 
 export function ResumeClient({ resumePage }: ResumeClientProps) {
-  const { handleDownload, isDownloading } = useResumeDownload()
-
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4 print:bg-white print:p-0">
       {/* Download button — hidden in print */}
       <div className="max-w-[210mm] mx-auto mb-4 flex justify-end print:hidden">
-        <button
-          onClick={handleDownload}
-          disabled={isDownloading}
-          className="bg-cyan-900 text-white px-6 py-2 rounded-lg hover:bg-cyan-800 transition-colors disabled:opacity-50 text-sm font-medium">
-          {isDownloading ? "Downloading..." : "Download PDF"}
-        </button>
+        <a
+          href={RESUME_PDF_PATH}
+          download
+          className="bg-cyan-900 text-white px-6 py-2 rounded-lg hover:bg-cyan-800 transition-colors text-sm font-medium">
+          Download PDF
+        </a>
       </div>
 
       {/* Resume container — A4 proportions */}

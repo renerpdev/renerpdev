@@ -1,6 +1,8 @@
+import type { Metadata } from "next"
 import { getResumePage } from "@/sanity/lib/fetch"
+import { sanityImageUrl } from "@/sanity/lib/image"
 
-export const revalidate = false
+export const metadata: Metadata = { robots: { index: false } }
 
 export default async function ResumePrintPage() {
   const resumePage = await getResumePage()
@@ -16,9 +18,11 @@ export default async function ResumePrintPage() {
   const educationItems = [...(resumePage.education || [])].sort(
     (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   )
+  const photoUrl = sanityImageUrl(resumePage.profileImage?.asset?.url, 180)
 
   return (
     <div
+      data-resume-print
       style={{
         width: "210mm",
         minHeight: "297mm",
@@ -114,11 +118,11 @@ export default async function ResumePrintPage() {
       <div style={{ backgroundColor: "#083344", color: "#ffffff", padding: "28px 20px" }}>
         {/* Header */}
         <div style={{ marginBottom: "20px", textAlign: "center" }}>
-          {resumePage.profileImage?.asset?.url && (
+          {photoUrl && (
             <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={resumePage.profileImage.asset.url}
+                src={photoUrl}
                 alt={resumePage.fullName}
                 style={{
                   width: "90px",

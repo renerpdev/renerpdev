@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { m, useCycle } from "framer-motion"
 import { type CursorAnimationHandler, useDimensions } from "@/hooks"
-import Image from "next/image"
+import { SanityImage } from "@/components/SanityImage"
 import type { Navbar as NavbarType } from "@/sanity/models"
 
 import { MenuToggle } from "./MenuToggle"
@@ -73,7 +73,7 @@ export const Navbar = ({ setCursorText, setCursorVariant, navbar }: NavbarProps)
       ref={containerReference}
       className={`${isOpen ? "fixed z-40" : "absolute"} top-0 bottom-0 right-0 w-screen h-screen p-12 flex justify-between items-start`}>
       {navbar?.logo?.image?.asset?.url && (
-        <Image
+        <SanityImage
           src={navbar.logo.image.asset.url}
           alt={navbar.logo.title || "Logo"}
           width={32}

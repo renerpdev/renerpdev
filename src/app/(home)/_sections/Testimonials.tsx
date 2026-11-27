@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { SanityImage } from "@/components/SanityImage"
 import React from "react"
 import { Subtitle, SwipeCarousel, Title } from "@/components"
 import { type CursorAnimationHandler } from "@/hooks"
@@ -26,7 +26,7 @@ export const Testimonials = ({ setCursorText, setCursorVariant, testimonialSecti
           {testimonials.map((testimonial) => (
             <div key={testimonial._id} className={"flex flex-col items-center space-y-8"}>
               {testimonial.profileImage?.asset?.url && (
-                <Image
+                <SanityImage
                   src={testimonial.profileImage.asset.url}
                   alt={`Photo of ${testimonial.name}`}
                   width={80}

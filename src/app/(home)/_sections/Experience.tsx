@@ -7,7 +7,7 @@ import { m } from "framer-motion"
 import { ExternalLink, Subtitle, Timeline, Title } from "@/components"
 import { format } from "date-fns"
 import type { ExperienceSection } from "@/sanity/models"
-import { useResumeDownload } from "@/hooks/useResumeDownload"
+import { RESUME_PDF_PATH } from "@/lib/resume.mjs"
 
 const DEFAULT_MAX_ITEMS = 2
 
@@ -27,8 +27,6 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
     setCursorText("👀")
     setCursorVariant("link")
   }
-
-  const { handleDownload, isDownloading } = useResumeDownload()
 
   const experiences = (experienceSection?.experiences || []).sort((a, b) => {
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
@@ -112,18 +110,18 @@ export const Experience = ({ setCursorText, setCursorVariant, experienceSection 
             </>
           )}
           {experienceSection?.cta && (
-            <m.button
+            <m.a
               onMouseEnter={linkEnter}
               onMouseLeave={onMouseLeave}
-              onClick={handleDownload}
-              disabled={isDownloading}
+              href={RESUME_PDF_PATH}
+              download
               transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
               className={
-                "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0 cursor-pointer disabled:opacity-50"
+                "underline underline-offset-2 mt-8 max-w-max text-center mx-auto text-sm flex justify-center items-center gap-2 px-3 py-1 z-0 cursor-pointer"
               }>
-              <span className={"text-cyan-950"}>{isDownloading ? "Downloading..." : experienceSection.cta.text}</span>
+              <span className={"text-cyan-950"}>{experienceSection.cta.text}</span>
               <ExternalLink />
-            </m.button>
+            </m.a>
           )}
         </div>
       </div>

@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/app/(home)/_sections/Hero.tsx"
+        ],
+        "createdAt": "2026-11-27T14:49:55.676Z",
+        "reason": "Agent: the resume call-to-action already uses this treatment on main and the migration preserves its appearance."
+      }
+    ]
+  }
+}
