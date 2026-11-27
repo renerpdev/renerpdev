@@ -30,18 +30,16 @@ export const Footer = ({ setCursorText, setCursorVariant, footer }: FooterProps)
     return null
   }
 
+  const footerColor = "#111827"
   const backgroundUrl = sanityImageUrl(footer.bgImage?.image?.asset?.url, 640)
   const bgStyle = {
     background: backgroundUrl
-      ? `radial-gradient(circle at 50% 50%, #1d2839 40%, transparent 90%), url("${backgroundUrl}") repeat center/25% #1d2839`
-      : "#1d2839"
+      ? `radial-gradient(circle at 50% 50%, ${footerColor} 40%, ${footerColor}99 90%), url("${backgroundUrl}") repeat center/25% ${footerColor}`
+      : footerColor
   }
 
   return (
-    <footer
-      id="contact"
-      className="px-5 py-16 w-full bg-gray-900 text-white text-center text-sm space-y-8 relative"
-      style={bgStyle}>
+    <footer className="relative w-full space-y-8 px-5 py-16 text-center text-sm text-white" style={bgStyle}>
       {footer.logo?.image?.asset?.url && (
         <SanityImage
           src={footer.logo.image.asset.url}

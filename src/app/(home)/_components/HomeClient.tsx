@@ -4,6 +4,7 @@ import { domAnimation, LazyMotion, m } from "framer-motion"
 import { CallToAction, Footer, Navbar, ParallaxText } from "@/components"
 import { useCursorAnimation } from "@/hooks"
 import { useRef } from "react"
+import { EnvelopeIcon } from "@sanity/icons"
 import { sanityImageUrl } from "@/sanity/lib/image"
 import type {
   Navbar as NavbarType,
@@ -20,6 +21,8 @@ import type {
 
 import { About, Experience as ExperienceSection, Hero, Projects, SkillSet, Testimonials } from "../_sections"
 import ReactLenis from "lenis/react"
+
+const CONTACT_EMAIL = "hello@renerp.dev"
 
 interface HomeClientProps {
   navbar: NavbarType | null
@@ -120,6 +123,23 @@ export default function HomeClient({
             }}>
             <Testimonials {...{ setCursorText, setCursorVariant, testimonialSection }} />
           </Section>
+
+          <section
+            id="contact"
+            aria-labelledby="contact-heading"
+            className="border-t border-white/10 bg-[#1d2839] px-5 py-12 text-white sm:px-8 lg:py-16">
+            <div className="mx-auto flex max-w-4xl flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <h2 id="contact-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+                Let&apos;s talk
+              </h2>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-center gap-2.5 rounded-full border border-white/50 px-6 py-3 text-base font-medium transition-colors hover:border-white hover:bg-white hover:text-cyan-950 active:bg-cyan-100 active:text-cyan-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 motion-reduce:transition-none">
+                <EnvelopeIcon aria-hidden="true" className="h-5 w-5 shrink-0" />
+                {CONTACT_EMAIL}
+              </a>
+            </div>
+          </section>
 
           <Footer {...{ setCursorText, setCursorVariant, footer }} />
         </main>
