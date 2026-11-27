@@ -127,7 +127,7 @@ export default function HomeClient({
           <section
             id="contact"
             aria-labelledby="contact-heading"
-            className="border-t border-white/10 bg-[#1d2839] px-5 py-12 text-white sm:px-8 lg:py-16">
+            className="border-t border-white/10 bg-cyan-900 px-5 py-12 text-white sm:px-8 lg:py-16">
             <div className="mx-auto flex max-w-4xl flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
               <h2 id="contact-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
                 Let&apos;s talk
