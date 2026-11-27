@@ -1,6 +1,6 @@
 # Cloudflare deployment
 
-Workers Static Assets serves the contents of `out/` on `portfolio.renerp.dev`. The build exports the Next.js pages, compiles Sanity Studio into `out/studio/`, and prints the exported resume to `out/rene-ricardo-resume.pdf`. The Worker handles Mailrelay POST requests and serves the Studio shell on deep links.
+Workers Static Assets serves the contents of `out/` on `portfolio.renerp.dev`. The build exports the Next.js pages, compiles Sanity Studio into `out/studio/`, and prints the exported resume to `out/rene-ricardo-resume.pdf`. The Worker serves the Studio shell on deep links.
 
 ## Build and verify locally
 
@@ -26,8 +26,6 @@ Connect the `renerpdev-portfolio` Worker to `renerpdev/renerpdev` on GitHub and 
 | Deploy command | `corepack pnpm@10.20.0 deploy` |
 | Other branches | Automatic deployments disabled |
 | Custom domain | `portfolio.renerp.dev` |
-
-Configure `RESEND_API_KEY`, `EMAIL_RECIPIENT`, `WEBHOOK_KEY`, `MAIL_RELAY_API_URL`, and `MAIL_RELAY_API_KEY` as **Worker secrets** for the Mailrelay callback and its notifications. Set them on the initial deploy with Wrangler's `--secrets-file` option using a protected JSON file outside the checkout. Later builds inherit the deployed secrets. The email sender must be authorized by Resend for the configured recipient.
 
 Create a Workers Builds Deploy Hook for `cloudflare-production` and connect it to Sanity as described in [SANITY.md](SANITY.md). Keep its URL in the provider settings. Cloudflare keeps the previous deployment available when a build fails.
 

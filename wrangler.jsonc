@@ -4,7 +4,7 @@
   "account_id": "ec3673cd92f59b7153203f1b3da7982a",
   "main": "./worker/index.ts",
   "compatibility_date": "2026-11-17",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_flags": ["global_fetch_strictly_public"],
   "workers_dev": false,
   "preview_urls": false,
   "routes": [{ "pattern": "portfolio.renerp.dev", "custom_domain": true }],
@@ -13,10 +13,7 @@
     "directory": "./out",
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/mailrelay/subscribe", "/api/mailrelay/subscribe/", "/studio/*", "!/studio/static/*"]
-  },
-  "secrets": {
-    "required": ["RESEND_API_KEY", "EMAIL_RECIPIENT", "WEBHOOK_KEY", "MAIL_RELAY_API_KEY", "MAIL_RELAY_API_URL"]
+    "run_worker_first": ["/studio/*", "!/studio/static/*"]
   },
   "observability": {
     "enabled": true,

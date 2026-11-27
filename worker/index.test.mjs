@@ -4,11 +4,6 @@ import worker from "./index.ts"
 
 const origin = "https://portfolio.example"
 const env = {
-  RESEND_API_KEY: "test-token",
-  EMAIL_RECIPIENT: "recipient@example.com",
-  WEBHOOK_KEY: "webhook-secret",
-  MAIL_RELAY_API_URL: "https://mailrelay.example/api",
-  MAIL_RELAY_API_KEY: "mailrelay-token",
   ASSETS: {
     async fetch(input) {
       const url = new URL(input.url ?? input)
@@ -17,38 +12,15 @@ const env = {
   }
 }
 
-function post(path, body, headers = {}) {
-  return new Request(origin + path, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...headers },
-    body: JSON.stringify(body)
-  })
-}
-
 function get(path) {
   return new Request(origin + path, { headers: { Accept: "text/html" } })
 }
 
-test("returns 404 for the retired contact endpoint", async () => {
-  const response = await worker.fetch(post("/api/contact", {}, { Origin: origin }), env)
-  assert.equal(response.status, 404)
-})
-
-test("Mailrelay preserves callback authentication and the provider group", async (t) => {
-  const fetcher = t.mock.method(globalThis, "fetch", async () => new Response(null, { status: 200 }))
-  const body = {
-    form: { url: "/proveedores", questions: [{ _id: "email", questionType: "email" }] },
-    answer: { answers: [{ q: "email", t: "provider@example.com" }] }
-  }
-
-  const unauthorized = await worker.fetch(post("/api/mailrelay/subscribe", body), env)
-  assert.equal(unauthorized.status, 403)
-  assert.equal(fetcher.mock.callCount(), 0)
-  const subscribed = await worker.fetch(post("/api/mailrelay/subscribe", body, { secret: env.WEBHOOK_KEY }), env)
-  assert.equal(subscribed.status, 201)
-  const [url, options] = fetcher.mock.calls[0].arguments
-  assert.equal(url, "https://mailrelay.example/api/subscribers")
-  assert.deepEqual(JSON.parse(options.body).group_ids, [3])
+test("returns 404 for retired API endpoints", async () => {
+  const contact = await worker.fetch(new Request(origin + "/api/contact", { method: "POST" }), env)
+  const mailrelay = await worker.fetch(new Request(origin + "/api/mailrelay/subscribe", { method: "POST" }), env)
+  assert.equal(contact.status, 404)
+  assert.equal(mailrelay.status, 404)
 })
 
 test("serves the Studio shell on a deep link and keeps unrelated paths at 404", async () => {

@@ -127,7 +127,7 @@ coalesce(after()._type, before()._type) in [
 )
 ```
 
-Use the projection `{"_type": coalesce(after()._type, before()._type)}` to send only the document type. Disable the Vercel revalidation webhooks after the Cloudflare hook is verified.
+Use the projection `{"_type": coalesce(after()._type, before()._type)}` to send only the document type.
 
 ### Image Handling
 
