@@ -4,7 +4,7 @@ Workers Static Assets serves the contents of `out/` on `portfolio.renerp.dev`. T
 
 ## Build and verify locally
 
-Use Node and pnpm from `.nvmrc` and `package.json`. Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in the local environment or `.env.local`. The optional `NEXT_PUBLIC_SANITY_API_VERSION` defaults to `2024-02-10`. The build reads published data directly from the Sanity API. Studio uses the same project and dataset.
+Use Node and pnpm from `.nvmrc` and `package.json`. Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in the local environment or `.env.local`. The optional `NEXT_PUBLIC_SANITY_API_VERSION` defaults to `2024-02-10`. The build clears the persisted Next.js fetch cache and reads published data directly from the Sanity API. Studio uses the same project and dataset.
 
 ```sh
 corepack pnpm@10.20.0 install --frozen-lockfile

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:studio": "node --env-file-if-exists=.env.local scripts/run-studio.mjs dev --port 3003",
-    "build": "next build && node --env-file-if-exists=.env.local scripts/run-studio.mjs build && node scripts/build-resume.mjs",
+    "build": "node scripts/clear-next-fetch-cache.mjs && next build && node --env-file-if-exists=.env.local scripts/run-studio.mjs build && node scripts/build-resume.mjs",
     "build:studio": "node --env-file-if-exists=.env.local scripts/run-studio.mjs build",
     "build:resume": "node scripts/build-resume.mjs",
     "check:worker": "wrangler types worker/env.d.ts && tsc -p worker/tsconfig.json",
